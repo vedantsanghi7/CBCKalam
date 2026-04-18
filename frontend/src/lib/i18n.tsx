@@ -109,19 +109,30 @@ export function useI18n() {
 /** Translate a list of strings and return the lookup map, caching them. */
 export function useTranslatedTexts(texts: string[]): Record<string, string> {
   const { lang, t, translateMany } = useI18n();
-  const [, force] = useState(0);
+  const [local, setLocal] = useState<Record<string, string>>({});
+
   useEffect(() => {
-    if (lang === 'hinglish') return;
-    translateMany(texts).then(() => force(x => x + 1));
+    if (lang === 'hinglish') {
+      setLocal({});
+      return;
+    }
+    let cancelled = false;
+    translateMany(texts).then(results => {
+      if (cancelled) return;
+      const map: Record<string, string> = {};
+      texts.forEach((x, i) => { map[x] = results[i] ?? x; });
+      setLocal(map);
+    });
+    return () => { cancelled = true; };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lang, texts.join('|')]);
+
   const map: Record<string, string> = {};
-  texts.forEach(x => { map[x] = t(x); });
+  texts.forEach(x => { map[x] = local[x] ?? t(x); });
   return map;
 }
 
 export function TranslatedText({ children }: { children: string }) {
-  useTranslatedTexts([children]);
-  const { t } = useI18n();
-  return <>{t(children)}</>;
+  const map = useTranslatedTexts([children]);
+  return <>{map[children] ?? children}</>;
 }
