@@ -25,6 +25,8 @@ interface ChatState {
   totalKnown: number;
   totalPossible: number;
   eligibleCount: number;
+  qualifiesCount: number;
+  almostCount: number;
 }
 
 const INITIAL_MESSAGE: ChatMessage = {
@@ -275,7 +277,7 @@ export default function ChatPage() {
                 <span className="text-sm font-medium" style={{ color: 'var(--text-1)' }}>
                   <TranslatedText>{qualifiesCount > 0 ? `${qualifiesCount} schemes found! Ready to evaluate.` : 'All info collected. Ready to check.'}</TranslatedText>
                 </span>
-                <PillButton size="sm" onClick={handleMatch}><TranslatedText>Run Check</TranslatedText></PillButton>
+                <PillButton size="sm" onClick={() => handleMatch()}><TranslatedText>Run Check</TranslatedText></PillButton>
               </GlassCard>
             </motion.div>
           )}
@@ -332,7 +334,7 @@ export default function ChatPage() {
             <div className="text-sm font-semibold text-center" style={{ color: 'var(--text-1)' }}>
               <TranslatedText>{qualifiesCount > 0 ? `${qualifiesCount} schemes found!` : 'Ready to Evaluate'}</TranslatedText>
             </div>
-            <PillButton onClick={handleMatch}><TranslatedText>Run Eligibility Engine</TranslatedText></PillButton>
+            <PillButton onClick={() => handleMatch()}><TranslatedText>Run Eligibility Engine</TranslatedText></PillButton>
           </GlassCard>
         )}
 

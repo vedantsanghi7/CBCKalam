@@ -268,18 +268,41 @@ def extract_slots_llm(utterance: str, current_slots: Dict[str, Any],
         else:
             lang_instruction = f"Reply in the '{language}' language."
 
+    # Determine the next slot to ask about
+    next_slot_to_ask = None
+    for s in SLOT_PRIORITY:
+        if s not in current_slots:
+            next_slot_to_ask = s
+            break
+
+    next_slot_hint = ""
+    if next_slot_to_ask:
+        q_info = SLOT_QUESTIONS.get(next_slot_to_ask, {})
+        slot_opts = q_info.get("options")
+        next_slot_hint = f"\nNEXT SLOT TO ASK: '{next_slot_to_ask}'"
+        if q_info.get("question"):
+            next_slot_hint += f"\nSuggested question: {q_info['question']}"
+        if slot_opts:
+            next_slot_hint += f"\nOptions to offer: {slot_opts}"
+
     prompt = (
         "SYSTEM: You are KALAM, a conversational AI collecting eligibility data for Indian welfare schemes. "
-        "Extract explicitly-stated values into a JSON object AND formulate a natural language response to the user. "
-        "Never invent values. Use UNKNOWN only if the user clearly said they don't know.\n\n"
+        "Extract explicitly-stated values into a JSON object AND formulate a natural language response to the user.\n\n"
+        "CRITICAL RULES:\n"
+        "1. Ask ONLY ONE question per response. Never ask multiple questions.\n"
+        "2. Keep your response SHORT — 1-2 sentences max.\n"
+        "3. First briefly acknowledge what the user said, then ask the ONE next question.\n"
+        "4. Never invent values. Use UNKNOWN only if the user clearly said they don't know.\n"
+        f"5. {lang_instruction}\n\n"
         f"Available slots: {schema_doc}\n"
-        f"Previously extracted slots: {json.dumps(current_slots, ensure_ascii=False)}\n\n"
+        f"Previously extracted slots: {json.dumps(current_slots, ensure_ascii=False)}\n"
+        f"{next_slot_hint}\n\n"
         f"Recent conversation:\n{hist_str}\n"
         f"USER: \"{utterance.strip()}\"\n\n"
         "Return ONLY JSON in this format:\n"
         "{\n"
         "  \"extracted\": { \"slot_name\": \"new or updated value\" },\n"
-        f"  \"next_message\": \"Friendly response confirming info and asking for important missing slots. {lang_instruction} If you have enough info, say you are checking schemes.\"\n"
+        "  \"next_message\": \"Short friendly response acknowledging info + asking ONE question about the next slot.\"\n"
         "}"
     )
     msgs = [
