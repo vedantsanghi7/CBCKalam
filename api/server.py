@@ -278,6 +278,14 @@ def handle_turn(sid: str, payload: TurnRequest):
     session["history"].append({"role": "assistant", "text": reply,
                                "pending": session.get("pending_slot")})
 
+    # Translate reply if user selected a non-Hinglish language
+    target_lang = (payload.language or "hinglish").strip()
+    if target_lang and target_lang not in ("hinglish", ""):
+        try:
+            reply = sarvam_client.translate(reply, target=target_lang, source="en")
+        except Exception:
+            pass  # Fall back to original if translation fails
+
     return {
         "reply": reply,
         "options": options,
