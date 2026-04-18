@@ -1,0 +1,22 @@
+# 848 — translate
+Date/Time: 2026-04-18T23:49:39.659961
+Model: translate
+Offline: False
+
+## Payload
+```json
+{
+  "input": "Schemes",
+  "source_language_code": "auto",
+  "target_language_code": "hi-IN",
+  "mode": "formal"
+}
+```
+
+## Response
+```
+योजनाएँ
+```
+
+## Note
+live call

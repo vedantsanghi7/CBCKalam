@@ -1,0 +1,61 @@
+scheme_id: MUDRA
+name: Pradhan Mantri MUDRA Yojana
+ministry: Department of Financial Services
+launched: '2015-04-08'
+category: entrepreneurship
+short_description: Collateral-free micro-enterprise loans up to ₹10 lakh — Shishu,
+  Kishore, Tarun.
+description: 'PMMY provides collateral-free loans up to ₹10 lakh for non-corporate,
+  non-farm small/micro enterprises. Three categories: Shishu (≤₹50k), Kishore (≤₹5L),
+  Tarun (≤₹10L).'
+application_url: https://www.mudra.org.in/
+benefit:
+  type: loan
+  amount_inr: 1000000
+  frequency: loan
+  mode: bank_credit
+inputs_required:
+- age
+- occupation
+- has_aadhaar
+- has_bank_account
+rules:
+- id: MUDRA_R001
+  type: inclusion
+  predicate: age >= 18
+  description: Adult applicant
+  source_text: Minimum age 18
+  confidence: high
+  ambiguity_flags: []
+- id: MUDRA_R002
+  type: inclusion
+  predicate: occupation IN ['farmer','business','street_vendor','artisan','laborer','salaried','other','homemaker']
+  description: Any non-corporate non-farm micro enterprise
+  source_text: Small / Micro enterprise (non-corporate, non-farm)
+  confidence: high
+  ambiguity_flags: []
+- id: MUDRA_R003
+  type: mandatory_doc
+  predicate: has_aadhaar == True AND has_bank_account == True
+  description: Aadhaar + bank account
+  source_text: Standard loan KYC
+  confidence: high
+  ambiguity_flags: []
+documents_checklist:
+- aadhaar_card
+- bank_passbook_with_ifsc
+- business_proof
+- pan_card
+verification:
+  extracted_by: sarvam-30b
+  extracted_on: '2026-04-18'
+  verified_by_human: true
+  verifier: auto
+  verification_notes: Rules authored from public scheme guidelines; re-verify against
+    live sources before production use.
+overlaps_with: []
+prerequisites: []
+sources:
+- url: https://www.myscheme.gov.in/schemes/mudra
+  section: Eligibility & Benefits
+  fetched_on: '2026-04-18'

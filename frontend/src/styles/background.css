@@ -1,0 +1,43 @@
+/* Gradient Background — from frontend.md § 4 */
+.kalam-bg {
+  min-height: 100dvh;
+  background-color: var(--bg-3);
+  background-image:
+    radial-gradient(60% 50% at 10% 15%, var(--bg-1) 0%, transparent 60%),
+    radial-gradient(55% 45% at 85% 30%, var(--bg-2) 0%, transparent 65%),
+    radial-gradient(70% 60% at 50% 95%, var(--bg-4) 0%, transparent 70%);
+  background-attachment: fixed;
+  position: relative;
+  isolation: isolate;
+}
+
+.kalam-bg::before {
+  content: "";
+  position: fixed; inset: -10%;
+  background-image:
+    radial-gradient(40% 35% at 20% 50%, rgba(110, 108, 255, 0.10), transparent 70%),
+    radial-gradient(45% 40% at 80% 60%, rgba(230, 122, 168, 0.10), transparent 70%);
+  filter: blur(40px);
+  animation: drift 40s ease-in-out infinite alternate;
+  z-index: -1;
+  pointer-events: none;
+}
+
+@keyframes drift {
+  0%   { transform: translate3d(-2%, -1%, 0) rotate(0deg); }
+  100% { transform: translate3d(2%, 1%, 0) rotate(8deg); }
+}
+
+.kalam-bg::after {
+  content: "";
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/></svg>");
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kalam-bg::before { animation: none; }
+}

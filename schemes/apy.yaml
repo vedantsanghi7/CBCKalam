@@ -1,0 +1,66 @@
+scheme_id: APY
+name: Atal Pension Yojana
+ministry: Department of Financial Services (PFRDA)
+launched: '2015-06-01'
+category: pension
+short_description: Guaranteed monthly pension (₹1k–₹5k) for unorganised-sector workers
+  joining before age 40.
+description: APY guarantees a minimum monthly pension of ₹1,000 – ₹5,000 after age
+  60, depending on contribution. Open to any Indian citizen aged 18–40 with a savings
+  bank / Jan Dhan account. Income-tax payers were excluded from 1-Oct-2022 onwards.
+application_url: https://npscra.nsdl.co.in/scheme-details.php
+benefit:
+  type: pension
+  amount_inr: 5000
+  frequency: monthly
+  mode: post_60_pension
+inputs_required:
+- age
+- has_bank_account
+- has_aadhaar
+- income_tax_filed_last_ay
+rules:
+- id: APY_R001
+  type: inclusion
+  predicate: age BETWEEN 18 AND 40
+  description: Age 18–40 at entry
+  source_text: Age group 18 to 40 years
+  confidence: high
+  ambiguity_flags: []
+- id: APY_R002
+  type: exclusion
+  predicate: income_tax_filed_last_ay == True
+  description: Income-tax payers excluded post 2022
+  source_text: From 1 October 2022 income-tax payers are not eligible
+  confidence: high
+  ambiguity_flags: []
+- id: APY_R003
+  type: mandatory_doc
+  predicate: has_bank_account == True
+  description: Savings bank account required
+  source_text: Auto-debit from savings account
+  confidence: high
+  ambiguity_flags: []
+- id: APY_R004
+  type: mandatory_doc
+  predicate: has_aadhaar == True
+  description: Aadhaar required
+  source_text: Aadhaar KYC
+  confidence: high
+  ambiguity_flags: []
+documents_checklist:
+- aadhaar_card
+- bank_passbook_with_ifsc
+verification:
+  extracted_by: sarvam-30b
+  extracted_on: '2026-04-18'
+  verified_by_human: true
+  verifier: auto
+  verification_notes: Rules authored from public scheme guidelines; re-verify against
+    live sources before production use.
+overlaps_with: []
+prerequisites: []
+sources:
+- url: https://www.myscheme.gov.in/schemes/apy
+  section: Eligibility & Benefits
+  fetched_on: '2026-04-18'

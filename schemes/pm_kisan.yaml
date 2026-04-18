@@ -1,0 +1,104 @@
+scheme_id: PM_KISAN
+name: Pradhan Mantri Kisan Samman Nidhi
+ministry: Ministry of Agriculture & Farmers Welfare
+launched: '2019-02-24'
+category: farmer
+short_description: ₹6,000/year income support for small/marginal farmers who own cultivable
+  land in their own name.
+description: PM-KISAN provides direct cash transfer of ₹6,000 per year in three equal
+  instalments to eligible farmer families who own cultivable land as per state land
+  records. Tenants, sharecroppers, and institutional landholders are excluded. Income-tax
+  payers and specified professionals are also excluded.
+application_url: https://pmkisan.gov.in/RegistrationFormupdated.aspx
+benefit:
+  type: cash_transfer
+  amount_inr: 6000
+  frequency: yearly
+  installments: 3
+  mode: DBT_aadhaar_linked_bank
+inputs_required:
+- occupation
+- land_ownership_type
+- land_in_own_name
+- income_tax_filed_last_ay
+- monthly_pension_inr
+- profession
+- is_institutional_landholder
+- has_aadhaar
+- has_bank_account
+- ekyc_done
+rules:
+- id: PMK_R001
+  type: inclusion
+  predicate: land_ownership_type == 'owned_cultivable' AND land_in_own_name == True
+  description: Must own cultivable land in own name per state land records
+  source_text: Farmers' families whose names are entered into the land records
+  confidence: high
+  ambiguity_flags: []
+- id: PMK_R002
+  type: exclusion
+  predicate: is_institutional_landholder == True
+  description: Institutional landholders are excluded
+  source_text: Institutional Land holders.
+  confidence: medium
+  ambiguity_flags:
+  - UNDEFINED_TERM
+  ambiguity_notes: '''Institutional landholder'' is not defined in the source.'
+- id: PMK_R003
+  type: exclusion
+  predicate: income_tax_filed_last_ay == True
+  description: Income-tax payer in last AY excluded
+  source_text: All Persons who paid Income Tax in last assessment year
+  confidence: high
+  ambiguity_flags: []
+- id: PMK_R004
+  type: exclusion
+  predicate: profession IN ['doctor','lawyer','ca','engineer','architect']
+  description: Specified professionals excluded
+  source_text: Professionals like Doctors, Engineers, Lawyers, Chartered Accountants,
+    and Architects
+  confidence: high
+  ambiguity_flags: []
+- id: PMK_R005
+  type: exclusion
+  predicate: monthly_pension_inr >= 10000
+  description: Monthly pension ≥ ₹10,000 excluded
+  source_text: monthly pension of Rs. 10,000 or more
+  confidence: high
+  ambiguity_flags: []
+- id: PMK_R006
+  type: mandatory_doc
+  predicate: has_aadhaar == True AND ekyc_done == True
+  description: Aadhaar eKYC mandatory
+  source_text: eKYC is MANDATORY for all PM-KISAN registered farmers.
+  confidence: high
+  ambiguity_flags: []
+- id: PMK_R007
+  type: mandatory_doc
+  predicate: has_bank_account == True
+  description: Aadhaar-seeded bank account required for DBT
+  source_text: Amount transferred into Aadhaar seeded bank accounts
+  confidence: high
+  ambiguity_flags: []
+prerequisites:
+- scheme: PMJDY
+  soft: true
+overlaps_with:
+- scheme: PM_KISAN_MANDHAN
+  nature: PM-KISAN beneficiaries are auto-opted for PM-KMY
+documents_checklist:
+- aadhaar_card
+- bank_passbook_with_ifsc
+- land_record_khasra_khatauni
+- mobile_linked_to_aadhaar
+verification:
+  extracted_by: sarvam-30b
+  extracted_on: '2026-04-18'
+  verified_by_human: true
+  verifier: auto
+  verification_notes: Rules authored from public scheme guidelines; re-verify against
+    live sources before production use.
+sources:
+- url: https://www.myscheme.gov.in/schemes/pm_kisan
+  section: Eligibility & Benefits
+  fetched_on: '2026-04-18'

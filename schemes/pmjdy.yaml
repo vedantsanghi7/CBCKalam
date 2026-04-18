@@ -1,0 +1,49 @@
+scheme_id: PMJDY
+name: Pradhan Mantri Jan Dhan Yojana
+ministry: Department of Financial Services
+launched: '2014-08-28'
+category: banking
+short_description: Zero-balance savings account for any Indian adult, with RuPay debit
+  card and ₹2 lakh accident cover.
+description: 'PMJDY is India''s flagship financial-inclusion programme: any Indian
+  adult can open a zero-balance Basic Savings Bank Deposit Account (BSBDA), get a
+  RuPay debit card with ₹2 lakh accident cover, a ₹10,000 overdraft, and interoperable
+  access. Minors 10+ can also open subsidiary accounts.'
+application_url: https://pmjdy.gov.in/
+benefit:
+  type: bank_account
+  notes: BSBDA + RuPay card + accident cover
+inputs_required:
+- age
+- has_aadhaar
+rules:
+- id: PMJDY_R001
+  type: inclusion
+  predicate: age >= 10
+  description: Minimum age 10 (sub-accounts) / 18 (full)
+  source_text: Accounts may be opened for any Indian citizen aged 10 years and above
+  confidence: high
+  ambiguity_flags: []
+- id: PMJDY_R002
+  type: mandatory_doc
+  predicate: has_aadhaar == True
+  description: Aadhaar or acceptable KYC needed
+  source_text: Aadhaar card / OVD is accepted as KYC
+  confidence: high
+  ambiguity_flags: []
+documents_checklist:
+- aadhaar_card_or_any_ovd
+- mobile_number
+verification:
+  extracted_by: sarvam-30b
+  extracted_on: '2026-04-18'
+  verified_by_human: true
+  verifier: auto
+  verification_notes: Rules authored from public scheme guidelines; re-verify against
+    live sources before production use.
+overlaps_with: []
+prerequisites: []
+sources:
+- url: https://www.myscheme.gov.in/schemes/pmjdy
+  section: Eligibility & Benefits
+  fetched_on: '2026-04-18'

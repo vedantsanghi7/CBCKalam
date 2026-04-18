@@ -1,0 +1,1821 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">    -->
+    <title>PM SVANidhi</title>
+<!---->
+<link rel="icon" href="/images/svanidhi.png" type="image/x-icon" />
+
+<link href="/Content/css/layoutcss?v=Qc9Vf52Cz7f1lEL0REMxyh6bKkzC01moNifgwr49kfw1" rel="stylesheet"/>
+
+<link href="/RevampPMSUI/css/Revampcss?v=dbV4VPbnL1iymAC5Twy--gKcjkeDX-mAfPEeGItf6mc1" rel="stylesheet"/>
+
+<script src="/Scripts/layoutjs?v=rd6VR_ywoRBqWT9_KBn1-2oFNEy8fVS5xEfQ2ymnrd41"></script>
+
+<script src="/RevampPMSUI/Revamplayoutjs?v=P2bsXutYfSJNSwwgDmz2oA-cIaRQ28h_PSYn3Np_28M1"></script>
+
+<script src="/Scripts/Contentlayoutjs?v=7NKzfWl8mbw837E8uIqTcs2lWJvQTCeVo_YzRW2z8sQ1"></script>
+
+
+<!--<link rel="icon" href="/images/svanidhi.png" type="image/x-icon" />
+<link rel="stylesheet" href="/Content/css/chosen.min.css?_=a19e1629-177490132000000" />
+<link rel="stylesheet" href="/Content/fontello/css/fontello.css?_=a19e1629-177490132000000" />
+<link rel="stylesheet" href="/Content/css/thickbox.css?_=a19e1629-177490132000000" />
+<link rel="stylesheet" href="/Content/css/font-awesome.min.css?_=a19e1629-177490132000000" />
+<link rel="stylesheet" href="/Content/css/fullcalendar.min.css?_=a19e1629-177490132000000" />
+<link rel="stylesheet" href="/Content/css/jquery.qtip.css?_=a19e1629-177490132000000" />
+<link rel="stylesheet" href="/Content/css/jquery-ui.css?_=a19e1629-177490132000000" />
+<link rel="stylesheet" href="/Content/css/jquery-ui-timepicker-addon.css?_=a19e1629-177490132000000" />
+<link rel="stylesheet" href="/Content/css/toastr.min.css?_=a19e1629-177490132000000" />
+<link rel="stylesheet" href="/Content/css/magnific-popup.min.css?_=a19e1629-177490132000000" />
+<script src="/Scripts/modernizr-2.8.3.js?_=a19e1629-177490132000000"></script>
+<script src="/Scripts/jquery-3.7.1.min.js?_=a19e1629-177490132000000"></script>
+<script src="/Scripts/jquery.validate.min.js?_=a19e1629-177490132000000"></script>
+<script src="/Scripts/jquery.validate.unobtrusive.min.js?_=a19e1629-177490132000000"></script>
+<script src="/Scripts/Common.js?_=a19e1629-177490132000000"></script>
+<script src="/Scripts/jquery-ui-1.13.2.min.js?_=a19e1629-177490132000000"></script>
+<script src="/Scripts/jquery-ui-sliderAccess.js?_=a19e1629-177490132000000"></script>
+<script src="/Scripts/chosen.jquery.min.js?_=a19e1629-177490132000000"></script>
+<script src="/Content/plugins/bootstrap/js/bootstrap.bundle.min.js?_=a19e1629-177490132000000"></script>
+<script src="/Content/plugins/slimScroll/jquery.slimscroll.min.js?_=a19e1629-177490132000000"></script>
+<script src="/Content/js/Site.min.js?_=a19e1629-177490132000000"></script>
+<script src="/Content/js/HighCharts/linq.min.js?_=a19e1629-177490132000000"></script>
+<script src="/Content/js/wizard-custom.js?_=a19e1629-177490132000000"></script>
+<script src="/Content/js/toastr.min.js?_=a19e1629-177490132000000"></script>
+<script src="/Scripts/swiper.min.js?_=a19e1629-177490132000000"></script>
+<link href="/css/swiper.css?_=a19e1629-177490132000000" rel="stylesheet" />
+<script src="/Scripts/aes.js?__=a19e1629-177490132000000"></script>
+-->
+<script type="text/JavaScript">
+        var ProjectTitle = 'PM SVANidhi';
+        var currPageNo = "1";
+        var maxPageNo = "0";
+        var ServerPath = 'https://pmsvanidhi.mohua.gov.in/';
+        var AllowedFiles = [{"AllowedFileId":1,"FileType":"image","MIMEType":"image/jpeg,image/png,image/bmp,image/pjpeg","Extensions":"png,jpg,jpeg,bmp","Size":2,"MinSize":0},{"AllowedFileId":2,"FileType":"pdf","MIMEType":"application/pdf,application/x-pdf","Extensions":"pdf","Size":10,"MinSize":0},{"AllowedFileId":3,"FileType":"doc","MIMEType":"application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document","Extensions":"doc,docx","Size":10,"MinSize":0},{"AllowedFileId":4,"FileType":"xls","MIMEType":"text/csv,application/excel,application/x-excel,application/x-msexcel","Extensions":"xls,xlsx,csv","Size":10,"MinSize":0},{"AllowedFileId":5,"FileType":"cshtml","MIMEType":"application/octet-stream","Extensions":"cshtml","Size":1,"MinSize":0},{"AllowedFileId":6,"FileType":"all","MIMEType":"application/x-zip-compressed,application/octet-stream,application/x-tar","Extensions":"zip,rar,tar,pdf,doc,docx,xls,xlsx,csv,png,jpg,jpeg,bmp","Size":10,"MinSize":0},{"AllowedFileId":7,"FileType":"image/pdf","MIMEType":"application/pdf,application/x-pdf,image/jpeg,image/png,image/bmp,image/pjpeg","Extensions":"png,jpg,jpeg,bmp,pdf","Size":5,"MinSize":0},{"AllowedFileId":8,"FileType":"pdf/doc","MIMEType":"application/pdf,application/x-pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document","Extensions":"pdf,doc,docx","Size":10,"MinSize":0},{"AllowedFileId":9,"FileType":"bigimage","MIMEType":"image/jpeg,image/png,image/bmp,image/pjpeg","Extensions":"png,jpg,jpeg,bmp","Size":13,"MinSize":1},{"AllowedFileId":10,"FileType":"image/pdf","MIMEType":"application/pdf,application/x-pdf,image/jpeg,image/png,image/bmp,image/pjpeg","Extensions":"png,jpg,jpeg,bmp,pdf","Size":0.25,"MinSize":0},{"AllowedFileId":11,"FileType":"image","MIMEType":"image/jpeg,image/png,image/bmp,image/pjpeg","Extensions":"png,jpg,jpeg,bmp","Size":0.25,"MinSize":0},{"AllowedFileId":12,"FileType":"pdf/doc/image","MIMEType":"image/jpeg,application/pdf,application/x-pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document","Extensions":"pdf,doc,docx,jpg","Size":10,"MinSize":0},{"AllowedFileId":13,"FileType":"image/pdf","MIMEType":"application/pdf,application/x-pdf,image/jpeg,image/png,image/pjpeg","Extensions":"png,jpg,jpeg,pdf","Size":1,"MinSize":0},{"AllowedFileId":14,"FileType":"xml","MIMEType":"text/octet-stream","Extensions":"application/xml,text/xml","Size":1,"MinSize":0},{"AllowedFileId":15,"FileType":"scf/pdf","MIMEType":"application/pdf,application/x-pdf","Extensions":"pdf","Size":50,"MinSize":0},{"AllowedFileId":16,"FileType":"pdf/image","MIMEType":"application/pdf,application/x-pdf,image/jpeg,image/png,image/bmp,image/pjpeg","Extensions":"pdf,png,jpg,jpeg,bmp","Size":5,"MinSize":0},{"AllowedFileId":17,"FileType":"pdf","MIMEType":"application/pdf,application/x-pdf","Extensions":"pdf","Size":25,"MinSize":0},{"AllowedFileId":18,"FileType":"xls/pdf/image","MIMEType":"text/csv,application/excel,application/x-excel,application/x-msexcel,application/pdf,application/x-pdf,image/jpeg,image/png,image/bmp,image/pjpeg","Extensions":"xls,xlsx,csv,pdf,png,jpg,jpeg,bmp","Size":5,"MinSize":0}];
+</script>
+
+<input type="hidden" id="langId" value="en" />
+
+<!--<script src="/RevampPMSUI/js/custom.js"></script>
+
+<script src="~/Scripts/ChatBox.js"></script>-->
+<script src="/RevampPMSUI/js/custom.js"></script>
+<!--<link href="~/RevampPMSUI/css/bootstrap.min.css" rel="stylesheet" />
+<script src="~/RevampPMSUI/js/bootstrap.min.js"></script>
+<link href="~/RevampPMSUI/css/main.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/RevampPMSUI/css/slick.css">
+<link rel="stylesheet" href="~/RevampPMSUI/css/slick-theme.css">
+<script src="~/RevampPMSUI/js/slick.js"></script>
+<script src="~/RevampPMSUI/js/slick.min.js"></script>-->
+<script src="/RevampPMSUI/js/bootstrap.min.js"></script>
+<script src="/RevampPMSUI/js/BhashiniUI.js"></script>
+
+
+
+    <style>
+        .scheme-wraper {
+            min-height: 100vh !important;
+        }
+
+        .bhashini-dropdown-content {
+            display: none;
+        }
+    </style>
+</head>
+<body oncontextmenu="return false;">
+    <div id="myData" data-active-tab=""></div>
+    <div class="toparea">
+        <div class="container-fluid">
+            <div class="nav-flex">
+                <div class="">
+                    <ul class="social-header-left-menu">
+                        <li><a href="https://www.facebook.com/mohua.india/" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="https://x.com/pmsvanidhi" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                        <li class="vr-line"></li>
+                        <li class="Lupdated">Last Updated: 30-03-2026 </li>
+                    </ul>
+                </div>
+                <div class="social-header-main-div">
+                    <ul class="social-header-right-menu">
+                        <li><a href="/"><img src="/images/home.svg" class="home-img"> </a></li>
+                        
+                        
+
+                        <li class="bhashini-skip-translation"><a id="text_resize_increase" class="changer" href="javascript:;" onclick="increaseTextSize()" title="Increase font size" role="link">+A</a></li>
+                        <li class="bhashini-skip-translation"><a id="text_resize_normal" class="changer" href="javascript:;" onclick="resetTextSize()" title="Reset font size" role="link">A</a></li>
+                        <li class="bhashini-skip-translation"><a id="text_resize_decrease" class="changer" href="javascript:;" onclick="decreaseTextSize()" title="Decrease font size" role="link">-A</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="header-wrapper">
+
+    <header class="header-top">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <nav class="navbar navbar-expand-lg">
+                        <div class="container-fluid">
+                            <div class="navbar-brand-flex">
+                                <div class="navbar-brand logo-box">
+                                    <img src="/RevampPMSUI/img/ministry-logo.png" id="logo3" alt="ministry">
+                                    <a class="logo " href="/"><img class="pmsvanidhilogo" src="/RevampPMSUI/img/pmsvanidhi-logo.jpeg" id="logo3" alt="PMSVANidhi"></a>
+                                    <a class="logo" href="https://sidbi.in/en" target="_blank" referrerpolicy="no-referrer">
+                                        <img src="/RevampPMSUI/img/sidbi.svg"
+                                             id="logo1" alt="Sidbi" style="height:40px;">
+                                    </a>
+                                    
+                                    <a class="logo" referrerpolicy="no-referrer">
+                                        <img src="/RevampPMSUI/img/DFS Logo png.png"
+                                             id="logo1" alt="Sidbi" style="height:55px;">
+
+
+                                    </a>
+                                </div>
+                                <button class="navbar-toggler bttn submit-bttn square-bttn bttn-sm" type="button" data-toggle="collapse"
+                                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                        aria-expanded="false" aria-label="Toggle navigation" style="margin-right:17px;">
+                                    <span class="navbar-toggler-icon">
+                                        <i class="fa fa-bars" aria-hidden="true"></i>
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="collapse navbar-collapse header-top" id="navbarSupportedContent">
+                                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/Home/Schemes">Scheme Instructions</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/Home/KnowledgeCenter">Knowledge Center</a>
+                                    </li>
+                                    <li class="nav-item dropdown nav-link dropdown-toggle">
+                                        <a class="nav-link">FAQ</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="/Default/ViewFile/?id=FAQHindi.pdf&path=MiscFiles" target="_blank">Hindi</a></li>
+                                            <li><a class="dropdown-item" href="/Default/ViewFile/?id=FAQEng.pdf&path=MiscFiles" target="_blank"> English</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/Home/WhatsNew">What’s New</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/Home/Contact">Contact Details</a>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <button class="bttn submit-bttn bttn-sm dropdown-toggle login-bttn bhashini-skip-translation">Login</button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item bhashini-skip-translation" href="/Login?flag=ApplicantLogin"  > Applicant</a></li>
+                                            
+                                            <li><a class="dropdown-item" href="https://portal.udyamimitra.in/Login" target="_blank" referrerpolicy="no-referrer">Lender/ DPA</a></li>
+                                            <li><a class="dropdown-item" href=" https://portal.udyamimitra.in/Login" target="_blank" referrerpolicy="no-referrer">Ministry/States/ULB&#39;s</a></li>
+                                            <li><a class="dropdown-item" href="https://portal.udyamimitra.in/Login" target="_blank" referrerpolicy="no-referrer">City Nodal Officer</a></li>
+                                           
+                                            <li><a class="dropdown-item" href="https://pmsvanidhi.qcin.org/" target="_blank" referrerpolicy="no-referrer">Socio Economic Profiling</a></li>
+                                            <li><a class="dropdown-item" href="http://portal.udyamimitra.in/IEC" target="_blank" referrerpolicy="no-referrer">IEC Material</a></li>
+
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <button href="" title="Change Language" class="bttn bttn-sm dropdown-toggle seva-bttn">
+                                            <img src="/RevampPMSUI/img/seva-img.svg">
+                                        </button>
+                                        <ul class="dropdown-menu" style="right: 0; left: auto;">
+                                            <li><a class="dropdown-item" href="/Login/DSCLogin" target="_blank">Apply For Loan </a></li>
+                                            
+
+                                        </ul>
+                                    </li>
+                                    <li>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+</div>
+<script>
+    function increaseTextSize() {
+      
+        var elements = document.getElementsByTagName('*');
+        for (var i = 0; i < elements.length; i++) {
+            var currentFontSize = parseInt(window.getComputedStyle(elements[i]).fontSize);
+            var newSize = currentFontSize + 1;
+            if (newSize <= 17) {
+                elements[i].style.fontSize = newSize + 'px';
+            }
+        }
+
+        // Store the font size in the browser's local storage
+        localStorage.setItem("fontSize", newSize);
+    }
+    //function showErrorMessage(actionName) {
+    //    toastr.error("Scheme is under restructuring and new applications will be accepted after the new scheme is approved ");
+    //}
+
+    function resetTextSize() {
+        var elements = document.getElementsByTagName('*');
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].style.fontSize = ''; // Remove the custom font size
+        }
+        // Clear the stored font size from the local storage or cookie
+        localStorage.removeItem('fontSize'); // If using local storage // Or //
+        setCookie('fontSize', '', -1); // If using cookies
+    }
+
+
+    function decreaseTextSize() {
+        var elements = document.getElementsByTagName('*');
+        for (var i = 0; i < elements.length; i++) {
+            var currentFontSize = parseInt(window.getComputedStyle(elements[i]).fontSize);
+            var newSize = currentFontSize - 1;
+            if (newSize >= 13) { // Limit the font size to a minimum of 10 pixels
+                elements[i].style.fontSize = newSize + 'px';
+            }
+        }
+        // Store the font size in the browser's local storage
+        localStorage.setItem("fontSize", newSize);
+    }
+
+
+    // Retrieve the font size from the local storage and apply it on page load
+    window.addEventListener('load', function () {
+        var storedFontSize = localStorage.getItem("fontSize");
+        if (storedFontSize) {
+            var elements = document.getElementsByTagName('*');
+            for (var i = 0; i < elements.length; i++) {
+                elements[i].style.fontSize = storedFontSize + 'px';
+            }
+        }
+    });
+
+</script>
+
+
+
+
+<script type="text/javascript">
+    function ChangeLanguage(lang) {
+        $.ajax({
+            url: ServerPath + 'Home/ChangeLanguage',
+            data: { lang: lang },
+            async: true,
+            type: 'POST',
+            success: function (response) {
+                if (response.success == true) {
+                    location.reload();
+                    return;
+                }
+                //else {
+                //    toastr.clear();
+                //    toastr.error(response.Message);
+                //    return;
+                //}
+            }
+        });
+    }
+</script>
+    //else
+    //{
+    
+
+
+
+<div class="top-box">
+
+    <div id="homr-caro" class="carousel carousel-fade slide   homr-caro-new" data-ride="carousel" data-interval="1800">
+        <div class="carousel-indicators">
+            <button type="button" data-target="#homr-caro" data-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-target="#homr-caro" data-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-target="#homr-caro" data-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-target="#homr-caro" data-slide-to="3" aria-label="Slide 4"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                
+                <img src="/RevampPMSUI/img/banner_new1.webp" class="d-block w-100 h-100" alt="Udyapi Mitra">
+                <div class="banner-overlay"></div>
+            </div>
+            
+            <div class="carousel-item">
+                <img src="/RevampPMSUI/img/banner_new2.webp" class="d-block w-100 h-100" alt="PM SvaNidhi">
+                <div class="banner-overlay"></div>
+            </div>
+            <div class="carousel-item">
+                <img src="/RevampPMSUI/img/bannerimage4.webp" class="d-block w-100 h-100" alt="Udyapi Mitra">
+                <div class="banner-overlay"></div>
+            </div>
+            <div class="carousel-item">
+                <img src="/RevampPMSUI/img/banner_new4.webp" class="d-block w-100 h-100" alt="PM SvaNidhi">
+                <div class="banner-overlay"></div>
+            </div>
+            
+        </div>
+        
+
+
+        <div class="container carousel-overlay-container">
+            <div class="row bg-blur-black g-0">
+                <div class="col-md-8 g-0">
+                    <div class="carousel-overlay">
+                        <div class="carousel-overlay-left">
+                            
+                            <h1>PM Street Vendor’s AtmaNirbhar Nidhi</h1>
+                            <h4>
+                                A SPECIAL MICRO-CREDIT FACILITY FOR
+                                STREET VENDORS
+                            </h4>
+                            <div class="search-container">
+                                <form id="searchForm" method="get" action="/Home/SearchSV">
+                                    <div class="search-container">
+                                        <input type="search" placeholder="Search SV Application No. & Mobile No." id="searchInput" name="query">
+                                        
+                                        <i class="fa fa-search"></i>
+                                        
+                                    </div>
+                                    <!-- Hidden fields to pass ApplicationNo and MobileNo -->
+                                    <input type="hidden" name="ApplicationNo" id="ApplicationNo">
+                                    <input type="hidden" name="MobileNo" id="MobileNo">
+                                    <div id="errorContainer" class="error-message"></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="over-marque">
+            <div class="bg-gradiant">
+                <div class="update-bx home-update-bx">
+                    <a href="/Home/MobileUpdate" style="text-decoration:none;">
+                        <p>
+                            <span>Update: </span>&nbsp; If you want to change your Mobile Number , Please<span class="marque-line-over">&nbsp;Click here,&nbsp;</span>and
+                            login with Aadhaar
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="latest-news">
+                <div class="orange-bg">
+                    <section class="marque-link">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-sm-12 d-flex">
+
+                                    <div class="marquee-container col-sm-12 bhashini-skip-translation">
+                                        <marquee direction="left" height="100" width="100%">
+                                            <ul style="display: table-cell;">
+                                                <li style="display: table-cell;">
+                                                    <a class="marque-line" style="color:red">
+                                                        PM SVANidhi Portal is live with enhanced loan amount limits. Vendors from Census Towns are also now eligible to avail loans and other benefits under the Scheme || PM SVANidhi Credit Card facility is now available for Second tranche repaid Street Vendors to enhance their working capital limit through a seamless and structured process. || Vendor Mobility (ULB Transfer) facility is now available on PM SVANidhi to enable street vendors to update their ULB details in case of migration to another vending location.
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </marquee>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="wh-box">
+    <div class="wh-box-inner">
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="left-bx">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="comn-box new-slide">
+                                <div class="grey-box">
+                                    <div class="img-box">
+                                        <img src="/RevampPMSUI/img/first-img.png">
+                                    </div>
+                                    
+                                    
+                                </div>
+                                <div class="apply-bx">
+                                    <a href="">Apply LoR cum <br />Loan</a>
+                                </div>
+                                <!--<div class="blur-bg">
+            <a href="/LoginLoRCumLoan">With Aadhaar </a>-->
+                                
+                                <!--<a href="#" onclick="showErrorMessage('Without Aadhaar');return false;" id="ApplyLoanAssamMeghalayaBtn" style=" ">
+
+            Without Aadhaar-->
+                                
+
+                                <!--(Assam /<br /> Meghalaya)
+                </a>
+            </div>-->
+                                <div class="blur-bg">
+                                    <a href="/LoginLoRCumLoan">With Aadhaar </a>
+                                    <a href="/Login">Without Aadhaar </a>
+                                    
+                                    
+                                    
+
+                                    <!--(Assam /<br /> Meghalaya)
+                </a>-->
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="comn-box new-slide">
+                                <div class="grey-box">
+                                    <div class="img-box">
+                                        <img src="/RevampPMSUI/img/svg/second-svg.svg">
+                                    </div>
+                                    
+                                </div>
+                                <div class="apply-bx">
+                                    <a href="">Apply for Loan</a>
+                                </div>
+                                <div class="blur-bg">
+                                    <a href="/Login">Apply For 15k</a>
+                                    
+                                    <a href="/LoginSecondLoanTerm">Apply For 25k</a>
+                                    
+                                    <a href="/LoginThirdLoanTerm">Apply For 50k</a>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-3">
+                            <div class="comn-box new-slide">
+                                <div class="grey-box">
+                                    <div class="img-box">
+                                        <img src="/RevampPMSUI/img/svg/second-svg.svg">
+                                    </div>
+                                    
+                                </div>
+                                <div class="apply-bx">
+                                    <a href="/Login?flag=ApplicantLogin">Apply Credit Card</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!--<div class="col-md-3">
+    <div class="comn-box">
+        <div class="grey-box bor-rit">
+            <div class="img-box">
+                <img src="~/RevampPMSUI/img/dashboard.png">
+            </div>
+            <div class="blur-bg">
+                <button>PMS-Dashboard</button>
+                <button>Mission Monitoring Dashboard</button>
+            </div>
+        </div>
+        <div class="apply-bx">
+            <a href="" target="_blank"> View</a>
+
+        </div>-->
+                        <!-- <div class="blur-bg">
+        <button>10 K</button>
+        <button>20 K</button>
+        <button>50 K</button>
+    </div> -->
+                        <!--</div>
+    </div>-->
+                        <div class="col-md-3">
+                            <div class="comn-box new-slide">
+                                <div class="grey-box   st">
+                                    <div class="img-box">
+                                        <img src="/RevampPMSUI/img/dashboard.png">
+                                    </div>
+                                    
+                                </div>
+                                <div class="apply-bx">
+                                    <a href=""> View <br />Dashboard</a>
+                                </div>
+                                <div class="blur-bg">
+                                    <a href="/Home/PMSDashboard" target="_blank">PMS - Dashboard</a>
+
+                                    <a href="/MissionMonitoringReport" class="yellow-btn gglow-btn" target="_blank">
+                                        Mission Monitoring Dashboard
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="col-md-3">
+                            <div class="comn-box ">
+                                <div class="grey-box bor-rit">
+                                    <div class="img-box">-->
+                                        
+                                        <!--<img src="~/RevampPMSUI/img/udyamAssist.svg" />
+                                    </div>-->
+
+                                    
+                                <!--</div>
+                                <div class="apply-bx">-->
+                                    
+                                    <!--<a href="/Login" class=" " target="_blank" style="cursor: default;">Download Udyam Assist </a>-->
+
+                                    
+                                <!--</div>
+
+
+                            </div>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="right-bx">
+                    <div class="row mb-4">
+                        
+                        <div class="col-3">
+                            <div class="branches-bx">
+                                <div class="branches-img">
+
+                                    <a href="/Login" class=" " target="_blank" style="cursor: default;"><img src="/RevampPMSUI/img/udyamAssist.svg"></a>
+
+                                </div>
+                                <div class="txt-bx">
+                                    <h4>
+                                        <a href="/Login" class=" " target="_blank" style="cursor: default;">Download Udyam Assist </a>
+                                    </h4>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-3">
+                            <div class="branches-bx">
+                                <div class="branches-img">
+
+                                    <a href="/Default/ViewFile/?id=High_Performing+_Branches_lst_mnth.pdf&path=UT" id="BestPerformBranches" target="_blank"><img src="/RevampPMSUI/img/svg/best-svg.svg"></a>
+
+                                </div>
+                                <div class="txt-bx">
+                                    <h4>
+                                        <a href="/Default/ViewFile/?id=High_Performing+_Branches_lst_mnth.pdf&path=UT" target="_blank">High Pendency ULBs</a><br />
+
+                                    </h4>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="branches-bx">
+                                <div class="branches-img st">
+                                    <a href="/Home/Search">
+                                        <img src="/RevampPMSUI/img/sch-img/mission.svg">
+                                    </a>
+                                </div>
+                                <div class="txt-bx">
+                                    <h4>
+                                        <a class="" href="/Home/Search">Know Your Application Status</a>
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                        
+
+                        <div class="col-3">
+                            <div class="branches-bx">
+                                <div class="branches-img-new">
+                                    <a href="/Default/ViewFile/?id=Final-National+level+winners.pdf&path=SVAPraiseAwards" id="Udyam" target="_blank">
+                                        <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M22.1501 28.8394H20.9552H19.7602C19.7602 28.8394 19.3978 35.8028 16.6946 38.7412H20.9548H25.2154C22.5125 35.8028 22.1501 28.8394 22.1501 28.8394Z" fill="white" />
+                                            <path d="M20.9552 37.9268H14.5849C14.3992 37.9268 14.249 38.1848 14.249 38.5031V40.4238C14.249 40.7421 14.3995 41.0001 14.5849 41.0001H20.9552H27.3254C27.5108 41.0001 27.6614 40.7421 27.6614 40.4238V38.5031C27.6614 38.1848 27.5108 37.9268 27.3254 37.9268H20.9552Z" fill="white" />
+                                            <path d="M18.5896 25.7012C12.8853 24.7875 9.13016 19.1614 7.64828 14.6209C7.21048 13.2797 6.98877 11.8753 6.98877 10.4463C6.98877 8.94578 8.2098 7.7251 9.71036 7.7251H11.3072V8.85166H9.71036C8.83089 8.85166 8.11533 9.56722 8.11533 10.4463C8.11533 11.7566 8.31837 13.0432 8.71915 14.2716C9.02617 15.212 11.9163 23.4917 18.768 24.589L18.5896 25.7012Z" fill="white" />
+                                            <path d="M23.589 25.7012L23.4106 24.589C30.262 23.4917 33.1521 15.212 33.4591 14.2716C33.8599 13.0435 34.063 11.7566 34.063 10.4463C34.063 9.56687 33.3474 8.85166 32.4679 8.85166H29.9434V7.7251H32.4679C33.9685 7.7251 35.1895 8.94578 35.1895 10.4463C35.1895 11.8753 34.9678 13.28 34.5297 14.6209C33.0485 19.1614 29.2934 24.7875 23.589 25.7012Z" fill="white" />
+                                            <path d="M30.7287 7.15886C30.721 6.58288 30.2338 6.11865 29.6378 6.11865H20.9559H12.274C11.6779 6.11865 11.1904 6.58288 11.183 7.15886C11.0018 20.813 17.7623 26.7585 17.7623 26.7585H20.9559H24.1495C24.1495 26.7585 30.9099 20.8126 30.7287 7.15886Z" fill="white" />
+                                            <path d="M13.2039 7.15886C13.2116 6.58288 13.6988 6.11865 14.2948 6.11865H12.274C11.6779 6.11865 11.1904 6.58288 11.183 7.15886C11.0018 20.813 17.7623 26.7585 17.7623 26.7585H19.7831C19.7831 26.7585 13.0223 20.8126 13.2039 7.15886Z" fill="white" />
+                                            <path d="M20.9554 30.0695C22.9241 30.0695 24.5201 28.9496 24.5201 27.5682C24.5201 26.1868 22.9241 25.0669 20.9554 25.0669C18.9866 25.0669 17.3906 26.1868 17.3906 27.5682C17.3906 28.9496 18.9866 30.0695 20.9554 30.0695Z" fill="white" />
+                                            <path d="M21.1545 10.3712L22.1217 13.348C22.1496 13.4343 22.2303 13.4925 22.3209 13.4925H25.451C25.6537 13.4925 25.7379 13.7519 25.574 13.8711L23.0417 15.7107C22.9684 15.764 22.9377 15.8584 22.9656 15.9448L23.9328 18.9216C23.9956 19.1144 23.7749 19.2748 23.6106 19.1556L21.0783 17.3156C21.005 17.2624 20.9056 17.2624 20.8323 17.3156L18.3 19.1556C18.1361 19.2748 17.9154 19.1144 17.9778 18.9216L18.945 15.9448C18.9729 15.8584 18.9422 15.764 18.8689 15.7107L16.3366 13.8711C16.1727 13.7519 16.2569 13.4925 16.4596 13.4925H19.5898C19.6803 13.4925 19.7607 13.434 19.7889 13.348L20.7562 10.3712C20.8189 10.1784 21.0917 10.1784 21.1545 10.3712Z" fill="#58CC7B" />
+                                            <path class="s-path" d="M21.0314 10.7532L21.9645 13.625C21.975 13.6578 22.0057 13.68 22.0403 13.68H25.0597C25.1369 13.68 25.169 13.779 25.1066 13.8241L22.6638 15.5989C22.636 15.6194 22.6243 15.6553 22.6349 15.6881L23.568 18.5599C23.5919 18.6332 23.5077 18.6945 23.4453 18.6491L21.0025 16.8743C20.9747 16.8538 20.9366 16.8538 20.9088 16.8743L18.466 18.6491C18.4036 18.6945 18.3193 18.6332 18.3433 18.5599L19.2764 15.6881C19.2869 15.6553 19.2753 15.6194 19.2475 15.5989L16.8047 13.8241C16.7423 13.7787 16.7744 13.68 16.8516 13.68H19.871C19.9056 13.68 19.9362 13.6578 19.9468 13.625L20.8799 10.7532C20.9035 10.6799 21.0075 10.6799 21.0314 10.7532Z" fill="#DEFFEA" />
+                                            <path d="M3.25384 21.4917L3.86259 23.1368L5.50767 23.7452L3.86259 24.3543L3.25384 25.9994L2.64508 24.3543L1 23.7452L2.64508 23.1368L3.25384 21.4917Z" fill="white" />
+                                            <path d="M13.8389 30.4683L14.2434 31.5609L15.336 31.9654L14.2434 32.3699L13.8389 33.4625L13.4348 32.3699L12.3418 31.9654L13.4348 31.5609L13.8389 30.4683Z" fill="white" />
+                                            <path d="M6.05418 18.1353L6.34063 18.9097L7.11544 19.1962L6.34063 19.483L6.05418 20.2574L5.76737 19.483L4.99292 19.1962L5.76737 18.9097L6.05418 18.1353Z" fill="white" />
+                                            <path d="M38.7618 16.1323L39.2317 17.4016L40.501 17.8715L39.2317 18.341L38.7618 19.6104L38.2923 18.341L37.0229 17.8715L38.2923 17.4016L38.7618 16.1323Z" fill="white" />
+                                            <path d="M27.0296 1L27.4991 2.26933L28.7685 2.7392L27.4991 3.20872L27.0296 4.47804L26.5601 3.20872L25.2908 2.7392L26.5601 2.26933L27.0296 1Z" fill="white" />
+                                            <path d="M36.4852 13.8691L36.772 14.6439L37.5465 14.9304L36.772 15.2172L36.4852 15.9917L36.1988 15.2172L35.4243 14.9304L36.1988 14.6439L36.4852 13.8691Z" fill="white" />
+                                            <path d="M30.2111 27.2275L30.4422 27.8522L31.0669 28.0834L30.4422 28.3145L30.2111 28.9392L29.9799 28.3145L29.3552 28.0834L29.9799 27.8522L30.2111 27.2275Z" fill="white" />
+                                        </svg>
+                                    </a>
+
+                                </div>
+                                <div class="txt-bx">
+                                    <h4>
+                                        <a href="/Default/ViewFile/?id=Final-National+level+winners.pdf&path=SVAPraiseAwards" target="_blank">PRAISE Awards (National Level Best Performers)</a>
+                                    </h4>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-3">
+                            <div class="branches-bx">
+                                <div class="branches-img">
+
+                                    <a href="/Default/ViewFile/?id=High_Pendency_Branches.pdf&path=UT" id="HighPendencyBranch" target="_blank"><img src="/RevampPMSUI/img/sch-img/branches.svg"></a>
+
+                                </div>
+                                <div class="txt-bx">
+                                    <h4>
+                                        <a href="/Default/ViewFile/?id=High_Pendency_Branches.pdf&path=UT" target="_blank">High Pendency Branches</a>
+                                    </h4>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="branches-bx">
+                                <div class="branches-img">
+
+                                    <a class="" href="https://pmsvanidhi.qcin.org/account/landing-page" target="_blank" referrerpolicy="no-referrer">
+                                        
+                                        <img src="/RevampPMSUI/img/svandhisesamrudhi.svg" />
+                                    </a>
+                                </div>
+                                <div class="txt-bx">
+                                    <h4>
+                                        <a class="" href="https://pmsvanidhi.qcin.org/account/landing-page" target="_blank" referrerpolicy="no-referrer"> SVANidhi se Samriddhi</a>
+
+                                    </h4>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="branches-bx">
+                                <div class="branches-img st">
+                                    <a href="/Login/UlbTransferIndex?flag=ULBTransferLogin">
+                                        <img src="/RevampPMSUI/img/sch-img/mission.svg">
+                                    </a>
+                                </div>
+                                <div class="txt-bx">
+                                    <h4>
+                                        <a class="" href="/Login/UlbTransferIndex">ULB Transfer Request</a>
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="branches-bx">
+                                <div class="branches-img-new1">
+                                    <a href="/Default/ViewFile/?id=State+level+best+performers.pdf&path=SVAPraiseAwards" id="Udyam" target="_blank">
+                                        <svg width="27" height="38" viewBox="0 0 27 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path class="green-white" fill-rule="evenodd" clip-rule="evenodd" d="M17.7841 12.0554L9.10932 14.8371L16.5368 38.0001L19.6445 32.7743L25.2117 35.2185L17.7841 12.0554Z" fill="#B3FECF" />
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M14.8923 12.9823L21.5001 33.5888L19.6443 32.7739L18.6084 34.516L12.0006 13.9095L14.8923 12.9823Z" fill="white" />
+                                            <path class="green-white" fill-rule="evenodd" clip-rule="evenodd" d="M9.92887 17.3936L16.5365 38.0001L19.6441 32.7739L18.6082 34.516L12.0004 13.9095L9.92887 17.3936Z" fill="#B3FECF" />
+                                            <path class="green-white" fill-rule="evenodd" clip-rule="evenodd" d="M9.10938 12.0553L17.7842 14.837L10.3561 38L7.24874 32.7742L1.68157 35.2184L9.10938 12.0553Z" fill="#B3FECF" />
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.0005 12.9824L5.3926 33.5888L7.24842 32.774L8.28403 34.516L14.8922 13.9096L12.0005 12.9824Z" fill="white" />
+                                            <path class="green-white" fill-rule="evenodd" clip-rule="evenodd" d="M12.0007 12.9824L5.39285 33.5888L7.24867 32.774L1.6815 35.2185L8.28937 14.612L12.0007 12.9824Z" fill="#B3FECF" />
+                                            <path class="green-white" fill-rule="evenodd" clip-rule="evenodd" d="M13.4458 0L15.3365 1.50968L17.601 0.658041L18.9326 2.67802L21.3494 2.56792L21.9913 4.90064L24.3238 5.54283L24.214 7.95933L26.2336 9.29098L25.3823 11.5555L26.892 13.4461L25.3823 15.3365L26.2336 17.6007L24.214 18.9326L24.3238 21.3494L21.9913 21.9913L21.3494 24.3238L18.9326 24.214L17.601 26.2339L15.3365 25.3823L13.4458 26.892L11.5555 25.3823L9.29098 26.2339L7.95933 24.214L5.54255 24.3238L4.90036 21.9913L2.56792 21.3494L2.67802 18.9326L0.658042 17.6007L1.50939 15.3365L0 13.4461L1.50939 11.5555L0.658042 9.29098L2.67802 7.95933L2.56792 5.54283L4.90036 4.90064L5.54255 2.56792L7.95933 2.67802L9.29098 0.658041L11.5555 1.50968L13.4458 0Z" fill="#DEFFEA" />
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M13.4456 1.11797L15.1792 2.50198L17.2552 1.72139L18.4762 3.57324L20.692 3.47248L21.2807 5.61077L23.4193 6.19975L23.3185 8.41558L25.1704 9.63628L24.3898 11.7126L25.7735 13.4461L24.3898 15.1794L25.1704 17.2557L23.3185 18.4764L23.4193 20.692L21.2807 21.2809L20.692 23.4195L18.4762 23.3187L17.2552 25.1706L15.1792 24.39L13.4456 25.774L11.7124 24.39L9.63636 25.1706L8.41538 23.3187L6.19954 23.4195L5.61084 21.2809L3.47228 20.692L3.57304 18.4764L1.72118 17.2557L2.50177 15.1794L1.11776 13.4461L2.50177 11.7126L1.72118 9.63628L3.57304 8.41558L3.47228 6.19975L5.61084 5.61077L6.19954 3.47248L8.41538 3.57324L9.63636 1.72139L11.7124 2.50198L13.4456 1.11797Z" fill="white" />
+                                            <path class="green-white" fill-rule="evenodd" clip-rule="evenodd" d="M13.446 0L15.3366 1.50968L17.6011 0.658041L18.9328 2.67802L21.3496 2.56792L21.9915 4.90064L24.3242 5.54283L24.2141 7.95933L26.2341 9.29098L25.3824 11.5555L26.8921 13.4461L25.3824 15.3365L26.2341 17.6007L24.2141 18.9326L24.3242 21.3494L21.9915 21.9916L21.3496 24.3238L18.9328 24.214L17.6011 26.2339L15.3366 25.3826L13.446 26.892V0Z" fill="#B3FECF" />
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M13.446 1.11797L15.1795 2.50198L17.2556 1.72139L18.4765 3.57324L20.6924 3.47248L21.2811 5.61077L23.4196 6.19975L23.3189 8.41558L25.1707 9.63628L24.3901 11.7126L25.7739 13.4461L24.3901 15.1794L25.1707 17.2557L23.3189 18.4764L23.4196 20.692L21.2811 21.2809L20.6924 23.4195L18.4765 23.3187L17.2556 25.1706L15.1795 24.39L13.446 25.774V1.11797Z" fill="#DEFFEA" />
+                                        </svg>
+
+                                    </a>
+
+                                </div>
+                                <div class="txt-bx">
+                                    <h4>
+                                        <a href="/Default/ViewFile/?id=State+level+best+performers.pdf&path=SVAPraiseAwards" target="_blank">PRAISE Awards (State Level Best Performers)</a>
+                                    </h4>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                      
+                        
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pink-box">
+        <h2 class="bhashini-skip-translation">Reaching New Goals, Every Day.</h2>
+        <div class="nav-list">
+            <ul class="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link tab-hover active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home"
+                            type="button" role="tab" aria-controls="pills-home" aria-selected="true">
+                        Total Loans
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link  " id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile"
+                            type="button" role="tab" aria-controls="pills-profile" aria-selected="false">
+                        1st Term Loan
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link tab-hover" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact"
+                            type="button" role="tab" aria-controls="pills-contact" aria-selected="false">
+                        2nd Term Loan
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link tab-hover" id="pills-loan-tab" data-bs-toggle="pill" data-bs-target="#pills-loan"
+                            type="button" role="tab" aria-controls="pills-loan" aria-selected="false">
+                        3rd Term Loan
+                    </button>
+                </li>
+
+            </ul>
+        </div>
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active " id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                <div class="loan-inner-box">
+                    <div class="row mb-4">
+                        <div class="col-4">
+                            <div class="loan-box st">
+                                <div class="img-container">
+                                    <img src="/RevampPMSUI/img/application.svg">
+                                </div>
+                                <div class="right-wh-bx">
+                                        <h4>
+                                            1,35,09,166
+                                        </h4>
+                                    <p>Eligible Applications</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="loan-box st">
+                                <div class="img-container">
+                                    <img src="/RevampPMSUI/img/loan.svg">
+                                </div>
+                                <div class="right-wh-bx">
+                                        <h4>
+                                            1,14,01,786
+                                        </h4>                                    <p>Sanctioned</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="loan-box st">
+                                <div class="img-container">
+                                    <img src="/RevampPMSUI/img/disbues.svg">
+                                </div>
+                                <div class="right-wh-bx">
+                                        <h4>
+                                            1,11,42,467
+                                        </h4>                                    <p>Disbursed</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="loan-box st">
+                                <div class="img-container">
+                                    <img src="/RevampPMSUI/img/return.svg">
+                                </div>
+                                <div class="right-wh-bx">
+                                            <h4>
+                                                9,89,345
+                                            </h4>                                     <p>Returned By Banks</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="loan-box st">
+                                <div class="img-container">
+                                    <img src="/RevampPMSUI/img/repaod.svg">
+                                </div>
+                                <div class="right-wh-bx">
+                                            <h4>
+                                                17,537 &nbsp;<span class="spaced-span">Crores</span>
+                                            </h4>                                     <p class="NameP">Total Disbursed Amount</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="loan-box st">
+                                <div class="img-container">
+                                    <img src="/RevampPMSUI/img/total.svg">
+                                </div>
+                                <div class="right-wh-bx">
+                                            <h4>
+                                                58,38,564
+                                            </h4>                                     <p class="NameP">Loans Repaid</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade " id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                <div class="loan-inner-box">
+                    <div class="row mb-4">
+                        <div class="col-4">
+                            <div class="loan-box">
+                                <div class="img-container">
+                                    <img src="/RevampPMSUI/img/application.svg">
+                                </div>
+                                <div class="right-wh-bx">
+                                        <h4>
+                                            87,09,461
+                                        </h4>                                    <p>Eligible Applications</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="loan-box">
+                                <div class="img-container">
+                                    <img src="/RevampPMSUI/img/loan.svg">
+                                </div>
+                                <div class="right-wh-bx">
+                                        <h4>
+                                            76,05,858
+                                        </h4>                                    <p>Sanctioned</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="loan-box">
+                                <div class="img-container">
+                                    <img src="/RevampPMSUI/img/disbues.svg">
+                                </div>
+                                <div class="right-wh-bx">
+                                        <h4>
+                                            74,89,831
+                                        </h4>                                    <p>Disbursed</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-4">
+                            <div class="loan-box">
+                                <div class="img-container">
+                                    <img src="/RevampPMSUI/img/return.svg">
+                                </div>
+                                <div class="right-wh-bx">
+                                            <h4>
+                                                5,21,612
+                                            </h4>                                     <p>Returned By Banks</p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="loan-box">
+                                <div class="img-container">
+                                    <img src="/RevampPMSUI/img/repaod.svg">
+                                </div>
+                                <div class="right-wh-bx">
+                                            <h4>
+                                                7,768 &nbsp;<span class="spaced-span">Crores</span>
+                                            </h4>                                     <p>Total Disbursed Amount</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="loan-box">
+                                <div class="img-container">
+                                    <img src="/RevampPMSUI/img/total.svg">
+                                </div>
+                                <div class="right-wh-bx">
+                                            <h4>
+                                                45,67,349
+                                            </h4>                                     <p class="NameP">Loans Repaid</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                <div class="loan-inner-box">
+                    <div class="row mb-4">
+                        <div class="col-4">
+                            <div class="loan-box">
+                                <div class="img-container">
+                                    <img src="/RevampPMSUI/img/application.svg">
+                                </div>
+                                <div class="right-wh-bx">
+                                            <h4>
+                                                37,41,927
+                                            </h4> 
+                                    <p class="NameP">Eligible Applications</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="loan-box">
+                                <div class="img-container">
+                                    <img src="/RevampPMSUI/img/loan.svg">
+                                </div>
+                                <div class="right-wh-bx">
+                                            <h4>
+                                                29,95,841
+                                            </h4>                                     <p class="NameP">Sanctioned</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="loan-box">
+                                <div class="img-container">
+                                    <img src="/RevampPMSUI/img/disbues.svg">
+                                </div>
+                                <div class="right-wh-bx">
+                                            <h4>
+                                                28,94,451
+                                            </h4>                                     <p>Disbursed</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-4">
+                            <div class="loan-box">
+                                <div class="img-container">
+                                    <img src="/RevampPMSUI/img/return.svg">
+                                </div>
+                                <div class="right-wh-bx">
+                                            <h4>
+                                                3,73,729
+                                            </h4>                                     <p>Returned By Banks</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="loan-box">
+                                <div class="img-container">
+                                    <img src="/RevampPMSUI/img/repaod.svg">
+                                </div>
+                                <div class="right-wh-bx">
+                                            <h4>
+                                                6,010 &nbsp;<span class="spaced-span">Crores</span>
+                                            </h4>                                     <p>Total Disbursed Amount</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="loan-box">
+                                <div class="img-container">
+                                    <img src="/RevampPMSUI/img/total.svg">
+                                </div>
+                                <div class="right-wh-bx">
+                                            <h4>
+                                                12,60,642
+                                            </h4>                                     <p>Loans Repaid</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pills-loan" role="tabpanel" aria-labelledby="pills-loan-tab">
+                <div class="loan-inner-box">
+                    <div class="row mb-4">
+                        <div class="col-4">
+                            <div class="loan-box">
+                                <div class="img-container">
+                                    <img src="/RevampPMSUI/img/application.svg">
+                                </div>
+                                <div class="right-wh-bx">
+                                            <h4>
+                                                10,57,778
+                                            </h4> 
+                                    <p>Eligible Applications</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="loan-box">
+                                <div class="img-container">
+                                    <img src="/RevampPMSUI/img/loan.svg">
+                                </div>
+                                <div class="right-wh-bx">
+                                            <h4>
+                                                8,00,087
+                                            </h4>                                     <p>Sanctioned</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="loan-box">
+                                <div class="img-container">
+                                    <img src="/RevampPMSUI/img/disbues.svg">
+                                </div>
+                                <div class="right-wh-bx">
+                                            <h4>
+                                                7,58,185
+                                            </h4>                                     <p>Disbursed</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-4">
+                            <div class="loan-box">
+                                <div class="img-container">
+                                    <img src="/RevampPMSUI/img/return.svg">
+                                </div>
+                                <div class="right-wh-bx">
+                                            <h4>
+                                                94,004
+                                            </h4>                                     <p>Returned By Banks</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="loan-box">
+                                <div class="img-container">
+                                    <img src="/RevampPMSUI/img/repaod.svg">
+                                </div>
+                                <div class="right-wh-bx">
+                                            <h4>
+                                                3,760 &nbsp;<span class="spaced-span">Crores</span>
+                                            </h4>                                     <p>Total Disbursed Amount</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="loan-box">
+                                <div class="img-container">
+                                    <img src="/RevampPMSUI/img/total.svg">
+                                </div>
+                                <div class="right-wh-bx">
+                                            <h4>
+                                                10,573
+                                            </h4>                                     <p>Loans Repaid</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="plan-wh-box">
+        <div class="wh-main-box">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="apply-main-bx">
+                        <div class="">
+                            <h3>
+                                <span>How to Apply...</span>
+                            </h3>
+                            <p>Follow 3 STEPs before starting the online Application Process:</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="processes">
+                        <div class="first-process">
+                            <h1>1</h1>
+                            <a href="/Home/PreApplication">
+                                <div class="process-name">
+                                    <h3>Check Eligibility</h3>
+                                    <p>1. Understand the Loan Application requirements</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="first-process">
+                            <h1>2</h1>
+                            <a href="/Home/PreApplication">
+                                <div class="process-name">
+                                    <h3>Apply Online</h3>
+                                    <p>
+                                        2. Make sure your mobile number is linked to your Aadhaar
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="first-process">
+                            <h1>3</h1>
+                            <a href="/Home/PreApplication">
+                                <div class="process-name">
+                                    <h3>Get Digital Approval</h3>
+                                    <p> 3. Check your eligibility status as per scheme rules</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="horz-line"></div>
+    <div class="state-box">
+        <div class="state-wrapper">
+            <div class="row">
+                <div class="col-lg-6 pe-4">
+                    <div class="apply-main-bx">
+                        <h3>
+                            Notified States/UTs
+                        </h3>
+                        <p>
+                            The scheme is available for beneficiaries
+                            belonging to only those States/UTs which have notified rules and scheme under
+                            Street Vendors (Protection of Livelihood and
+                            Regulation of Street Vending) Act, 2014.
+                        </p>
+                        <a href="/Home/States" style="display: initial;">
+                            <div class="lern-main-wrap">
+                                <div class="learn-more">
+                                    Click To View State Notification
+
+                                </div>
+                                <div class="lbtn-wrap">
+
+                                    <img src="/RevampPMSUI/img/arrow-striting.svg" alt="Arrow Image">
+
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="apply-main-bx">
+                        <h3>
+                            Check your Survey Status
+                        </h3>
+                        <p>
+                            You can check your survey status whether you have been covered in the survey carried out by Urban Local Bodies(ULB)/Municipalities or not and can save your Survey Reference Number(SRN) for future Reference.
+                        </p>
+
+                        <a href="/Schemes/SearchVendor" style="display: initial;">
+                            <div class="lern-main-wrap">
+                                <div class="learn-more">
+                                    Click to check survey status
+
+                                </div>
+                                <div class="lbtn-wrap">
+
+                                    <img src="/RevampPMSUI/img/arrow-striting.svg" alt="Arrow Image">
+
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="top-five">
+        <div class="top-five-wrapper mt-manual">
+            <h2>Top Performances</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="states-container ">
+                        <div class="state-head">
+                            States
+                        </div>
+                        <div class="state-inner-bx">
+                                    <div class="state-name">
+                                        <p class="bhashini-skip-translation">UTTAR PRADESH</p>
+                                    </div>
+                                    <div class="state-name">
+                                        <p class="bhashini-skip-translation">MADHYA PRADESH</p>
+                                    </div>
+                                    <div class="state-name">
+                                        <p class="bhashini-skip-translation">MAHARASHTRA</p>
+                                    </div>
+                                    <div class="state-name">
+                                        <p class="bhashini-skip-translation">GUJARAT</p>
+                                    </div>
+                                    <div class="state-name">
+                                        <p class="bhashini-skip-translation">TELANGANA</p>
+                                    </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="states-container">
+                        <div class="state-head">
+                            Banks
+                        </div>
+                        <div class="state-inner-bx">
+                                    <div class="state-name">
+                                        <p class="bhashini-skip-translation">STATE BANK OF INDIA</p>
+                                    </div>
+                                    <div class="state-name">
+                                        <p class="bhashini-skip-translation">BANK OF BARODA</p>
+                                    </div>
+                                    <div class="state-name">
+                                        <p class="bhashini-skip-translation">UNION BANK OF INDIA</p>
+                                    </div>
+                                    <div class="state-name">
+                                        <p class="bhashini-skip-translation">PUNJAB NATIONAL BANK</p>
+                                    </div>
+                                    <div class="state-name">
+                                        <p class="bhashini-skip-translation">CANARA BANK</p>
+                                    </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="states-container">
+                        <div class="state-head">
+                            Urban Local Bodies
+                        </div>
+                        <div class="state-inner-bx">
+                                    <div class="state-name d-flex flex-wrap">
+                                        <p class="bhashini-skip-translation">Municipal Corporation of Delhi   </p>
+                                    </div>
+                                    <div class="state-name d-flex flex-wrap">
+                                        <p class="bhashini-skip-translation">Ahmedabad Municipal Corporations </p>
+                                    </div>
+                                    <div class="state-name d-flex flex-wrap">
+                                        <p class="bhashini-skip-translation">Bbmp Municipal Corporations </p>
+                                    </div>
+                                    <div class="state-name d-flex flex-wrap">
+                                        <p class="bhashini-skip-translation">Indore Municipal Corporations </p>
+                                    </div>
+                                    <div class="state-name d-flex flex-wrap">
+                                        <p class="bhashini-skip-translation">Lucknow Municipal Corporations </p>
+                                    </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="grey-bottom-box">
+        <div class="bg-box">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="follow-box">
+                        <h1 class="bhashini-skip-translation">Follow us</h1>
+                        <p class="bhashini-skip-translation">On social media to get latest updates</p>
+                        <div class="social-links">
+                            <a target="_blank" href="https://www.facebook.com/mohua.india/" referrerpolicy="no-referrer"><img src="/RevampPMSUI/img/fb.svg"></a>
+                            <a target="_blank" href="https://twitter.com/pmsvanidhi" referrerpolicy="no-referrer"><img src="/RevampPMSUI/img/tw.svg"></a>
+                            <a target="_blank" href="https://www.instagram.com/pmsvanidhi?igsh=MXQyaDVrNTliM2RleQ==" referrerpolicy="no-referrer"> <img src="/RevampPMSUI/img/instagram.svg" /></a>
+                            <a target="_blank" href="https://www.youtube.com/@pm_svanidhi" +> <img src="/images/youtube-logo.png" /></a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="follow-box">
+                        <h1>Read our Newsletter!</h1>
+                        <div class="news-letter">
+                            <img src="/RevampPMSUI/img/newsletter.png">
+                        </div>
+                        <a href="/Home/DownloadFileLatestNews" target="_blank">
+                            <div class="lern-main-wrap">
+                                <div class="learn-more">
+                                    View Latest Newsletter
+                                </div>
+                                <div class="lbtn-wrap">
+                                    <img src="/RevampPMSUI/img/arrow-striting.svg" alt="">
+                                </div>
+                            </div>
+                        </a>
+
+                        <div class="vnews">
+                            <a href="/Home/HomepageNewsLetter" style="display: initial;">
+                                <div class="lern-main-wrap">
+                                    <div class="learn-more">
+                                        View all NewsLetters
+                                    </div>
+                                    <div class="lbtn-wrap" style="margin-left:18px;">
+                                        <img src="/RevampPMSUI/img/arrow-striting.svg" alt="">
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <img class="grey-bg-img" src="/RevampPMSUI/img/follow-bg.gif" alt="go Digital">
+        <div class="grey-bg-img-circle"></div>
+    </div>
+</div>
+
+<div class="go-digitl">
+    <div class="mbl-bg">
+        <h1 class="bhashini-skip-translation">Go digital, grow your stall: Get<br> App for street vendor loans.</h1>
+        <div class="download-bx">
+            <div class="scan-box">
+                <h4 class="bhashini-skip-translation">Download PM SVANidhi app</h4>
+                <p class="bhashini-skip-translation">Scan the QR code to Download the App</p>
+                <div class="app-store">
+                    <img src="/RevampPMSUI/img/QRCodeNew.png" style=" width: 130px; height: 130px; cursor:default">
+                    
+                    
+                    <a href="https://play.google.com/store/apps/details?id=com.mohua.pmsvanidhi_v2" target="_blank">
+                        <img src="/RevampPMSUI/img/playstore.png" style="cursor:default">
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="top-five-wrapper-foot ">
+    <div class="yourclass logo-list">
+        <div><div class="slide-content"> <a onclick="redirectToGov('https://data.gov.in/')"><img src="/RevampPMSUI/img/logo3.svg"></a></div></div>
+        <div><div class="slide-content"><a onclick="redirectToGov('https://www.india.gov.in/');"><img src="/RevampPMSUI/img/logo-6.png"></a></div></div>
+        <div><div class="slide-content">  <a onclick="redirectToGov('https://www.cgtmse.in/');"><img src="/RevampPMSUI/img/logo2.svg"></a></div></div>
+        <div><div class="slide-content"><a onclick="redirectToGov('https://www.npci.org.in/')"><img class="w-100 cgtlogo" src="/RevampPMSUI/img/logo-5.png"></a></div></div>
+        <div><div class="slide-content"><a onclick="redirectToGov('https://digitalindia.gov.in/');"><img src="/RevampPMSUI/img/logo4.svg"></a></div></div>
+
+        <div><div class="slide-content"><a onclick="redirectToGov('https://morth.nic.in/');"><img src="/RevampPMSUI/img/logo6.svg"></a></div></div>
+        <div><div class="slide-content"> <a onclick="redirectToGov('https://www.mygov.in/');"><img src="/RevampPMSUI/img/logo1.svg"></a></div></div>
+
+
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+</div>
+
+<style>
+    .govern-cars-box .carousel-item img {
+        max-height: 90px;
+        margin: 0px;
+        width: 100%;
+    }
+
+    a#askSamridhi {
+        position: fixed;
+        right: 10px;
+        bottom: 50px;
+        z-index: 100;
+    }
+
+    .askContainer {
+        position: fixed;
+        z-index: 100;
+        height: auto;
+        width: auto;
+        display: block;
+        right: 20px;
+        /*        background: #fff;*/
+        bottom: 20px;
+    }
+
+    #overlap {
+        position: fixed;
+        background-color: transparent;
+        top: 100px;
+        right: 10px;
+        bottom: 150px;
+        z-index: 101;
+        margin: 0px;
+        padding: 0px 0px 0px 0px;
+        width: 50px;
+        min-height: 300px;
+    }
+
+    .hide {
+        display: none !important;
+    }
+
+    .spaced-span {
+        font-style: italic;
+        font-size: 18px;
+    }
+
+    .vnews {
+        margin-top: 6px;
+        margin-left: 0px;
+    }
+</style>
+
+<section id="chatbox" style="position: fixed; bottom: 20px; right: 20px; z-index: 10000;">
+    <a href="javascript:void(0);" id="askSamridhi">
+
+        <img src="/images/chatbox/PM chatbot.svg" alt="askSamridhi" style="width:100%;height:35px;" id="chatboximg" />
+    </a>
+    <div class="askContainer panel-body hide" style="position: relative; bottom: 100%; right: 0; z-index: 1001;border-radius:10px !important;">
+        <iframe id="frame" class="frame" src="" width="395" height="500" style="border:none;border-radius:10px !important;" scrolling="no"></iframe>
+    </div>
+    <div id=""></div>
+</section>
+
+<script type="text/javascript">
+    function redirectToGov(url) {
+        var confirmation = confirm("You are being redirected to an external website.Are you sure you want to visit this page?");
+        if (confirmation) {
+            window.open(url, "url");
+        }
+    }
+    $("#askSamridhi").click(function () {
+
+                var chatBoxUrl = '/chatBox';
+
+    $("#frame").attr("src", chatBoxUrl).on('load', function () {
+        $(this).show();
+            var chatBoxUrl = '/chatBox';
+
+        $("#askSamridhi").addClass("hide");
+        $(".askContainer").removeClass("hide");
+    });
+  });
+        
+
+    $(document).ready(function () {
+        $("#askSamridhi").removeClass("hide");
+        $(".askContainer").addClass("hide");
+    });
+    window.addEventListener('message', function (event) {
+       if (event.data === 'closeChatbot') {
+            $("#frame").hide();
+            $("#askSamridhi").removeClass("hide");
+            $(".askContainer").removeClass("hide");
+        }
+        //else if (event.data === 'minimizeChatbot') {
+        //    debugger;
+        //    $(".askContainer").css("height", "50px");
+
+        //}
+
+    });
+
+</script>
+<script>
+    var swiper = new Swiper('.swiper-1', {
+        spaceBetween: 30,
+        centeredSlides: true,
+        autoplay: {
+            delay: 1500,
+            disableOnInteraction: false,
+        }
+    });
+
+    var mySwiper = new Swiper('.swiper-2', {
+        observer: true,
+        observeParents: true,
+        parallax: true,
+        cssMode: true,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        pagination: {
+            el: '.swiper-pagination'
+        },
+        mousewheel: true,
+        keyboard: true,
+    });
+
+    function createCookie(name, value, days) {
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            var expires = "; expires=" + date.toGMTString();
+        }
+        else var expires = "";
+
+        document.cookie = name + "=" + value + expires + "; path=/";
+    }
+
+    function readCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+
+    $(document).ready(function () {
+        // KK : Commented following cookie is not used anywhere so no need to create.
+        var dialogShown = readCookie("dialogShown");
+        if (dialogShown == null) {
+            createCookie("dialogShown", "0", 1);
+        }
+        if (true) {
+            // $("#myModal").modal('show');
+            createCookie("dialogShown", "1", 1);
+        } else {
+            $("#myModal").modal('hide');
+        }
+
+        $('#close').click(function () {
+            $('#myModal').modal('hide');
+        });
+    });
+
+    setInterval(hideMyModel, 285000);
+    function hideMyModel() {
+        $("#myModal").modal('hide');
+    }
+
+    //$('#WebSiteLink').click(function () {
+    function WebSiteLink() {
+        //$('#WebSiteLink').attr("href", GetProjectURL() + "/Akam");
+        window.open(GetProjectURL() + "/Akam", "_blank");
+    }
+    //});
+
+
+    function redirectToGov(url) {
+        var confirmation = confirm("You are being redirected to an external website.Are you sure you want to visit this page?");
+        if (confirmation) {
+            window.open(url, "url");
+        }
+    }
+
+</script>
+<script>
+    function downloadFiles() {
+        var viewLink = '/Default/ViewFile/?id=State+level+best+performers.pdf&path=SVAPraiseAwards';
+          var viewLink1 = '/Default/ViewFile/?id=Final-National+level+winners.pdf&path=SVAPraiseAwards';
+        
+        window.open(viewLink, '_blank');
+        setTimeout(function () {
+            window.open(viewLink1, '_blank');
+        }, 500); // 500 milliseconds delay
+
+        //for (var i = 0; i < downloadLinks.length; i++) {
+        //    var a = document.createElement('a');
+        //    a.href = downloadLinks[i];
+        //    a.download = downloadLinks[i].split('/').pop();
+        //    document.body.appendChild(a);
+        //    a.click();
+        //    document.body.removeChild(a);
+        //}
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const searchInput = document.getElementById('searchInput');
+        const form = document.getElementById('searchForm');
+        const errorContainer = document.getElementById('errorContainer');
+        const appNoField = document.getElementById('ApplicationNo');
+        const mobileNoField = document.getElementById('MobileNo');
+
+        // Handle form submission
+        form.addEventListener('submit', (event) => {
+            const input = searchInput.value.trim();
+            errorContainer.textContent = ''; // Clear previous errors
+
+            if (input === '') {
+                showError('Please enter a search term.');
+                event.preventDefault(); // Prevent form submission
+            } else {
+                // Regular expression for validating mobile numbers (10 digits)
+                const mobileNumberRegex = /^[0-9]{10}$/;
+                const appNoRegex = /^PMS.{0,12}$/; // Starts with 'PMS' and up to 15 characters total
+
+                if (appNoRegex.test(input)) {
+                    // Valid Application No
+                    appNoField.value = input;
+                    mobileNoField.value = ''; // Ensure MobileNo is empty
+                } else if (mobileNumberRegex.test(input)) {
+                    // Valid Mobile No
+                    appNoField.value = ''; // Ensure ApplicationNo is empty
+                    mobileNoField.value = input;
+                } else {
+                    showError('Invalid input. Please enter a valid Application No (starts with PMS) or a valid Mobile No (10 digits).');
+                    event.preventDefault(); // Prevent form submission
+                }
+            }
+        });
+
+        // Function to display error messages
+        function showError(message) {
+            errorContainer.textContent = message;
+            errorContainer.style.color = 'white'; // Set text color to white
+            setTimeout(() => {
+                errorContainer.textContent = ''; // Clear error message after 3 seconds
+            }, 3000);
+        }
+
+        // Handle search icon click (if applicable)
+        function performSearch() {
+            form.dispatchEvent(new Event('submit')); // Trigger form submission
+        }
+
+        // Optionally bind performSearch to a search icon click event if needed
+        // Example:
+        // const searchIcon = document.getElementById('searchIcon');
+        // searchIcon.addEventListener('click', performSearch);
+    });
+
+</script>
+
+
+
+<script>
+    $('.yourclass').slick({
+        dots: false,
+        infinite: true,
+        speed: 300,
+        slidesToShow: 6,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 1000,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    dots: true
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1
+                }
+            }
+        ]
+    });
+    //function showErrorMessage(actionName) {
+    //    toastr.error("Scheme is under restructuring and new applications will be accepted after the new scheme is approved ");
+    //}
+</script>
+    
+
+
+<div class="footer-wrap">
+    <div class="footer-bx">
+            <ul class="footer-ul">
+                <li><a href="/Home/Disclaimer">Disclaimer</a></li>
+                <li><a href="/Home/PrivacyPolicy">Privacy Policy </a></li>
+                <li><a href="/Home/TnC"> Terms and Conditions</a></li>
+                <li><a href="/Home/FeedBack">Feedback</a></li>
+                <li> <a href="/Home/Sitemap">Sitemap</a></li>
+            </ul>
+
+    </div>
+    <div class="copyright-bx">
+        <p class="bhashini-skip-translation">Copyright &copy; 2024 PMSVANidhi. All rights reserved.</p>
+        <p>Visitors Count: 44125396</p>
+        <div class="power-bx">
+            <p class="bhashini-skip-translation">Powered by:</p>
+            <a href="https://udyamimitra.in/" target="_blank">
+                <img src="/RevampPMSUI/img/image.png">
+                
+            </a>
+            <img class="qr-box" src="/images/QRCode.png" alt="" style="cursor:default">
+            (28)
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<script type="text/javascript">
+    $(function () {
+        $('body').css('min-height', ($(window).height() - $('header').height() + $('footer').height()) + 'px');
+    });
+</script>
+
+
+
+
+    <script type="text/javascript">
+        //function showErrorMessage(actionName) {
+        //                    toastr.error("Scheme is under restructuring and new applications will be accepted after the new scheme is approved ");
+        //                }
+
+        $(function () {
+            HideWait();
+            window.addEventListener("beforeunload", function (e) {
+                //$('#lightbox1, #overlay').show();
+            });
+
+            //for (i = 0; i < history.length; i++);
+            //{
+            //    history.pushState({ page: i + 1 }, "title 1", "#NoBack");
+            //}
+
+            //window.onhashchange = function (event) {
+            //    window.location.hash = "#NoBack";
+            //};
+
+            //Added by Neha Pawar-25/05-For goback when browser back buttn click
+            var loginType = '<%= Session["LoginType"] %>';
+            if (loginType === "LOGIN") {
+
+            }
+            else {
+                window.history.forward();
+                function noBack() {
+                    window.history.forward();
+                }
+            }
+
+
+        });
+
+          function GoBack() {
+            window.location = '/Login/LogOut';
+        }
+        $('#WebSiteLink').click(function () {
+
+            $(this).attr("href", GetProjectURL() + "/Akam");
+            $(this).css({ 'cursor': 'pointer' });
+        });
+        //$(document).ready(function () {
+        //    $('.scheme-instructions').on('click', function () {
+        //        $('.tabContent').hide();
+        //        // Get the URL from the data-url attribute
+        //        var url = $(this).data('url');
+        //        // Use AJAX to fetch the content
+        //        $.ajax({
+        //            url: url,
+        //            type: 'GET',
+        //            success: function (data) {
+        //                // Load the fetched content into the #content-area
+        //                $('.tabContent').html(data);
+        //            },
+        //            error: function () {
+        //                // Handle any errors here
+        //                $('.tabContent').html('<p>Error loading content.</p>');
+        //            }
+        //        });
+        //    });
+
+        //});
+
+    </script>
+    
+    <div id="loder" class="loder-gif">
+        <img src="/RevampPMSUI/img/sch-img/pmsvanidhi_loader.GIF" style="width: 100px; height: 100px;">
+    </div>
+
+
+</body>
+<script>
+    document.addEventListener('keydown', function (event) {
+        if (
+            event.key === "F12" ||
+            (event.ctrlKey && event.shiftKey && event.key === 'I') ||
+            (event.ctrlKey && event.shiftKey && event.key === 'J') ||
+            (event.ctrlKey && event.key === 'U') // View source
+        ) {
+            event.preventDefault();
+        }
+    });
+</script>
+</html>
+<script src="https://translation-plugin.bhashini.co.in/v2/website_translation_utility.js" auth-token="0d5z_ZIJRhRSRqb0N1nLcPI3ZboElGICkbz8KsvqA7k3aCBXbdJvXLygRwJAR27O" data-pos-x="95" data-pos-y=" 95" default-translated-language="en" translation-language-list="en,hi,mr,kn,gu,gom,pa,bn,as,or,te,ta,ml,sa"></script>
+
+
+<script>
+    //function showErrorMessage(actionName) {
+    //    toastr.error("Scheme is under restructuring and new applications will be accepted after the new scheme is approved ");
+    //}
+
+
+</script>

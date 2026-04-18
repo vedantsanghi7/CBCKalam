@@ -1,0 +1,63 @@
+scheme_id: NMMSS
+name: National Means-cum-Merit Scholarship Scheme
+ministry: Ministry of Education
+launched: '2008-05-01'
+category: scholarship
+short_description: ₹12,000/yr scholarship for meritorious Class 9–12 students whose
+  family income ≤ ₹3.5 lakh/yr.
+description: NMMSS awards ₹12,000/year to academically meritorious students from Class
+  9 to Class 12 in state-government, government-aided and local-body schools. Family
+  income ceiling ₹3.5 lakh/year. Selection via state-level means-cum-merit test in
+  Class 8.
+application_url: https://scholarships.gov.in/
+benefit:
+  type: scholarship
+  amount_inr: 12000
+  frequency: yearly
+  mode: DBT
+inputs_required:
+- age
+- annual_income_inr
+- has_aadhaar
+- has_bank_account
+rules:
+- id: NMMSS_R001
+  type: inclusion
+  predicate: age BETWEEN 13 AND 19
+  description: Age 13–19 (Class 9–12)
+  source_text: Students in Class 9 through 12
+  confidence: high
+  ambiguity_flags: []
+- id: NMMSS_R002
+  type: inclusion
+  predicate: annual_income_inr <= 350000
+  description: Family income ≤ ₹3.5L/year
+  source_text: Parental income ceiling of Rs 3.5 lakh
+  confidence: high
+  ambiguity_flags: []
+- id: NMMSS_R003
+  type: mandatory_doc
+  predicate: has_aadhaar == True AND has_bank_account == True
+  description: Aadhaar + bank account
+  source_text: DBT requires linked account
+  confidence: high
+  ambiguity_flags: []
+documents_checklist:
+- aadhaar_card
+- bank_passbook_with_ifsc
+- income_certificate
+- class_8_marksheet
+- bonafide_certificate
+verification:
+  extracted_by: sarvam-30b
+  extracted_on: '2026-04-18'
+  verified_by_human: true
+  verifier: auto
+  verification_notes: Rules authored from public scheme guidelines; re-verify against
+    live sources before production use.
+overlaps_with: []
+prerequisites: []
+sources:
+- url: https://www.myscheme.gov.in/schemes/nmmss
+  section: Eligibility & Benefits
+  fetched_on: '2026-04-18'

@@ -1,0 +1,54 @@
+scheme_id: NSAP_NFBS
+name: National Family Benefit Scheme (NSAP)
+ministry: Ministry of Rural Development (NSAP)
+launched: '1995-08-15'
+category: family_support
+short_description: One-time ₹20,000 to a BPL household on the death of its primary
+  breadwinner aged 18–59.
+description: NFBS provides a lump-sum assistance of ₹20,000 to a bereaved BPL household
+  on the death of its primary earner (18–59 years). Claim must normally be filed within
+  3 years of the death.
+application_url: https://nsap.nic.in/
+benefit:
+  type: cash_transfer
+  amount_inr: 20000
+  frequency: one_time
+  mode: DBT
+inputs_required:
+- is_bpl
+- has_aadhaar
+- has_bank_account
+rules:
+- id: NFBS_R001
+  type: inclusion
+  predicate: is_bpl == True
+  description: BPL household
+  source_text: Identified BPL household
+  confidence: high
+  ambiguity_flags: []
+- id: NFBS_R002
+  type: mandatory_doc
+  predicate: has_aadhaar == True AND has_bank_account == True
+  description: Aadhaar + bank account
+  source_text: DBT requires linked account
+  confidence: high
+  ambiguity_flags: []
+documents_checklist:
+- aadhaar_card
+- bank_passbook_with_ifsc
+- death_certificate
+- bpl_certificate
+- age_proof_of_deceased
+verification:
+  extracted_by: sarvam-30b
+  extracted_on: '2026-04-18'
+  verified_by_human: true
+  verifier: auto
+  verification_notes: Rules authored from public scheme guidelines; re-verify against
+    live sources before production use.
+overlaps_with: []
+prerequisites: []
+sources:
+- url: https://www.myscheme.gov.in/schemes/nsap_nfbs
+  section: Eligibility & Benefits
+  fetched_on: '2026-04-18'

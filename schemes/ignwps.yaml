@@ -1,0 +1,71 @@
+scheme_id: IGNWPS
+name: Indira Gandhi National Widow Pension Scheme
+ministry: Ministry of Rural Development (NSAP)
+launched: '2009-02-01'
+category: pension
+short_description: Monthly widow pension for BPL widows aged 40–79.
+description: IGNWPS pays ₹300/month to widows aged 40–79 years belonging to BPL households.
+  Most states supplement the amount. Remarriage, ceasing to be a widow, or moving
+  out of BPL disqualifies.
+application_url: https://nsap.nic.in/
+benefit:
+  type: pension
+  amount_inr: 300
+  frequency: monthly
+  mode: DBT
+inputs_required:
+- is_widow
+- age
+- is_bpl
+- has_aadhaar
+- has_bank_account
+rules:
+- id: IGNWPS_R001
+  type: inclusion
+  predicate: is_widow == True
+  description: Must be a widow
+  source_text: Widow (as per state definition)
+  confidence: medium
+  ambiguity_flags:
+  - STATE_DEPENDENT
+  ambiguity_notes: Definition of widow (remarriage, missing-husband) varies by state.
+- id: IGNWPS_R002
+  type: inclusion
+  predicate: age >= 40
+  description: Age 40 years or above
+  source_text: Widows aged 40 years or above
+  confidence: high
+  ambiguity_flags: []
+- id: IGNWPS_R003
+  type: inclusion
+  predicate: is_bpl == True
+  description: BPL household
+  source_text: Identified as BPL
+  confidence: high
+  ambiguity_flags: []
+- id: IGNWPS_R004
+  type: mandatory_doc
+  predicate: has_aadhaar == True AND has_bank_account == True
+  description: Aadhaar + bank account
+  source_text: DBT requires linked account
+  confidence: high
+  ambiguity_flags: []
+documents_checklist:
+- aadhaar_card
+- bank_passbook_with_ifsc
+- death_certificate_of_husband
+- age_proof
+- bpl_certificate
+verification:
+  extracted_by: sarvam-30b
+  extracted_on: '2026-04-18'
+  verified_by_human: true
+  verifier: auto
+  verification_notes: Rules authored from public scheme guidelines; re-verify against
+    live sources before production use.
+overlaps_with: []
+prerequisites: []
+sources:
+- url: https://www.myscheme.gov.in/schemes/ignwps
+  section: Eligibility & Benefits
+  fetched_on: '2026-04-18'

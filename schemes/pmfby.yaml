@@ -1,0 +1,53 @@
+scheme_id: PMFBY
+name: Pradhan Mantri Fasal Bima Yojana
+ministry: Ministry of Agriculture & Farmers Welfare
+launched: '2016-04-01'
+category: farmer
+short_description: Crop insurance for notified crops for farmers (owner, tenant, or
+  sharecropper).
+description: 'PMFBY provides insurance against crop loss due to natural calamities,
+  pests and diseases. Premium: 2% of sum insured for kharif, 1.5% for rabi, 5% for
+  annual commercial/horticultural crops. Both loanee and non-loanee farmers — including
+  tenants and sharecroppers — can enrol.'
+application_url: https://pmfby.gov.in/
+benefit:
+  type: insurance
+  notes: Sum insured equal to scale of finance
+  mode: claim_based
+inputs_required:
+- occupation
+- has_aadhaar
+- has_bank_account
+rules:
+- id: PMFBY_R001
+  type: inclusion
+  predicate: occupation == 'farmer'
+  description: Must be a cultivator (owner/tenant/sharecropper)
+  source_text: All farmers including sharecroppers and tenants
+  confidence: high
+  ambiguity_flags: []
+- id: PMFBY_R002
+  type: mandatory_doc
+  predicate: has_aadhaar == True AND has_bank_account == True
+  description: Aadhaar + bank account
+  source_text: Premium DBT + claim payout
+  confidence: high
+  ambiguity_flags: []
+documents_checklist:
+- aadhaar_card
+- bank_passbook_with_ifsc
+- sowing_certificate_or_land_record
+- tenancy_agreement_if_tenant
+verification:
+  extracted_by: sarvam-30b
+  extracted_on: '2026-04-18'
+  verified_by_human: true
+  verifier: auto
+  verification_notes: Rules authored from public scheme guidelines; re-verify against
+    live sources before production use.
+overlaps_with: []
+prerequisites: []
+sources:
+- url: https://www.myscheme.gov.in/schemes/pmfby
+  section: Eligibility & Benefits
+  fetched_on: '2026-04-18'

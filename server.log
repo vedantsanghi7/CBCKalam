@@ -1,0 +1,38 @@
+INFO:     Started server process [72507]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:51389 - "OPTIONS /session HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51389 - "POST /session HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51391 - "POST /session HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51418 - "GET /docs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51418 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51450 - "POST /session HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51467 - "OPTIONS /schemes HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51467 - "GET /schemes HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51469 - "OPTIONS /ambiguity-map HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51469 - "GET /ambiguity-map HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51496 - "GET /docs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51496 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51897 - "OPTIONS /session HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51897 - "POST /session HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51897 - "OPTIONS /schemes HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51899 - "GET /schemes HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51899 - "OPTIONS /schemes/APY HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51897 - "GET /schemes/APY HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51897 - "GET /schemes HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51908 - "OPTIONS /ambiguity-map HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51908 - "GET /ambiguity-map HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51910 - "POST /session HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51934 - "OPTIONS /session/fca5e3fc-3ec9-4ed5-81c1-bce6428a1a84/turn HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51934 - "POST /session/fca5e3fc-3ec9-4ed5-81c1-bce6428a1a84/turn HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51936 - "POST /session/fca5e3fc-3ec9-4ed5-81c1-bce6428a1a84/turn HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51940 - "POST /session/fca5e3fc-3ec9-4ed5-81c1-bce6428a1a84/turn HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51940 - "POST /session/fca5e3fc-3ec9-4ed5-81c1-bce6428a1a84/turn HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51940 - "OPTIONS /session/fca5e3fc-3ec9-4ed5-81c1-bce6428a1a84/match HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51940 - "POST /session/fca5e3fc-3ec9-4ed5-81c1-bce6428a1a84/match HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51942 - "POST /session/fca5e3fc-3ec9-4ed5-81c1-bce6428a1a84/turn HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52104 - "OPTIONS /session HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52106 - "OPTIONS /session HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52104 - "POST /session HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52106 - "POST /session HTTP/1.1" 200 OK

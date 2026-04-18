@@ -1,0 +1,61 @@
+scheme_id: PMAY_U
+name: Pradhan Mantri Awas Yojana — Urban 2.0
+ministry: Ministry of Housing & Urban Affairs
+launched: '2024-09-01'
+category: housing
+short_description: Interest subsidy / direct subsidy for urban families lacking pucca
+  house — EWS/LIG/MIG-I.
+description: 'PMAY-U 2.0 (Housing for All) provides interest subsidy on home loans
+  and direct construction support for urban EWS, LIG, and MIG-I households who do
+  not own a pucca house anywhere in India. Annual household income ceilings: EWS ≤
+  ₹3 lakh, LIG ≤ ₹6 lakh, MIG-I ≤ ₹9 lakh.'
+application_url: https://pmay-urban.gov.in/
+benefit:
+  type: housing_subsidy
+  amount_inr: 250000
+  frequency: one_time
+  mode: credit_linked_subsidy
+inputs_required:
+- district_rural_or_urban
+- annual_income_inr
+- has_aadhaar
+rules:
+- id: PMAYU_R001
+  type: inclusion
+  predicate: district_rural_or_urban == 'urban'
+  description: Applicant must reside in a statutory urban area
+  source_text: Scheme covers households in ULBs
+  confidence: high
+  ambiguity_flags: []
+- id: PMAYU_R002
+  type: inclusion
+  predicate: annual_income_inr <= 900000
+  description: Household income ≤ ₹9 lakh (MIG-I ceiling)
+  source_text: 'Household annual income ceilings: EWS, LIG, MIG-I'
+  confidence: high
+  ambiguity_flags: []
+- id: PMAYU_R003
+  type: mandatory_doc
+  predicate: has_aadhaar == True
+  description: Aadhaar required
+  source_text: Aadhaar required for DBT/CLSS
+  confidence: high
+  ambiguity_flags: []
+documents_checklist:
+- aadhaar_card
+- bank_passbook_with_ifsc
+- income_certificate
+- affidavit_no_pucca_house
+verification:
+  extracted_by: sarvam-30b
+  extracted_on: '2026-04-18'
+  verified_by_human: true
+  verifier: auto
+  verification_notes: Rules authored from public scheme guidelines; re-verify against
+    live sources before production use.
+overlaps_with: []
+prerequisites: []
+sources:
+- url: https://www.myscheme.gov.in/schemes/pmay_u
+  section: Eligibility & Benefits
+  fetched_on: '2026-04-18'

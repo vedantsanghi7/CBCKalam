@@ -1,0 +1,63 @@
+scheme_id: PMUY
+name: Pradhan Mantri Ujjwala Yojana
+ministry: Ministry of Petroleum & Natural Gas
+launched: '2016-05-01'
+category: energy
+short_description: Free LPG connection (with first refill and stove) for women from
+  BPL / priority households.
+description: PMUY provides a free LPG connection, deposit-free cylinder, first refill,
+  and gas stove to adult women (≥18) from BPL, SECC, or other priority households.
+  Intended to replace polluting traditional cooking fuels.
+application_url: https://www.pmuy.gov.in/
+benefit:
+  type: lpg_connection
+  amount_inr: 1600
+  frequency: one_time
+  mode: subsidy_plus_goods
+inputs_required:
+- sex
+- age
+- is_bpl
+- has_aadhaar
+- has_bank_account
+rules:
+- id: PMUY_R001
+  type: inclusion
+  predicate: sex == 'F' AND age >= 18
+  description: Applicant must be an adult woman
+  source_text: Adult woman (≥18) of a BPL family
+  confidence: high
+  ambiguity_flags: []
+- id: PMUY_R002
+  type: inclusion
+  predicate: is_bpl == True
+  description: Household must be BPL / SECC-listed
+  source_text: BPL household / SECC 2011 list
+  confidence: medium
+  ambiguity_flags:
+  - STATE_DEPENDENT
+- id: PMUY_R003
+  type: mandatory_doc
+  predicate: has_aadhaar == True AND has_bank_account == True
+  description: Aadhaar + bank account mandatory for LPG subsidy DBT
+  source_text: DBT for subsidies requires Aadhaar-linked bank account
+  confidence: high
+  ambiguity_flags: []
+documents_checklist:
+- aadhaar_card
+- bank_passbook_with_ifsc
+- ration_card
+- bpl_certificate
+verification:
+  extracted_by: sarvam-30b
+  extracted_on: '2026-04-18'
+  verified_by_human: true
+  verifier: auto
+  verification_notes: Rules authored from public scheme guidelines; re-verify against
+    live sources before production use.
+overlaps_with: []
+prerequisites: []
+sources:
+- url: https://www.myscheme.gov.in/schemes/pmuy
+  section: Eligibility & Benefits
+  fetched_on: '2026-04-18'

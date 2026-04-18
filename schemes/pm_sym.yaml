@@ -1,0 +1,75 @@
+scheme_id: PM_SYM
+name: PM Shram Yogi Maan-Dhan
+ministry: Ministry of Labour & Employment
+launched: '2019-02-15'
+category: pension
+short_description: ₹3,000/month pension after 60 for unorganised-sector workers earning
+  ≤ ₹15,000/month.
+description: PM-SYM provides a guaranteed minimum pension of ₹3,000/month after 60
+  to unorganised workers (street vendors, domestic workers, construction workers etc.)
+  earning up to ₹15,000/month, aged 18–40. Matching monthly contribution.
+application_url: https://maandhan.in/shramyogi
+benefit:
+  type: pension
+  amount_inr: 3000
+  frequency: monthly
+  mode: post_60_pension
+inputs_required:
+- age
+- annual_income_inr
+- has_aadhaar
+- has_bank_account
+- govt_employee_status
+- income_tax_filed_last_ay
+rules:
+- id: SYM_R001
+  type: inclusion
+  predicate: age BETWEEN 18 AND 40
+  description: Age 18–40
+  source_text: Entry age 18 to 40
+  confidence: high
+  ambiguity_flags: []
+- id: SYM_R002
+  type: inclusion
+  predicate: annual_income_inr <= 180000
+  description: Monthly income ≤ ₹15,000 (₹1.8L/yr)
+  source_text: Monthly income up to Rs 15,000
+  confidence: high
+  ambiguity_flags: []
+- id: SYM_R003
+  type: exclusion
+  predicate: govt_employee_status != 'none'
+  description: Existing govt employees excluded
+  source_text: Not already covered under NPS/ESIC/EPFO as govt/organised worker
+  confidence: high
+  ambiguity_flags: []
+- id: SYM_R004
+  type: exclusion
+  predicate: income_tax_filed_last_ay == True
+  description: Income tax payers excluded
+  source_text: Income tax assessees are not eligible
+  confidence: high
+  ambiguity_flags: []
+- id: SYM_R005
+  type: mandatory_doc
+  predicate: has_aadhaar == True AND has_bank_account == True
+  description: Aadhaar + bank account
+  source_text: Standard KYC
+  confidence: high
+  ambiguity_flags: []
+documents_checklist:
+- aadhaar_card
+- bank_passbook_with_ifsc
+verification:
+  extracted_by: sarvam-30b
+  extracted_on: '2026-04-18'
+  verified_by_human: true
+  verifier: auto
+  verification_notes: Rules authored from public scheme guidelines; re-verify against
+    live sources before production use.
+overlaps_with: []
+prerequisites: []
+sources:
+- url: https://www.myscheme.gov.in/schemes/pm_sym
+  section: Eligibility & Benefits
+  fetched_on: '2026-04-18'

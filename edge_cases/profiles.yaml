@@ -1,0 +1,44 @@
+profiles:
+  - id: leela_remarried
+    name: "Widow Who Recently Remarried (Leela, 38)"
+    data:
+      age: 38
+      is_widow: true
+      is_bpl: true
+      is_remarried: true
+  - id: ramesh_farmer_tenant
+    name: "Farmer Who Leases Land (Ramesh, 42)"
+    data:
+      age: 42
+      land_ownership_type: "leased"
+      land_in_own_name: false
+      district_rural_or_urban: "rural"
+      is_willing_to_do_unskilled_work: true
+  - id: sushila_no_bank
+    name: "Aadhaar-Yes, Bank-No (Sushila, 28)"
+    data:
+      age: 28
+      has_aadhaar: true
+      has_bank_account: false
+      nationality: "indian"
+      ekyc_done: false
+  - id: ayesha_transgender
+    name: "Transgender Applicant (Ayesha, 35)"
+    data:
+      age: 35
+      is_pregnant: true
+      sex: "other"
+      child_number: 1
+      govt_employee_status: "none"
+  - id: meena_missing_husband
+    name: "Husband Missing 7+ Years (Meena, 45)"
+    data:
+      age: 45
+      is_widow: "UNKNOWN" # Actually unknown legally
+      is_bpl: true
+  - id: arjun_divorced_father
+    name: "Divorced Father Raising Daughter (Arjun, 44)"
+    data:
+      age: 44
+      has_daughter_under_10: true
+      is_legal_guardian: true

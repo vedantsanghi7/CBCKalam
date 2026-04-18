@@ -1,0 +1,63 @@
+scheme_id: STANDUP_INDIA
+name: Stand-Up India
+ministry: Department of Financial Services
+launched: '2016-04-05'
+category: entrepreneurship
+short_description: Bank loans ₹10 lakh – ₹1 crore to SC/ST or women entrepreneurs
+  setting up a greenfield enterprise.
+description: Stand-Up India facilitates bank loans between ₹10 lakh and ₹1 crore to
+  at least one SC/ST and one woman borrower per bank branch for setting up a greenfield
+  enterprise in manufacturing, services, trading, or agri-allied activities.
+application_url: https://www.standupmitra.in/
+benefit:
+  type: loan
+  amount_inr: 10000000
+  frequency: loan
+  mode: bank_credit
+inputs_required:
+- age
+- caste_category
+- sex
+- has_aadhaar
+- has_bank_account
+rules:
+- id: SUI_R001
+  type: inclusion
+  predicate: age >= 18
+  description: Adult applicant
+  source_text: Applicant must be 18+
+  confidence: high
+  ambiguity_flags: []
+- id: SUI_R002
+  type: inclusion
+  predicate: caste_category IN ['SC','ST'] OR sex == 'F'
+  description: Must be SC/ST or woman
+  source_text: At least one SC/ST and/or woman borrower
+  confidence: high
+  ambiguity_flags: []
+- id: SUI_R003
+  type: mandatory_doc
+  predicate: has_aadhaar == True AND has_bank_account == True
+  description: Aadhaar + bank account
+  source_text: Standard loan KYC
+  confidence: high
+  ambiguity_flags: []
+documents_checklist:
+- aadhaar_card
+- bank_passbook_with_ifsc
+- caste_certificate_if_sc_st
+- project_proposal
+- pan_card
+verification:
+  extracted_by: sarvam-30b
+  extracted_on: '2026-04-18'
+  verified_by_human: true
+  verifier: auto
+  verification_notes: Rules authored from public scheme guidelines; re-verify against
+    live sources before production use.
+overlaps_with: []
+prerequisites: []
+sources:
+- url: https://www.myscheme.gov.in/schemes/standup_india
+  section: Eligibility & Benefits
+  fetched_on: '2026-04-18'

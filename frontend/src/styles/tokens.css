@@ -1,0 +1,67 @@
+:root {
+  /* Background gradient stops */
+  --bg-1: #EEF1FA;   /* cool blue-white, top-left */
+  --bg-2: #F5E8F1;   /* dusty pink, center */
+  --bg-3: #FFF4E1;   /* cream, bottom-right */
+  --bg-4: #E8EFFA;   /* secondary blue bloom */
+
+  /* Surface (glass) */
+  --surface-1: rgba(255, 255, 255, 0.55);   /* cards */
+  --surface-2: rgba(255, 255, 255, 0.70);   /* raised cards */
+  --surface-3: rgba(255, 255, 255, 0.85);   /* dialogs */
+  --surface-ink: rgba(20, 22, 34, 0.92);    /* dark pill / primary */
+
+  /* Borders */
+  --border-hairline: rgba(255, 255, 255, 0.6);
+  --border-ink: rgba(20, 22, 34, 0.08);
+
+  /* Text */
+  --text-1: #141622;          /* primary */
+  --text-2: #4A4E63;          /* secondary */
+  --text-3: #7A7E92;          /* tertiary / captions */
+  --text-inverse: #FFFFFF;
+
+  /* Status colors — calibrated for AA contrast on glass */
+  --status-qualifies: #0E7A4D;          /* deep green */
+  --status-qualifies-bg: #DDF4E8;
+  --status-almost: #9A5B00;              /* amber */
+  --status-almost-bg: #FCEBCB;
+  --status-no: #8A1F1F;                  /* muted red */
+  --status-no-bg: #F6DADA;
+  --status-uncertain: #4A4690;           /* deep violet — "we don't know yet" */
+  --status-uncertain-bg: #E5E2F5;
+
+  /* Accent (used sparingly — brand gradient text, focus rings) */
+  --accent-1: #6E6CFF;       /* indigo */
+  --accent-2: #E67AA8;       /* rose */
+
+  /* Radii */
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+  --radius-xl: 36px;
+  --radius-pill: 9999px;
+
+  /* Shadows — soft, never harsh */
+  --shadow-sm: 0 1px 2px rgba(20, 22, 34, 0.04), 0 1px 3px rgba(20, 22, 34, 0.04);
+  --shadow-md: 0 4px 20px rgba(20, 22, 34, 0.06), 0 2px 6px rgba(20, 22, 34, 0.04);
+  --shadow-lg: 0 20px 60px rgba(20, 22, 34, 0.08), 0 8px 20px rgba(20, 22, 34, 0.05);
+  --shadow-glow: 0 0 0 4px rgba(110, 108, 255, 0.15);   /* focus */
+
+  /* Blur */
+  --blur-sm: 12px;
+  --blur-md: 24px;
+  --blur-lg: 40px;
+
+  /* Type scale */
+  --font-sans: "Inter", "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --font-display: "Plus Jakarta Sans", "Inter", sans-serif;
+  --font-devanagari: "Noto Sans Devanagari", "Inter", sans-serif;
+
+  /* Spacing rhythm (4px base) */
+  --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px;
+  --s-5: 20px; --s-6: 24px; --s-8: 32px; --s-10: 40px;
+  --s-12: 48px; --s-16: 64px; --s-20: 80px;
+}
+

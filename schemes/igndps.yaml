@@ -1,0 +1,70 @@
+scheme_id: IGNDPS
+name: Indira Gandhi National Disability Pension Scheme
+ministry: Ministry of Rural Development (NSAP)
+launched: '2009-02-01'
+category: pension
+short_description: Monthly disability pension for BPL persons aged 18–79 with ≥80%
+  disability.
+description: IGNDPS provides a central pension of ₹300/month (and ₹500/month for those
+  80+) to BPL persons aged 18+ with severe or multiple disabilities (usually 80% or
+  more). States may supplement.
+application_url: https://nsap.nic.in/
+benefit:
+  type: pension
+  amount_inr: 300
+  frequency: monthly
+  mode: DBT
+inputs_required:
+- is_disabled
+- age
+- is_bpl
+- has_aadhaar
+- has_bank_account
+rules:
+- id: DPS_R001
+  type: inclusion
+  predicate: is_disabled == True
+  description: Must be certified disabled (usually ≥80%)
+  source_text: Severe / multiple disability as per PwD Act
+  confidence: medium
+  ambiguity_flags:
+  - STATE_DEPENDENT
+- id: DPS_R002
+  type: inclusion
+  predicate: age >= 18
+  description: Age 18+
+  source_text: Age 18 and above
+  confidence: high
+  ambiguity_flags: []
+- id: DPS_R003
+  type: inclusion
+  predicate: is_bpl == True
+  description: BPL household
+  source_text: BPL listed household
+  confidence: high
+  ambiguity_flags: []
+- id: DPS_R004
+  type: mandatory_doc
+  predicate: has_aadhaar == True AND has_bank_account == True
+  description: Aadhaar + bank account
+  source_text: DBT requires linked account
+  confidence: high
+  ambiguity_flags: []
+documents_checklist:
+- aadhaar_card
+- bank_passbook_with_ifsc
+- disability_certificate
+- bpl_certificate
+verification:
+  extracted_by: sarvam-30b
+  extracted_on: '2026-04-18'
+  verified_by_human: true
+  verifier: auto
+  verification_notes: Rules authored from public scheme guidelines; re-verify against
+    live sources before production use.
+overlaps_with: []
+prerequisites: []
+sources:
+- url: https://www.myscheme.gov.in/schemes/igndps
+  section: Eligibility & Benefits
+  fetched_on: '2026-04-18'

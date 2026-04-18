@@ -1,0 +1,22 @@
+# 1429 — translate
+Date/Time: 2026-04-18T23:51:22.644879
+Model: translate
+Offline: False
+
+## Payload
+```json
+{
+  "input": "PM Shram Yogi Maan-Dhan",
+  "source_language_code": "auto",
+  "target_language_code": "hi-IN",
+  "mode": "formal"
+}
+```
+
+## Response
+```
+प्रधानमंत्री श्रम योगी अंशदान
+```
+
+## Note
+live call

@@ -1,0 +1,67 @@
+scheme_id: DDU_GKY
+name: Deen Dayal Upadhyaya Grameen Kaushalya Yojana
+ministry: Ministry of Rural Development
+launched: '2014-09-25'
+category: skill
+short_description: Placement-linked skill training for rural youth aged 15–35 from
+  poor families.
+description: DDU-GKY is a placement-linked skills programme for rural youth aged 15–35
+  from poor families (SECC-identified). Training + assured placement. Higher age cap
+  (18–45) for women and vulnerable groups.
+application_url: https://ddugky.gov.in/
+benefit:
+  type: skill_training
+  notes: Free training + placement support
+  mode: classroom
+inputs_required:
+- age
+- district_rural_or_urban
+- is_bpl
+- has_aadhaar
+rules:
+- id: DGKY_R001
+  type: inclusion
+  predicate: age BETWEEN 15 AND 35
+  description: Age 15–35
+  source_text: Rural youth aged 15–35; 18–45 for women
+  confidence: high
+  ambiguity_flags: []
+- id: DGKY_R002
+  type: inclusion
+  predicate: district_rural_or_urban == 'rural'
+  description: Rural residence
+  source_text: Programme is for rural youth
+  confidence: high
+  ambiguity_flags: []
+- id: DGKY_R003
+  type: inclusion
+  predicate: is_bpl == True
+  description: Must be from a poor household
+  source_text: SECC-identified poor rural household
+  confidence: medium
+  ambiguity_flags:
+  - STATE_DEPENDENT
+- id: DGKY_R004
+  type: mandatory_doc
+  predicate: has_aadhaar == True
+  description: Aadhaar required
+  source_text: Aadhaar KYC
+  confidence: high
+  ambiguity_flags: []
+documents_checklist:
+- aadhaar_card
+- bank_passbook_with_ifsc
+- bpl_or_secc_id
+verification:
+  extracted_by: sarvam-30b
+  extracted_on: '2026-04-18'
+  verified_by_human: true
+  verifier: auto
+  verification_notes: Rules authored from public scheme guidelines; re-verify against
+    live sources before production use.
+overlaps_with: []
+prerequisites: []
+sources:
+- url: https://www.myscheme.gov.in/schemes/ddu_gky
+  section: Eligibility & Benefits
+  fetched_on: '2026-04-18'

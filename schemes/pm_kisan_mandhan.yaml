@@ -1,0 +1,71 @@
+scheme_id: PM_KISAN_MANDHAN
+name: PM Kisan Maan-Dhan Yojana
+ministry: Ministry of Agriculture & Farmers Welfare
+launched: '2019-09-12'
+category: pension
+short_description: Voluntary ₹3,000/month pension after 60 for small and marginal
+  farmers aged 18–40.
+description: PM-KMY gives small and marginal farmers with up to 2 ha landholding a
+  monthly pension of ₹3,000 after age 60, on matching monthly contributions during
+  the accrual period. Open to ages 18–40.
+application_url: https://maandhan.in/
+benefit:
+  type: pension
+  amount_inr: 3000
+  frequency: monthly
+  mode: post_60_pension
+inputs_required:
+- age
+- land_ownership_type
+- land_in_own_name
+- has_aadhaar
+- has_bank_account
+- income_tax_filed_last_ay
+rules:
+- id: KMY_R001
+  type: inclusion
+  predicate: age BETWEEN 18 AND 40
+  description: Age 18–40 at entry
+  source_text: Eligible age 18 to 40 years
+  confidence: high
+  ambiguity_flags: []
+- id: KMY_R002
+  type: inclusion
+  predicate: land_ownership_type == 'owned_cultivable' AND land_in_own_name == True
+  description: Must be a small/marginal farmer with own land
+  source_text: Small and marginal farmer with up to 2 hectares of cultivable land
+  confidence: high
+  ambiguity_flags: []
+- id: KMY_R003
+  type: exclusion
+  predicate: income_tax_filed_last_ay == True
+  description: Income-tax payers excluded
+  source_text: Income tax assessees are not eligible
+  confidence: high
+  ambiguity_flags: []
+- id: KMY_R004
+  type: mandatory_doc
+  predicate: has_aadhaar == True AND has_bank_account == True
+  description: Aadhaar + bank account
+  source_text: Standard KYC
+  confidence: high
+  ambiguity_flags: []
+overlaps_with:
+- scheme: PM_KISAN
+  nature: PM-KISAN beneficiaries can auto-opt for PM-KMY contributions
+documents_checklist:
+- aadhaar_card
+- bank_passbook_with_ifsc
+- land_record
+verification:
+  extracted_by: sarvam-30b
+  extracted_on: '2026-04-18'
+  verified_by_human: true
+  verifier: auto
+  verification_notes: Rules authored from public scheme guidelines; re-verify against
+    live sources before production use.
+prerequisites: []
+sources:
+- url: https://www.myscheme.gov.in/schemes/pm_kisan_mandhan
+  section: Eligibility & Benefits
+  fetched_on: '2026-04-18'

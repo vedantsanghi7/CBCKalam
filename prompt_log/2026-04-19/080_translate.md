@@ -1,0 +1,22 @@
+# 080 — translate
+Date/Time: 2026-04-19T00:28:38.497111
+Model: translate
+Offline: False
+
+## Payload
+```json
+{
+  "input": "Your Information",
+  "source_language_code": "auto",
+  "target_language_code": "bn-IN",
+  "mode": "formal"
+}
+```
+
+## Response
+```
+আপনার তথ্য
+```
+
+## Note
+live call

@@ -1,0 +1,61 @@
+scheme_id: PMJJBY
+name: Pradhan Mantri Jeevan Jyoti Bima Yojana
+ministry: Department of Financial Services
+launched: '2015-05-09'
+category: insurance
+short_description: ₹2 lakh life insurance for anyone aged 18–50 with a bank account,
+  at ₹436/year.
+description: 'PMJJBY is a one-year renewable term life insurance plan of ₹2 lakh available
+  to account holders aged 18–50. Premium: ₹436/year auto-debited from the savings
+  account.'
+application_url: https://jansuraksha.gov.in/
+benefit:
+  type: insurance
+  amount_inr: 200000
+  frequency: lump_sum
+  mode: bank_auto_debit_premium
+inputs_required:
+- age
+- has_bank_account
+- has_aadhaar
+rules:
+- id: PMJJBY_R001
+  type: inclusion
+  predicate: age BETWEEN 18 AND 50
+  description: Age 18–50 at the time of enrolment
+  source_text: Between the age of 18 to 50 years
+  confidence: high
+  ambiguity_flags: []
+- id: PMJJBY_R002
+  type: mandatory_doc
+  predicate: has_bank_account == True
+  description: Active savings bank account required
+  source_text: Auto-debit of premium from savings account
+  confidence: high
+  ambiguity_flags: []
+- id: PMJJBY_R003
+  type: mandatory_doc
+  predicate: has_aadhaar == True
+  description: Aadhaar linked to the account
+  source_text: Aadhaar as primary KYC
+  confidence: high
+  ambiguity_flags: []
+prerequisites:
+- scheme: PMJDY
+  soft: true
+documents_checklist:
+- aadhaar_card
+- bank_passbook_with_ifsc
+- nominee_details
+verification:
+  extracted_by: sarvam-30b
+  extracted_on: '2026-04-18'
+  verified_by_human: true
+  verifier: auto
+  verification_notes: Rules authored from public scheme guidelines; re-verify against
+    live sources before production use.
+overlaps_with: []
+sources:
+- url: https://www.myscheme.gov.in/schemes/pmjjby
+  section: Eligibility & Benefits
+  fetched_on: '2026-04-18'

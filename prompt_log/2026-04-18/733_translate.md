@@ -1,0 +1,22 @@
+# 733 — translate
+Date/Time: 2026-04-18T23:35:40.204132
+Model: translate
+Offline: False
+
+## Payload
+```json
+{
+  "input": "SSY",
+  "source_language_code": "auto",
+  "target_language_code": "mr-IN",
+  "mode": "formal"
+}
+```
+
+## Response
+```
+एस.एस.वाई.
+```
+
+## Note
+live call

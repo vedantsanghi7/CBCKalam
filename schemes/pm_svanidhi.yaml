@@ -1,0 +1,61 @@
+scheme_id: PM_SVANIDHI
+name: PM Street Vendor's AtmaNirbhar Nidhi
+ministry: Ministry of Housing & Urban Affairs
+launched: '2020-06-01'
+category: livelihood
+short_description: Collateral-free working-capital loan of ₹10k / ₹20k / ₹50k for
+  urban street vendors.
+description: PM SVANidhi provides urban street vendors with affordable collateral-free
+  working-capital loans of ₹10,000 in the first tranche, escalating to ₹20,000 and
+  ₹50,000 upon timely repayment. Interest subsidy of 7%; digital-transaction cashback
+  up to ₹1,200/year.
+application_url: https://pmsvanidhi.mohua.gov.in/
+benefit:
+  type: loan_subsidy
+  amount_inr: 50000
+  frequency: loan
+  mode: bank_credit
+inputs_required:
+- occupation
+- district_rural_or_urban
+- has_aadhaar
+- has_bank_account
+rules:
+- id: SVAN_R001
+  type: inclusion
+  predicate: occupation == 'street_vendor'
+  description: Applicant must be a street vendor / hawker
+  source_text: Street vendors as per the Street Vendors Act 2014
+  confidence: high
+  ambiguity_flags: []
+- id: SVAN_R002
+  type: inclusion
+  predicate: district_rural_or_urban == 'urban'
+  description: Must operate in urban area
+  source_text: Scheme is for urban street vendors
+  confidence: high
+  ambiguity_flags: []
+- id: SVAN_R003
+  type: mandatory_doc
+  predicate: has_aadhaar == True AND has_bank_account == True
+  description: Aadhaar + bank account needed
+  source_text: Credit linked with Aadhaar/PAN + bank account
+  confidence: high
+  ambiguity_flags: []
+documents_checklist:
+- aadhaar_card
+- bank_passbook_with_ifsc
+- vending_certificate_or_letter
+verification:
+  extracted_by: sarvam-30b
+  extracted_on: '2026-04-18'
+  verified_by_human: true
+  verifier: auto
+  verification_notes: Rules authored from public scheme guidelines; re-verify against
+    live sources before production use.
+overlaps_with: []
+prerequisites: []
+sources:
+- url: https://www.myscheme.gov.in/schemes/pm_svanidhi
+  section: Eligibility & Benefits
+  fetched_on: '2026-04-18'

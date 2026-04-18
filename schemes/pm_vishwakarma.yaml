@@ -1,0 +1,61 @@
+scheme_id: PM_VISHWAKARMA
+name: PM Vishwakarma Yojana
+ministry: Ministry of MSME
+launched: '2023-09-17'
+category: artisan
+short_description: Skill upgrade, ₹15k tool kit, and collateral-free loans up to ₹3
+  lakh for traditional artisans.
+description: PM Vishwakarma recognises and supports 18 traditional artisan trades
+  (carpenter, blacksmith, potter, tailor, barber, mason, etc.). Benefits include skill
+  training with stipend, a ₹15,000 toolkit voucher, and collateral-free enterprise
+  loans up to ₹3 lakh at concessional interest.
+application_url: https://pmvishwakarma.gov.in/
+benefit:
+  type: mixed
+  amount_inr: 300000
+  frequency: one_time
+  mode: training_plus_loan_plus_toolkit
+inputs_required:
+- occupation
+- age
+- has_aadhaar
+- has_bank_account
+rules:
+- id: VSH_R001
+  type: inclusion
+  predicate: occupation == 'artisan'
+  description: Applicant must be in a listed traditional trade
+  source_text: Craftspeople and artisans engaged in one of 18 trades
+  confidence: high
+  ambiguity_flags: []
+- id: VSH_R002
+  type: inclusion
+  predicate: age >= 18
+  description: Adult applicant
+  source_text: Minimum age 18
+  confidence: high
+  ambiguity_flags: []
+- id: VSH_R003
+  type: mandatory_doc
+  predicate: has_aadhaar == True AND has_bank_account == True
+  description: Aadhaar + bank account
+  source_text: Standard DBT / loan KYC
+  confidence: high
+  ambiguity_flags: []
+documents_checklist:
+- aadhaar_card
+- bank_passbook_with_ifsc
+- trade_self_declaration
+verification:
+  extracted_by: sarvam-30b
+  extracted_on: '2026-04-18'
+  verified_by_human: true
+  verifier: auto
+  verification_notes: Rules authored from public scheme guidelines; re-verify against
+    live sources before production use.
+overlaps_with: []
+prerequisites: []
+sources:
+- url: https://www.myscheme.gov.in/schemes/pm_vishwakarma
+  section: Eligibility & Benefits
+  fetched_on: '2026-04-18'

@@ -1,0 +1,62 @@
+scheme_id: KCC
+name: Kisan Credit Card
+ministry: Ministry of Agriculture & Farmers Welfare
+launched: '1998-08-01'
+category: farmer
+short_description: Short-term crop loan with interest subvention for farmers — including
+  tenants with recorded lease.
+description: KCC provides flexible, short-term agricultural credit at a concessional
+  interest rate (7% base, with 3% PRI + 2% ISS subvention) to farmers. Owner-cultivators,
+  tenants, oral lessees and sharecroppers with a recorded lease/JLG can access KCC.
+application_url: https://www.pmkisan.gov.in/kcc/
+benefit:
+  type: loan
+  notes: Short-term agri credit at subvented rate
+  mode: bank_credit
+inputs_required:
+- occupation
+- land_ownership_type
+- has_aadhaar
+- has_bank_account
+rules:
+- id: KCC_R001
+  type: inclusion
+  predicate: occupation == 'farmer'
+  description: Must be a cultivator
+  source_text: All farmers — owner cultivators, tenants, oral lessees, sharecroppers
+  confidence: high
+  ambiguity_flags: []
+- id: KCC_R002
+  type: inclusion
+  predicate: land_ownership_type IN ['owned_cultivable','lease']
+  description: Land ownership or recorded lease required
+  source_text: Recorded tenancy / sharecropping agreement acceptable
+  confidence: medium
+  ambiguity_flags:
+  - STATE_DEPENDENT
+  ambiguity_notes: Tenancy documentation varies by state — informal tenants often
+    rejected in practice.
+- id: KCC_R003
+  type: mandatory_doc
+  predicate: has_aadhaar == True AND has_bank_account == True
+  description: Aadhaar + bank account
+  source_text: Standard KYC
+  confidence: high
+  ambiguity_flags: []
+documents_checklist:
+- aadhaar_card
+- bank_passbook_with_ifsc
+- land_record_or_lease_agreement
+verification:
+  extracted_by: sarvam-30b
+  extracted_on: '2026-04-18'
+  verified_by_human: true
+  verifier: auto
+  verification_notes: Rules authored from public scheme guidelines; re-verify against
+    live sources before production use.
+overlaps_with: []
+prerequisites: []
+sources:
+- url: https://www.myscheme.gov.in/schemes/kcc
+  section: Eligibility & Benefits
+  fetched_on: '2026-04-18'

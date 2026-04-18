@@ -1,0 +1,353 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>
+	Jan-Dhan Se Jan Suraksha
+</title><meta name="keywords" /><meta name="description" /><meta charset="utf-8" /><meta name="viewport" content="initial-scale=1" /><link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700,800" rel="stylesheet" type="text/css" /><link rel="stylesheet" href="css/font-awesome.min.css" /><link rel="stylesheet" href="css/bootstrap.min.css" /><link rel="stylesheet" href="css/templatemo_misc.css" /><link rel="stylesheet" href="css/templatemo_style.css" /><link rel="stylesheet" href="css/animate.css" />
+  
+    <!-- JavaScripts -->
+    <!--<script src="js/jquery-1.11.1.min.js"></script>-->
+    <!-- lightbox -->
+    <script src="js/templatemo_custom.js"></script>
+    <!-- lightbox -->
+    <script src="js/jquery.lightbox.js"></script>
+    <script src="js/bootstrap-collapse.js"></script>
+
+    <!-- Add jQuery library -->
+    <script type="text/javascript" src="lib/jquery-3.7.1.min.js"></script>
+    <script type="text/javascript" src="lib/jquery.mousewheel-3.0.6.pack.js"></script>
+    <script type="text/javascript" src="source/jquery.fancybox.js?v=2.1.5"></script>
+    <link rel="stylesheet" type="text/css" href="source/jquery.fancybox.css?v=2.1.5" media="screen" /><link rel="stylesheet" type="text/css" href="source/helpers/jquery.fancybox-buttons.css?v=1.0.5" />
+    <script type="text/javascript" src="source/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+    <link rel="stylesheet" type="text/css" href="source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" />
+    <script type="text/javascript" src="source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+    <script type="text/javascript" src="source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+    
+<script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-66570602-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.fancybox').fancybox();
+            $(".fancybox-effects-a").fancybox({
+                helpers: {
+                    title: {
+                        type: 'outside'
+                    },
+                    overlay: {
+                        speedOut: 0
+                    }
+                }
+            });
+            $(".fancybox-effects-b").fancybox({
+                openEffect: 'none',
+                closeEffect: 'none',
+                helpers: {
+                    title: {
+                        type: 'over'
+                    }
+                }
+            });
+            $(".fancybox-effects-c").fancybox({
+                wrapCSS: 'fancybox-custom',
+                closeClick: true,
+
+                openEffect: 'none',
+
+                helpers: {
+                    title: {
+                        type: 'inside'
+                    },
+                    overlay: {
+                        css: {
+                            'background': 'rgba(238,238,238,0.85)'
+
+                        }
+                    }
+                }
+            });
+            $(".fancybox-effects-d").fancybox({
+                padding: 0,
+
+                openEffect: 'elastic',
+                openSpeed: 150,
+
+                closeEffect: 'elastic',
+                closeSpeed: 150,
+
+                closeClick: true,
+
+                helpers: {
+                    overlay: null
+                }
+            });
+            $('.fancybox-buttons').fancybox({
+                openEffect: 'none',
+                closeEffect: 'none',
+
+
+                prevEffect: 'none',
+                nextEffect: 'none',
+
+                closeBtn: false,
+
+                helpers: {
+                    title: {
+                        type: 'inside'
+                    },
+                    buttons: {}
+                },
+                afterLoad: function () {
+                    this.title = 'Image ' + (this.index + 1) + ' of ' + this.group.length + (this.title ? ' - ' + this.title : '');
+                }
+            });
+            $('.fancybox-thumbs').fancybox({
+                prevEffect: 'none',
+                nextEffect: 'none',
+                closeBtn: false,
+                arrows: false,
+                nextClick: true,
+                helpers: {
+                    thumbs: {
+                        width: 50,
+                        height: 50
+                    }
+                }
+            });
+            $('.fancybox-media')
+                          .attr('rel', 'media-gallery')
+                          .fancybox({
+                              openEffect: 'none',
+                              closeEffect: 'none',
+                              prevEffect: 'none',
+                              nextEffect: 'none',
+                              arrows: false,
+                              helpers: {
+                                  media: {},
+                                  buttons: {}
+                              },
+                              css: {
+                                  'z-index': '1000000'
+
+                              }
+                          });
+            $("#fancybox-manual-a").click(function () {
+                $.fancybox.open('1_b.jpg');
+            });
+            $("#fancybox-manual-b").click(function () {
+                $.fancybox.open({
+                    href: 'iframe.html',
+                    type: 'iframe',
+                    padding: 5
+                });
+            });
+            $("#fancybox-manual-c").click(function () {
+                $.fancybox.open([
+                    {
+                        href: '1_b.jpg',
+                        title: 'My title'
+                    }, {
+                        href: '2_b.jpg',
+                        title: '2nd title'
+                    }, {
+                        href: '3_b.jpg'
+                    }
+                ], {
+                    helpers: {
+                        thumbs: {
+                            width: 75,
+                            height: 50
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+    <script lang="JavaScript" type="text/javascript">
+        function changeFontSize(inc) {
+            var p = document.querySelectorAll('p,li,a');
+            for (n = 0; n < p.length; n++) {
+                if (p[n].style.fontSize) {
+                    var size = parseInt(p[n].style.fontSize.replace("px", ""));
+                }
+                else {
+                    var size = 12;
+                }
+                p[n].style.fontSize = size + inc + 'px';
+            }
+        }
+        function changeFontSizeIncrease() {
+            var p = document.querySelectorAll('p,li,a,span');
+            for (n = 0; n < p.length; n++) p[n].style.fontSize = '14px';
+
+        }
+        function changeFontSizeDecrease() {
+            var p = document.querySelectorAll('p,li,a,span');
+            for (n = 0; n < p.length; n++) {
+                p[n].style.fontSize = '10px';
+            }
+        }
+        function changeFontSizeNormal() {
+            var p = document.querySelectorAll('p,li,a,span');
+            for (n = 0; n < p.length; n++) {
+                p[n].style.fontSize = '12px';
+            }
+        }
+
+    </script>
+ <script type="text/javascript">
+     (function (i, s, o, g, r, a, m) {
+         i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+             (i[r].q = i[r].q || []).push(arguments)
+         }, i[r].l = 1 * new Date(); a = s.createElement(o),
+         m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+     })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+     ga('create', 'UA-66570602-1', 'auto');
+     ga('send', 'pageview');
+
+</script>
+</head>
+<body>
+    <form method="post" action="./" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKMTY1NDU2MTA1MmRkUfq0HqtLCySlLv9AOHuMOG8LWLSEjlGliWyU9ujCRjk=" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['form1'];
+if (!theForm) {
+    theForm = document.form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/WebResource.axd?d=fuyvIwueCDaFgsQSOFVdy2dqN9HxmdmkVv7HiiucCm2risSicax00-aFTWDjWWIBjMbyPmylS993p1s2tkVdH5WamouC4WDV53O4OHWDT2U1&amp;t=636935083199995647" type="text/javascript"></script>
+
+
+<script src="/ScriptResource.axd?d=6sAlH2DHomw75RYQ0ChtWGiWScT51veC2ebI_EY6TnyugJm3n79JNFo_d-E5woJtlWZAX-3PfydP8vyhbWH989_3LZnxw1l4IEgczShu1QCNzqovpS7UaiMZyHWvLUChES4e9OFXX2LIbu4sOAmrGOHLpKwxq5QwMWUcsIx0bGQ1&amp;t=ffffffffa580202a" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=GUM1u91Y2MfDrPA2HrDX5l7c6k5jBfsMihX3jVPKdhVywwR7M_YRrzoreQ_55J1kLlqkgTHWqpP9Ro65jn0tbADCtY7WZYCnr4ImP37LSYPlam2EiOloWG6_kzaK4PShST2oo9PJYcQt5FRsk5n1SlwitO982XSDCQIfLVMhTrz5YqPHVes_dPrCes0wGIO20&amp;t=ffffffffa580202a" type="text/javascript"></script>
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="CA0B0334" />
+</div>
+        <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', [], [], [], 90, 'ctl00');
+//]]>
+</script>
+
+        <div id="menu-container">
+            <div class="content homepage" id="menu-1">
+                <div class="container">
+                    <div class="row">
+                        <div class="templatemo_homewrapper ">
+                            <div class="templatemo_hometop_bg">
+                                <div class="col-md-6">
+                                    <p class="logodfs">
+                                        <a href="http://financialservices.gov.in/" target="_blank">
+                                            <img src="PICS/lgo1.png" /></a>
+                                        <a href="http://financialservices.gov.in/" target="_blank">Department of Financial Services</a>
+                                        <a href="http://financialservices.gov.in/" target="_blank">Ministry Of Finance</a>
+                                        <a href="http://financialservices.gov.in/" target="_blank">Government of India</a>
+                                    </p>
+                                    <div class="templemo_hometop_img"></div>
+                                    <p class="logopmjdy">
+                                        <a href="http://pmjdy.gov.in/" target="_blank">
+                                            <img src="PICS/pmjdylogo.png" /></a>
+                                        <br />
+                                        <j style="width: 100%; height: 80px; background-color: transparent; margin-top: 0px;">
+                            <a style="margin-top: 50PX; font-weight: bold; color:#000; font-size: 12px;" title="Click To View In Hindi" href="Hi-Home.aspx">हिन्दी  &nbsp; </a>
+                   <div class="fons">
+                            <k style="margin-top: 10PX; font-weight: bold; cursor: pointer; font-size: 10px;" title="Small" href="javascript:void(0);" onclick="changeFontSizeDecrease();return false;">A &nbsp; |</k>
+                            <k style="margin-top: 10PX; font-weight: bold; cursor: pointer; font-size: 12px;" title="Medium" href="javascript:void(0);" onclick="changeFontSizeNormal();return false;">A &nbsp; |</k>
+                            <k style="margin-top: 10PX; font-weight: bold; cursor: pointer; font-size: 14px;" title="large" href="javascript:void(0);" onclick="changeFontSizeIncrease();return false;">A </k>
+                    </div>
+                 </j>
+                                    </p>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="menu">
+                        <div class="row">
+                            <div class="templatemo_topwrapper ">
+                                <div class="col-sm-8">
+                                    <nav class="navbar navbar-default" role="navigation" >
+                                        <div class="container-fluid" >
+                                            <div class="navbar-header">
+                                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                                            </div>
+                                            <div id="top-menu" >
+                                                <div class="collapse navbar-collapse main_menu" id="bs-example-navbar-collapse-1">
+                                                    <ul class="nav navbar-nav">
+                                                        <li><a href="Default.aspx"><span></span>HOME</a></li>
+                                                        <li><a href="FAQ.aspx"><span></span>FAQ</a></li>
+                                                        <li><a href="Rules.aspx"><span></span>RULES</a></li>
+                                                        <li><a href="Forms.aspx"><span></span>FORMS</a></li>
+                                                        
+                                                        <li><a href="Publicity.aspx"><span></span>PUBLICITY</a></li>
+                                                        <li><a href="Gallery.aspx"><span></span>GALLERY</a></li>
+                                                        <li><a href="Performance.aspx"><span></span>PERFORMANCE</a></li>
+                                                        <li class="LAST"><a href="ContactUs.aspx"><span></span>CONTACT</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+    <nav id="nav01"></nav>
+    <script src="JS/ENGLISH/HOMEEN.js"></script>
+
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="templatemo_footer">
+                            <div class="col-md-6">
+                                <div class="tlf">National Toll-Free - 1800-180-1111 / 1800-110-001</div>
+                                <!--	<div class="social"><a href="#"><img src="images/templatemo_fb.jpg" alt="facebook"></a></div>
+                        <div class="social"><a href="#"><img src="images/templatemo_gg.jpg" alt="google plus"></a></div>
+                        <div class="social"><a href="#"><img src="images/templatemo_tw.jpg" alt="twitter"></a></div>-->
+                                <a href="files/STATEWISETOLLFREE.pdf" target="_blank">Statewise Toll-Free     </a>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</body>
+</html>

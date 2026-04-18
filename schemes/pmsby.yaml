@@ -1,0 +1,61 @@
+scheme_id: PMSBY
+name: Pradhan Mantri Suraksha Bima Yojana
+ministry: Department of Financial Services
+launched: '2015-05-09'
+category: insurance
+short_description: ₹2 lakh accident cover for ages 18–70 at ₹20/year via auto-debit.
+description: 'PMSBY is an annually-renewable accident insurance policy: ₹2 lakh for
+  accidental death or full disability, ₹1 lakh for partial disability, at a premium
+  of ₹20/year auto-debited from the bank account. Available to anyone with a savings
+  account aged 18–70.'
+application_url: https://jansuraksha.gov.in/
+benefit:
+  type: insurance
+  amount_inr: 200000
+  frequency: lump_sum
+  mode: bank_auto_debit_premium
+inputs_required:
+- age
+- has_bank_account
+- has_aadhaar
+rules:
+- id: PMSBY_R001
+  type: inclusion
+  predicate: age BETWEEN 18 AND 70
+  description: Age 18–70
+  source_text: Between 18 and 70 years
+  confidence: high
+  ambiguity_flags: []
+- id: PMSBY_R002
+  type: mandatory_doc
+  predicate: has_bank_account == True
+  description: Savings bank account required
+  source_text: Auto-debit from savings account
+  confidence: high
+  ambiguity_flags: []
+- id: PMSBY_R003
+  type: mandatory_doc
+  predicate: has_aadhaar == True
+  description: Aadhaar required
+  source_text: Aadhaar linkage
+  confidence: high
+  ambiguity_flags: []
+prerequisites:
+- scheme: PMJDY
+  soft: true
+documents_checklist:
+- aadhaar_card
+- bank_passbook_with_ifsc
+- nominee_details
+verification:
+  extracted_by: sarvam-30b
+  extracted_on: '2026-04-18'
+  verified_by_human: true
+  verifier: auto
+  verification_notes: Rules authored from public scheme guidelines; re-verify against
+    live sources before production use.
+overlaps_with: []
+sources:
+- url: https://www.myscheme.gov.in/schemes/pmsby
+  section: Eligibility & Benefits
+  fetched_on: '2026-04-18'

@@ -1,0 +1,94 @@
+PM_KISAN:
+  name: Pradhan Mantri Kisan Samman Nidhi
+  primary:
+    - url: https://pmkisan.gov.in/Documents/RevisedFAQ.pdf
+      type: pdf
+      section: "Full document"
+    - url: https://pmkisan.gov.in/
+      type: html
+      section: "Eligibility tab"
+MGNREGA:
+  name: Mahatma Gandhi National Rural Employment Guarantee Act
+  primary:
+    - url: https://nrega.nic.in
+      type: html
+PMJAY:
+  name: Ayushman Bharat - PM Jan Arogya Yojana
+  primary:
+    - url: https://pmjay.gov.in
+      type: html
+PMAY_G:
+  name: Pradhan Mantri Awas Yojana - Gramin
+  primary:
+    - url: https://pmayg.nic.in
+      type: html
+PMAY_U:
+  name: Pradhan Mantri Awas Yojana - Urban (PMAY 2.0)
+  primary:
+    - url: https://pmay-urban.gov.in
+      type: html
+PMUY:
+  name: Pradhan Mantri Ujjwala Yojana
+  primary:
+    - url: https://pmuy.gov.in
+      type: html
+PMJDY:
+  name: Pradhan Mantri Jan Dhan Yojana
+  primary:
+    - url: https://pmjdy.gov.in
+      type: html
+PMJJBY:
+  name: Pradhan Mantri Jeevan Jyoti Bima Yojana
+  primary:
+    - url: https://jansuraksha.gov.in
+      type: html
+PMSBY:
+  name: Pradhan Mantri Suraksha Bima Yojana
+  primary:
+    - url: https://jansuraksha.gov.in
+      type: html
+APY:
+  name: Atal Pension Yojana
+  primary:
+    - url: https://npscra.nsdl.co.in
+      type: html
+PMMVY:
+  name: Pradhan Mantri Matru Vandana Yojana
+  primary:
+    - url: https://pmmvy.wcd.gov.in
+      type: html
+SSY:
+  name: Sukanya Samriddhi Yojana
+  primary:
+    - url: https://www.nsiindia.gov.in
+      type: html
+IGNOAPS:
+  name: Indira Gandhi National Old Age Pension (NSAP)
+  primary:
+    - url: https://nsap.nic.in
+      type: html
+IGNWPS:
+  name: Indira Gandhi National Widow Pension (NSAP)
+  primary:
+    - url: https://nsap.nic.in
+      type: html
+PM_SVANIDHI:
+  name: PM Street Vendor's AtmaNirbhar Nidhi
+  primary:
+    - url: https://pmsvanidhi.mohua.gov.in
+      type: html
+STANDUP_INDIA:
+  name: Stand-Up India
+  primary:
+    - url: https://www.standupmitra.in
+      type: html
+PM_VISHWAKARMA:
+  name: PM Vishwakarma
+  primary:
+    - url: https://pmvishwakarma.gov.in
+      type: html
+PM_KISAN_MANDHAN:
+  name: PM Kisan Maan-Dhan Yojana
+  primary:
+    - url: https://maandhan.in
+      type: html

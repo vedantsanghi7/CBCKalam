@@ -1,0 +1,64 @@
+scheme_id: PMAY_G
+name: Pradhan Mantri Awas Yojana — Gramin
+ministry: Ministry of Rural Development
+launched: '2016-04-01'
+category: housing
+short_description: Assistance of ₹1.2–1.3 lakh to build a pucca house for rural households
+  living in kutcha or no housing.
+description: PMAY-G provides financial assistance to rural households who are homeless
+  or live in kutcha/dilapidated structures. Selection is based on the SECC 2011 Awaas+
+  list. The beneficiary receives ₹1,20,000 (plain area) or ₹1,30,000 (hilly/Himalayan/IAP
+  districts).
+application_url: https://pmayg.nic.in/
+benefit:
+  type: construction_subsidy
+  amount_inr: 120000
+  frequency: one_time
+  mode: DBT_installments
+inputs_required:
+- district_rural_or_urban
+- is_bpl
+- has_aadhaar
+- has_bank_account
+- caste_category
+rules:
+- id: PMAYG_R001
+  type: inclusion
+  predicate: district_rural_or_urban == 'rural'
+  description: Applicant must be in a rural area
+  source_text: Applicable only in rural areas per SECC list
+  confidence: high
+  ambiguity_flags: []
+- id: PMAYG_R002
+  type: inclusion
+  predicate: is_bpl == True OR caste_category IN ['SC','ST']
+  description: Must fall in SECC-identified deprivation / SC/ST priority list
+  source_text: Selection is through SECC 2011 housing deprivation parameters
+  confidence: medium
+  ambiguity_flags:
+  - STATE_DEPENDENT
+- id: PMAYG_R003
+  type: mandatory_doc
+  predicate: has_aadhaar == True AND has_bank_account == True
+  description: Aadhaar + bank account mandatory for DBT
+  source_text: Installments paid via PFMS into Aadhaar-linked bank account
+  confidence: high
+  ambiguity_flags: []
+documents_checklist:
+- aadhaar_card
+- bank_passbook_with_ifsc
+- secc_id_if_available
+- mgnrega_job_card_if_any
+verification:
+  extracted_by: sarvam-30b
+  extracted_on: '2026-04-18'
+  verified_by_human: true
+  verifier: auto
+  verification_notes: Rules authored from public scheme guidelines; re-verify against
+    live sources before production use.
+overlaps_with: []
+prerequisites: []
+sources:
+- url: https://www.myscheme.gov.in/schemes/pmay_g
+  section: Eligibility & Benefits
+  fetched_on: '2026-04-18'
