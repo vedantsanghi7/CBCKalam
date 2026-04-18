@@ -175,24 +175,31 @@ export default function ChatPage() {
   const progressPct = totalPossible > 0 ? Math.round((totalKnown / totalPossible) * 100) : 0;
 
   return (
-    <div className="flex gap-6 h-[calc(100dvh-32px)] max-w-6xl mx-auto">
+    <div className="flex gap-6 h-[calc(100dvh-96px)] max-w-6xl mx-auto">
       {/* Chat Column */}
       <div className="flex-1 flex flex-col max-w-[680px] min-w-0 mx-auto">
         {/* Header */}
-        <div className="flex items-center justify-between mb-4 mt-2">
-          <h1 className="text-display" style={{ color: 'var(--text-1)' }}><TranslatedText>Eligibility Check</TranslatedText></h1>
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-2">
+            <h1 className="text-h3" style={{ color: 'var(--text-1)' }}><TranslatedText>Eligibility Check</TranslatedText></h1>
+            {totalKnown > 0 && (
+              <span className="text-xs px-2 py-0.5 rounded-[9999px]" style={{ background: 'rgba(110,108,255,0.08)', color: 'var(--accent-1)' }}>
+                {totalKnown}/{totalPossible}
+              </span>
+            )}
+          </div>
           <div className="flex items-center gap-2">
             <button
               onClick={handleReset}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-[var(--radius-sm)] text-xs font-medium transition-all hover:scale-105"
-              style={{ background: 'rgba(239,68,68,0.08)', color: 'var(--status-no)' }}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-[9999px] text-xs font-medium transition-all hover:scale-105"
+              style={{ background: 'rgba(239,68,68,0.06)', color: 'var(--status-no)' }}
               title="Reset conversation"
             >
-              <RotateCcw size={13} /> <TranslatedText>Reset</TranslatedText>
+              <RotateCcw size={12} /> <TranslatedText>Reset</TranslatedText>
             </button>
             {results && (
               <PillButton size="sm" onClick={() => navigate('/results', { state: { results } })}>
-                <LayoutGrid size={16} /> <TranslatedText>View Results</TranslatedText>
+                <LayoutGrid size={14} /> <TranslatedText>Results</TranslatedText>
               </PillButton>
             )}
           </div>
