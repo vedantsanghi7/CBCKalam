@@ -38,9 +38,9 @@ export default function SchemeDetail() {
         <GlassCard tone="raised" className="mb-6">
           <div className="flex items-start justify-between gap-4 mb-4">
             <div>
-              <div className="text-caption uppercase tracking-wide"><TranslatedText>{detail?.ministry || id}</TranslatedText></div>
+              <div className="text-caption uppercase tracking-wide"><TranslatedText>{detail?.ministry || id || ''}</TranslatedText></div>
               <h1 className="text-h1 mt-1" style={{ color: 'var(--text-1)' }}>
-                <TranslatedText>{result?.name || detail?.name || id}</TranslatedText>
+                <TranslatedText>{result?.name || detail?.name || id || ''}</TranslatedText>
               </h1>
             </div>
             {result && <StatusBadge status={result.status} />}
