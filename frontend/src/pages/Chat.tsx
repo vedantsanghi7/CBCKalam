@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { api } from '@/lib/api';
 import { ChatBubble } from '@/components/chat/ChatBubble';
 import { ChatComposer } from '@/components/chat/ChatComposer';
@@ -7,40 +7,83 @@ import { SlotChipRow } from '@/components/chat/SlotChipRow';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { PillButton } from '@/components/ui/PillButton';
 import { motion, AnimatePresence } from 'framer-motion';
-import { LayoutGrid, Info } from 'lucide-react';
+import { LayoutGrid, Info, RotateCcw } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import type { ChatMessage, SchemeResult } from '@/types';
 import { TranslatedText, useI18n } from '@/lib/i18n';
 
+const STORAGE_KEY = 'kalam_chat_state';
+
+interface ChatState {
+  sessionId: string | null;
+  messages: ChatMessage[];
+  slots: Record<string, any>;
+  missingSlots: string[];
+  readyToMatch: boolean;
+  options: string[] | null;
+  results: SchemeResult[] | null;
+  totalKnown: number;
+  totalPossible: number;
+  eligibleCount: number;
+}
+
+const INITIAL_MESSAGE: ChatMessage = {
+  id: '0',
+  role: 'assistant',
+  text: 'Namaste! 🙏 Main KALAM hoon — aapki sarkari yojanaon ke liye eligibility check karne wala AI engine. Kaunsi sarkari yojana aapke liye hai? Chaliye pata lagate hain.',
+  timestamp: new Date(),
+};
+
+function loadState(): ChatState | null {
+  try {
+    const raw = sessionStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    const s = JSON.parse(raw);
+    // Revive Date objects
+    s.messages = s.messages.map((m: any) => ({ ...m, timestamp: new Date(m.timestamp) }));
+    return s;
+  } catch {
+    return null;
+  }
+}
+
+function saveState(state: ChatState) {
+  try {
+    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch { /* quota exceeded — tolerable */ }
+}
+
 export default function ChatPage() {
   const navigate = useNavigate();
   const { lang, t } = useI18n();
-  const [sessionId, setSessionId] = useState<string | null>(null);
-  const [messages, setMessages] = useState<ChatMessage[]>([
-    {
-      id: '0',
-      role: 'assistant',
-      text: 'Namaste! 🙏 Main KALAM hoon — aapki sarkari yojanaon ke liye eligibility check karne wala AI engine. Kaunsi sarkari yojana aapke liye hai? Chaliye pata lagate hain.',
-      timestamp: new Date(),
-    }
-  ]);
+
+  const saved = useRef(loadState());
+  const [sessionId, setSessionId] = useState<string | null>(saved.current?.sessionId ?? null);
+  const [messages, setMessages] = useState<ChatMessage[]>(saved.current?.messages ?? [INITIAL_MESSAGE]);
   const [loading, setLoading] = useState(false);
-  const [slots, setSlots] = useState<Record<string, any>>({});
-  const [missingSlots, setMissingSlots] = useState<string[]>([]);
-  const [readyToMatch, setReadyToMatch] = useState(false);
-  const [options, setOptions] = useState<string[] | null>(null);
-  const [results, setResults] = useState<SchemeResult[] | null>(null);
-  const [totalKnown, setTotalKnown] = useState(0);
-  const [totalPossible, setTotalPossible] = useState(21);
-  const [eligibleCount, setEligibleCount] = useState(0);
+  const [slots, setSlots] = useState<Record<string, any>>(saved.current?.slots ?? {});
+  const [missingSlots, setMissingSlots] = useState<string[]>(saved.current?.missingSlots ?? []);
+  const [readyToMatch, setReadyToMatch] = useState(saved.current?.readyToMatch ?? false);
+  const [options, setOptions] = useState<string[] | null>(saved.current?.options ?? null);
+  const [results, setResults] = useState<SchemeResult[] | null>(saved.current?.results ?? null);
+  const [totalKnown, setTotalKnown] = useState(saved.current?.totalKnown ?? 0);
+  const [totalPossible, setTotalPossible] = useState(saved.current?.totalPossible ?? 21);
+  const [eligibleCount, setEligibleCount] = useState(saved.current?.eligibleCount ?? 0);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Persist chat state on every change
+  useEffect(() => {
+    saveState({ sessionId, messages, slots, missingSlots, readyToMatch, options, results, totalKnown, totalPossible, eligibleCount });
+  }, [sessionId, messages, slots, missingSlots, readyToMatch, options, results, totalKnown, totalPossible, eligibleCount]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, loading]);
 
+  // Create a session only if we don't already have one from storage
   useEffect(() => {
+    if (sessionId) return;
     const init = async () => {
       try {
         const res = await api.startSession();
@@ -50,7 +93,7 @@ export default function ChatPage() {
       }
     };
     init();
-  }, []);
+  }, [sessionId]);
 
   const addMessage = useCallback((role: 'user' | 'assistant', text: string) => {
     setMessages(prev => [...prev, {
@@ -60,6 +103,31 @@ export default function ChatPage() {
       timestamp: new Date(),
     }]);
   }, []);
+
+  const handleReset = async () => {
+    // Reset backend session
+    if (sessionId) {
+      api.resetSession(sessionId).catch(() => {});
+    }
+    // Clear all state
+    sessionStorage.removeItem(STORAGE_KEY);
+    setMessages([INITIAL_MESSAGE]);
+    setSlots({});
+    setMissingSlots([]);
+    setReadyToMatch(false);
+    setOptions(null);
+    setResults(null);
+    setTotalKnown(0);
+    setTotalPossible(21);
+    setEligibleCount(0);
+    // Start a fresh session
+    try {
+      const res = await api.startSession();
+      setSessionId(res.session_id);
+    } catch {
+      setSessionId('demo-' + Date.now());
+    }
+  };
 
   const handleSend = async (text: string) => {
     if (!text.trim() || !sessionId) return;
@@ -113,11 +181,21 @@ export default function ChatPage() {
         {/* Header */}
         <div className="flex items-center justify-between mb-4 mt-2">
           <h1 className="text-display" style={{ color: 'var(--text-1)' }}><TranslatedText>Eligibility Check</TranslatedText></h1>
-          {results && (
-            <PillButton size="sm" onClick={() => navigate('/results', { state: { results } })}>
-              <LayoutGrid size={16} /> <TranslatedText>View Results</TranslatedText>
-            </PillButton>
-          )}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleReset}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-[var(--radius-sm)] text-xs font-medium transition-all hover:scale-105"
+              style={{ background: 'rgba(239,68,68,0.08)', color: 'var(--status-no)' }}
+              title="Reset conversation"
+            >
+              <RotateCcw size={13} /> <TranslatedText>Reset</TranslatedText>
+            </button>
+            {results && (
+              <PillButton size="sm" onClick={() => navigate('/results', { state: { results } })}>
+                <LayoutGrid size={16} /> <TranslatedText>View Results</TranslatedText>
+              </PillButton>
+            )}
+          </div>
         </div>
 
         {/* Messages */}
@@ -216,8 +294,6 @@ export default function ChatPage() {
             </PillButton>
           </GlassCard>
         )}
-
-
       </div>
     </div>
   );

@@ -53,7 +53,15 @@ sessions: Dict[str, Dict[str, Any]] = {}
 
 # ----- Helpers ------------------------------------------------------------
 
+_schemes_cache: List[Scheme] = []
+_schemes_cache_ts: float = 0
+
 def _load_all_schemes() -> List[Scheme]:
+    global _schemes_cache, _schemes_cache_ts
+    import time
+    now = time.time()
+    if _schemes_cache and (now - _schemes_cache_ts) < 60:
+        return _schemes_cache
     schemes: List[Scheme] = []
     if not SCHEMES_DIR.exists():
         return schemes
@@ -67,6 +75,8 @@ def _load_all_schemes() -> List[Scheme]:
             schemes.append(Scheme(**{k: v for k, v in data.items() if k in Scheme.model_fields}))
         except Exception as e:
             print(f"[api] failed to load {p.name}: {e}")
+    _schemes_cache = schemes
+    _schemes_cache_ts = now
     return schemes
 
 

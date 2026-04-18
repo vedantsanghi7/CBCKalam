@@ -1,23 +1,49 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { api } from '@/lib/api';
 import { useI18n } from '@/lib/i18n';
 import { motion } from 'framer-motion';
 import type { SchemeSummary } from '@/types';
-import { Compass, FileText, Search } from 'lucide-react';
+import { Compass, FileText, Search, Loader2 } from 'lucide-react';
+
+// Simple in-memory + sessionStorage cache for schemes
+const CACHE_KEY = 'kalam_schemes_cache';
+let memoryCache: SchemeSummary[] | null = null;
+
+function getCachedSchemes(): SchemeSummary[] | null {
+  if (memoryCache) return memoryCache;
+  try {
+    const raw = sessionStorage.getItem(CACHE_KEY);
+    if (raw) {
+      memoryCache = JSON.parse(raw);
+      return memoryCache;
+    }
+  } catch {}
+  return null;
+}
+
+function setCachedSchemes(schemes: SchemeSummary[]) {
+  memoryCache = schemes;
+  try { sessionStorage.setItem(CACHE_KEY, JSON.stringify(schemes)); } catch {}
+}
 
 export default function SchemesCatalogue() {
   const navigate = useNavigate();
-  const [schemes, setSchemes] = useState<SchemeSummary[]>([]);
-  const [loading, setLoading] = useState(true);
+  const cached = useRef(getCachedSchemes());
+  const [schemes, setSchemes] = useState<SchemeSummary[]>(cached.current ?? []);
+  const [loading, setLoading] = useState(!cached.current);
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState<string>('all');
   const { t, translateMany, lang } = useI18n();
 
   useEffect(() => {
+    // Always fetch fresh data in background, but show cached first
     api.listSchemes()
-      .then(data => setSchemes(data.schemes))
+      .then(data => {
+        setSchemes(data.schemes);
+        setCachedSchemes(data.schemes);
+      })
       .catch(console.error)
       .finally(() => setLoading(false));
   }, []);
@@ -55,9 +81,10 @@ export default function SchemesCatalogue() {
     });
   }, [schemes, query, category]);
 
-  if (loading) {
+  if (loading && schemes.length === 0) {
     return (
-      <div className="flex items-center justify-center min-h-[60vh]">
+      <div className="flex flex-col items-center justify-center min-h-[60vh] gap-3">
+        <Loader2 size={32} className="animate-spin" style={{ color: 'var(--accent-1)' }} />
         <div className="text-body" style={{ color: 'var(--text-3)' }}>Loading schemes…</div>
       </div>
     );
@@ -108,7 +135,7 @@ export default function SchemesCatalogue() {
             key={scheme.id}
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: Math.min(i, 12) * 0.03, duration: 0.3 }}
+            transition={{ delay: Math.min(i, 8) * 0.03, duration: 0.25 }}
           >
             <GlassCard
               className="flex flex-col gap-3 p-5 hover:-translate-y-0.5 transition-transform cursor-pointer h-full"

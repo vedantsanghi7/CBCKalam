@@ -71,6 +71,10 @@ export interface SchemeDetail {
   name: string;
   ministry: string;
   launched: string;
+  category?: string;
+  description?: string;
+  short_description?: string;
+  application_url?: string;
   benefit: Record<string, any>;
   sources: Array<{ url: string; section: string; fetched_on: string }>;
   inputs_required: string[];
@@ -87,6 +91,7 @@ export interface SchemeDetail {
   prerequisites: Array<{ scheme: string; soft: boolean }>;
   overlaps_with: Array<{ scheme: string; nature: string }>;
   documents_checklist: string[];
+  verification?: Record<string, any>;
 }
 
 export interface ChatMessage {
