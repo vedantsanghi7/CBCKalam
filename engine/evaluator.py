@@ -253,22 +253,36 @@ def run_evaluation(scheme: Scheme, user_data: Dict[str, Any]):
     """Evaluate all rules for a scheme against user data.
     Returns (rule_evaluations, missing_inputs, ambiguity_notes, status).
     """
+    # Normalize user data - convert string booleans to actual booleans
+    normalized = {}
+    for k, v in user_data.items():
+        if isinstance(v, str):
+            vl = v.lower().strip()
+            if vl in ("true", "yes", "haan", "ha"):
+                normalized[k] = True
+            elif vl in ("false", "no", "nahi", "naa"):
+                normalized[k] = False
+            else:
+                normalized[k] = v
+        else:
+            normalized[k] = v
+
     results = []
     missing_inputs = []
     ambiguity_notes = []
-    status = "QUALIFIES"
     base_fail = False
     has_unknown = False
+    all_known_pass = True  # Track if all evaluated (non-unknown) rules pass
 
     for req in scheme.inputs_required:
         flat_req = req.replace(".", "_")
-        if user_data.get(req) is None and user_data.get(flat_req) is None:
+        if normalized.get(req) is None and normalized.get(flat_req) is None:
             missing_inputs.append(req)
 
     failed_rules = []
     for rule in scheme.rules:
         try:
-            val = evaluate_predicate(rule.predicate, user_data)
+            val = evaluate_predicate(rule.predicate, normalized)
         except Exception:
             val = "UNKNOWN"
 
@@ -280,14 +294,17 @@ def run_evaluation(scheme: Scheme, user_data: Dict[str, Any]):
             if rule.type == "inclusion" and val is False:
                 result_status = False
                 base_fail = True
+                all_known_pass = False
                 failed_rules.append(rule)
             elif rule.type == "exclusion" and val is True:
                 result_status = False
                 base_fail = True
+                all_known_pass = False
                 failed_rules.append(rule)
             elif rule.type == "mandatory_doc" and val is False:
                 result_status = False
                 base_fail = True
+                all_known_pass = False
                 failed_rules.append(rule)
 
         results.append({
@@ -300,6 +317,7 @@ def run_evaluation(scheme: Scheme, user_data: Dict[str, Any]):
             for flag in rule.ambiguity_flags:
                 ambiguity_notes.append(f"Rule {rule.id}: {flag} — {rule.ambiguity_notes or rule.description}")
 
+    # Determine status
     if base_fail:
         unchangeable_vars = ["age", "sex", "caste_category", "is_widow", "is_disabled", "is_pregnant", "occupation", "profession"]
         has_unchangeable = False
@@ -308,11 +326,15 @@ def run_evaluation(scheme: Scheme, user_data: Dict[str, Any]):
                 has_unchangeable = True
                 break
         status = "DOES_NOT_QUALIFY" if has_unchangeable else "ALMOST_QUALIFIES"
-    elif has_unknown:
+    elif has_unknown and not all_known_pass:
+        # Only UNCERTAIN if unknown rules might change the outcome
         status = "UNCERTAIN"
-
-    if len(missing_inputs) > 0 and status == "QUALIFIES":
-        status = "UNCERTAIN"
+    elif has_unknown and all_known_pass:
+        # All known rules pass — unknown rules MIGHT fail, but lean toward QUALIFIES
+        # since the user satisfies everything we can check
+        status = "QUALIFIES"
+    else:
+        status = "QUALIFIES"
 
     return results, missing_inputs, ambiguity_notes, status
 
