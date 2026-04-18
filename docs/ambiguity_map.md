@@ -113,20 +113,19 @@ Rules where eligibility depends on **officer/branch discretion** beyond what the
 ### Age Coverage Across Schemes
 
 ```
- Age →   10    15    18    20    25    30    35    40    45    50    55    60    65    70+
-         │     │     │     │     │     │     │     │     │     │     │     │     │     │
-YASASVI  ├─────────────────┤                                                            13–22
-DDU-GKY        ├──────────────────────────────────┤                                     15–35
-APY                  ├────────────────────────────────────────┤                          18–40
-PMJJBY               ├──────────────────────────────────────────────┤                   18–50
-PM-SYM               ├──────────────────────────────────────────────┤                   18–40
-MGNREGA              ├────────────────────────────────────────────────────────────────▶  18+
-IGNOAPS                                                                    ├──────────▶  60+
-IGNWPS                                                             ├──────────────────▶  40+
-ANNAPURNA                                                                        ├────▶  65+
+Scheme          |10  15  18  20  30  40  50  60  65  70+
+PM YASASVI      |████████████████░░░░░░░░░░░░░░░░░░░░░░░  13-22
+DDU-GKY         |░░░████████████████████░░░░░░░░░░░░░░░░░  15-35
+APY             |░░░░░░████████████████████████░░░░░░░░░░░  18-40
+PM-SYM          |░░░░░░████████████████████████░░░░░░░░░░░  18-40
+PMJJBY          |░░░░░░████████████████████████████░░░░░░░  18-50
+MGNREGA         |░░░░░░████████████████████████████████████  18+
+IGNWPS          |░░░░░░░░░░░░░░░░░░░░░░░░░░████████████████  40+
+IGNOAPS         |░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░████████  60+
+ANNAPURNA       |░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░██████  65+
 ```
 
-> **No gaps or contradictions** — the scheme portfolio covers ages 13 through 70+ with appropriate overlap in the working-age range (18–60).
+> **No gaps or contradictions** — the portfolio covers ages 13 through 70+ with appropriate overlap in the working-age range (18–60).
 
 ---
 
