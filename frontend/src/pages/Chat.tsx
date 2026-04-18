@@ -77,8 +77,14 @@ export default function ChatPage() {
     saveState({ sessionId, messages, slots, missingSlots, readyToMatch, options, results, totalKnown, totalPossible, eligibleCount });
   }, [sessionId, messages, slots, missingSlots, readyToMatch, options, results, totalKnown, totalPossible, eligibleCount]);
 
+  const hasMounted = useRef(false);
+
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (!hasMounted.current) {
+      hasMounted.current = true;
+      return; // skip scroll on first render
+    }
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
   }, [messages, loading]);
 
   // Create a session only if we don't already have one from storage
