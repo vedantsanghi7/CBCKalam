@@ -344,14 +344,11 @@ def run_evaluation(scheme: Scheme, user_data: Dict[str, Any]):
                 has_unchangeable = True
                 break
         status = "DOES_NOT_QUALIFY" if has_unchangeable else "ALMOST_QUALIFIES"
-    elif has_unknown and not all_known_pass:
-        # Only UNCERTAIN if unknown rules might change the outcome
+    elif has_unknown:
+        # Some rules couldn't be evaluated because data is missing
         status = "UNCERTAIN"
-    elif has_unknown and all_known_pass:
-        # All known rules pass — unknown rules MIGHT fail, but lean toward QUALIFIES
-        # since the user satisfies everything we can check
-        status = "QUALIFIES"
     else:
+        # All rules evaluated and all passed
         status = "QUALIFIES"
 
     return results, missing_inputs, ambiguity_notes, status
