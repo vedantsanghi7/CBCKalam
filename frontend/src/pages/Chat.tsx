@@ -164,11 +164,16 @@ export default function ChatPage() {
       setQualifiesCount(data.qualifies_count ?? 0);
       setAlmostCount(data.almost_count ?? 0);
 
-      // Auto-match only when there are actual qualifiers and no prior results
-      // Or when all slots exhausted (ready=true, missing=0)
-      const qCount = data.qualifies_count ?? 0;
-      if (data.ready_to_match && !results && (qCount > 0 || data.slots_missing.length === 0)) {
-        handleMatch();
+      // If already evaluated, re-evaluate silently on every new answer
+      if (results) {
+        handleMatch(true);
+      }
+      // First-time auto-match when ready
+      else if (data.ready_to_match) {
+        const qCount = data.qualifies_count ?? 0;
+        if (qCount > 0 || data.slots_missing.length === 0) {
+          handleMatch();
+        }
       }
     } catch (err) {
       addMessage('assistant', 'Maaf kijiye, connection error. Kripya dubara try karein.');
@@ -177,32 +182,32 @@ export default function ChatPage() {
     }
   };
 
-  const handleMatch = async () => {
+  const handleMatch = async (silent = false) => {
     if (!sessionId) return;
-    setLoading(true);
+    if (!silent) setLoading(true);
     try {
       const data = await api.match(sessionId);
       setResults(data);
-      const qualCount = data.filter(r => r.status === 'QUALIFIES').length;
-      const almCount = data.filter(r => r.status === 'ALMOST_QUALIFIES').length;
-      const unclearCount = data.filter(r => r.status === 'UNCERTAIN').length;
+      if (!silent) {
+        const qualCount = data.filter(r => r.status === 'QUALIFIES').length;
+        const almCount = data.filter(r => r.status === 'ALMOST_QUALIFIES').length;
 
-      // Smart message based on actual results
-      let msg: string;
-      if (qualCount > 0) {
-        msg = `🎉 Aap ${qualCount} yojanaon ke liye eligible hain!`;
-        if (almCount > 0) msg += ` ${almCount} aur schemes ke liye almost eligible.`;
-        msg += ' Results page par dekhein.';
-      } else if (almCount > 0) {
-        msg = `📋 ${almCount} schemes ke liye aap almost eligible hain. Kuch details aur confirm karein toh qualify kar sakte hain. Results dekhein.`;
-      } else {
-        msg = `📋 Evaluation complete. Aapki current profile ke hisaab se koi direct match nahi mila. Results page par full analysis dekhein.`;
+        let msg: string;
+        if (qualCount > 0) {
+          msg = `🎉 Aap ${qualCount} yojanaon ke liye eligible hain!`;
+          if (almCount > 0) msg += ` ${almCount} aur schemes ke liye almost eligible.`;
+          msg += ' Results page par dekhein.';
+        } else if (almCount > 0) {
+          msg = `📋 ${almCount} schemes ke liye aap almost eligible hain. Kuch details aur confirm karein toh qualify kar sakte hain. Results dekhein.`;
+        } else {
+          msg = `📋 Evaluation complete. Aapki current profile ke hisaab se koi direct match nahi mila. Results page par full analysis dekhein.`;
+        }
+        addMessage('assistant', msg);
       }
-      addMessage('assistant', msg);
     } catch {
-      addMessage('assistant', 'Engine matching mein error aaya. Kripya dubara try karein.');
+      if (!silent) addMessage('assistant', 'Engine matching mein error aaya. Kripya dubara try karein.');
     } finally {
-      setLoading(false);
+      if (!silent) setLoading(false);
     }
   };
 
