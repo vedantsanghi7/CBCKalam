@@ -1,44 +1,227 @@
+# ──────────────────────────────────────────────────────────────────────────────
+# KALAM — Ten Adversarial Edge-Case Profiles
+# ──────────────────────────────────────────────────────────────────────────────
+# Each profile deliberately targets ambiguities, boundary conditions, or
+# under-specified areas in central government welfare schemes.
+#
+# These profiles are designed to stress-test the eligibility engine across:
+#   • Age boundaries (exactly on cut-off limits)
+#   • Gender-role assumptions
+#   • Occupation edge cases (seasonal / multi-occupation)
+#   • Document possession gaps
+#   • Contradictory or legally uncertain statuses
+# ──────────────────────────────────────────────────────────────────────────────
+
 profiles:
-  - id: leela_remarried
+
+  # ── Profile 1 ──────────────────────────────────────────────────────────────
+  - id: P01_leela_remarried_widow
     name: "Widow Who Recently Remarried (Leela, 38)"
+    adversarial_angle: >
+      Tests whether widow-specific pension schemes correctly disqualify
+      a widow who has remarried, despite still having BPL status. Exercises
+      the tension between is_widow=true and remarried status.
     data:
       age: 38
+      sex: "F"
       is_widow: true
       is_bpl: true
-      is_remarried: true
-  - id: ramesh_farmer_tenant
-    name: "Farmer Who Leases Land (Ramesh, 42)"
+      has_aadhaar: true
+      has_bank_account: true
+      occupation: "homemaker"
+      district_rural_or_urban: "rural"
+      annual_income_inr: 40000
+      caste_category: "OBC"
+      state: "Madhya Pradesh"
+
+  # ── Profile 2 ──────────────────────────────────────────────────────────────
+  - id: P02_ramesh_tenant_farmer
+    name: "Landless Tenant Farmer (Ramesh, 42)"
+    adversarial_angle: >
+      Ramesh works on leased land. PM-KISAN requires "cultivable land held",
+      so his ownership type "lease" should trigger ALMOST_QUALIFIES for
+      PM-KISAN but still qualify for MGNREGA and KCC.
     data:
       age: 42
-      land_ownership_type: "leased"
-      land_in_own_name: false
+      sex: "M"
+      occupation: "farmer"
+      land_ownership_type: "lease"
       district_rural_or_urban: "rural"
-      is_willing_to_do_unskilled_work: true
-  - id: sushila_no_bank
-    name: "Aadhaar-Yes, Bank-No (Sushila, 28)"
+      is_bpl: true
+      has_aadhaar: true
+      has_bank_account: true
+      annual_income_inr: 80000
+      caste_category: "SC"
+      state: "Bihar"
+      income_tax_filed_last_ay: false
+
+  # ── Profile 3 ──────────────────────────────────────────────────────────────
+  - id: P03_sushila_no_bank
+    name: "Aadhaar-Only, No Bank Account (Sushila, 28)"
+    adversarial_angle: >
+      Most schemes require both Aadhaar + bank account. Sushila has Aadhaar
+      but no bank account. This should recommend PMJDY first (bank account
+      opening) and mark insurance/pension schemes as ALMOST_QUALIFIES.
     data:
       age: 28
+      sex: "F"
       has_aadhaar: true
       has_bank_account: false
-      nationality: "indian"
-      ekyc_done: false
-  - id: ayesha_transgender
-    name: "Transgender Applicant (Ayesha, 35)"
+      occupation: "laborer"
+      district_rural_or_urban: "urban"
+      is_bpl: true
+      annual_income_inr: 60000
+      caste_category: "SC"
+      state: "Maharashtra"
+      income_tax_filed_last_ay: false
+
+  # ── Profile 4 ──────────────────────────────────────────────────────────────
+  - id: P04_ayesha_transgender
+    name: "Transgender Individual (Ayesha, 35)"
+    adversarial_angle: >
+      Ayesha identifies as transgender (sex='other'). Schemes like PMMVY
+      require sex='F' explicitly. Tests whether the engine correctly marks
+      gender-specific schemes as DOES_NOT_QUALIFY vs. UNCERTAIN.
+      Also tests is_pregnant=true with sex='other'.
     data:
       age: 35
-      is_pregnant: true
       sex: "other"
-      child_number: 1
-      govt_employee_status: "none"
-  - id: meena_missing_husband
+      is_pregnant: true
+      occupation: "other"
+      has_aadhaar: true
+      has_bank_account: true
+      is_bpl: true
+      district_rural_or_urban: "urban"
+      annual_income_inr: 120000
+      caste_category: "General"
+      state: "Delhi"
+
+  # ── Profile 5 ──────────────────────────────────────────────────────────────
+  - id: P05_meena_missing_husband
     name: "Husband Missing 7+ Years (Meena, 45)"
+    adversarial_angle: >
+      Meena's husband has been missing for 7 years. She may be legally
+      considered a widow by court decree but has no death certificate.
+      Tests UNKNOWN handling for is_widow — the engine should flag this
+      as UNCERTAIN rather than force a True/False.
     data:
       age: 45
-      is_widow: "UNKNOWN" # Actually unknown legally
+      sex: "F"
+      is_widow: "UNKNOWN"
       is_bpl: true
-  - id: arjun_divorced_father
+      has_aadhaar: true
+      has_bank_account: true
+      occupation: "laborer"
+      district_rural_or_urban: "rural"
+      annual_income_inr: 50000
+      caste_category: "OBC"
+      state: "Uttar Pradesh"
+
+  # ── Profile 6 ──────────────────────────────────────────────────────────────
+  - id: P06_arjun_single_father
     name: "Divorced Father Raising Daughter (Arjun, 44)"
+    adversarial_angle: >
+      SSY (Sukanya Samriddhi) is for "girl child" parents. Arjun is a
+      divorced single father with a daughter under 10. Tests whether the
+      engine correctly qualifies him despite the scheme's common association
+      with mothers specifically.
     data:
       age: 44
+      sex: "M"
       has_daughter_under_10: true
-      is_legal_guardian: true
+      occupation: "salaried"
+      has_aadhaar: true
+      has_bank_account: true
+      annual_income_inr: 400000
+      is_bpl: false
+      caste_category: "General"
+      district_rural_or_urban: "urban"
+      state: "Karnataka"
+      income_tax_filed_last_ay: true
+
+  # ── Profile 7 ──────────────────────────────────────────────────────────────
+  - id: P07_boundary_age_18
+    name: "Exact Age Boundary — Just Turned 18 (Ravi)"
+    adversarial_angle: >
+      Ravi is exactly 18. Multiple schemes have age >= 18 or BETWEEN 18 AND X
+      rules. Tests that boundary values are handled inclusively (>=, not >).
+      Should qualify for PMJJBY, PMSBY, MGNREGA, APY, PM-SVANidhi, etc.
+    data:
+      age: 18
+      sex: "M"
+      occupation: "laborer"
+      has_aadhaar: true
+      has_bank_account: true
+      is_bpl: true
+      district_rural_or_urban: "rural"
+      annual_income_inr: 30000
+      caste_category: "ST"
+      state: "Jharkhand"
+      income_tax_filed_last_ay: false
+
+  # ── Profile 8 ──────────────────────────────────────────────────────────────
+  - id: P08_wealthy_farmer
+    name: "High-Income Farmer Filing Taxes (Pradeep, 55)"
+    adversarial_angle: >
+      Pradeep is a farmer with high income who files taxes. PM-KISAN
+      explicitly excludes income-tax filers. Tests the exclusion-rule
+      logic — he should DOES_NOT_QUALIFY for PM-KISAN despite being
+      a farmer with own land. Should still qualify for KCC and PMFBY.
+    data:
+      age: 55
+      sex: "M"
+      occupation: "farmer"
+      land_ownership_type: "owned_cultivable"
+      has_aadhaar: true
+      has_bank_account: true
+      annual_income_inr: 800000
+      income_tax_filed_last_ay: true
+      is_bpl: false
+      district_rural_or_urban: "rural"
+      caste_category: "General"
+      state: "Punjab"
+
+  # ── Profile 9 ──────────────────────────────────────────────────────────────
+  - id: P09_elderly_no_pension
+    name: "70-Year-Old Without Any Pension (Kamla Devi)"
+    adversarial_angle: >
+      Tests upper age boundaries. At 70, Kamla exceeds PMJJBY's max age (50)
+      and APY's max (40) but should strongly qualify for IGNOAPS (old-age
+      pension), Annapurna (food), and NSAP/NFBS. Verifies that exceeding
+      scheme age limits correctly results in DOES_NOT_QUALIFY.
+    data:
+      age: 70
+      sex: "F"
+      occupation: "homemaker"
+      has_aadhaar: true
+      has_bank_account: true
+      annual_income_inr: 0
+      monthly_pension_inr: 0
+      is_bpl: true
+      district_rural_or_urban: "rural"
+      caste_category: "SC"
+      state: "Rajasthan"
+      income_tax_filed_last_ay: false
+      is_widow: true
+
+  # ── Profile 10 ─────────────────────────────────────────────────────────────
+  - id: P10_urban_street_vendor
+    name: "Urban Street Vendor Without PAN (Firoz, 32)"
+    adversarial_angle: >
+      Firoz is a street vendor — prime target for PM-SVANidhi. But he lacks
+      a PAN card. Tests whether missing optional documents don't block
+      qualification. He should also be eligible for Mudra, PMJJBY, PMSBY.
+      Verifies occupation-based routing works correctly for 'street_vendor'.
+    data:
+      age: 32
+      sex: "M"
+      occupation: "street_vendor"
+      has_aadhaar: true
+      has_bank_account: true
+      has_pan: false
+      annual_income_inr: 150000
+      is_bpl: true
+      district_rural_or_urban: "urban"
+      caste_category: "OBC"
+      state: "Gujarat"
+      income_tax_filed_last_ay: false
