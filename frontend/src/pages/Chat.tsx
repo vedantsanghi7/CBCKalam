@@ -187,11 +187,7 @@ export default function ChatPage() {
         {/* Header */}
         <div className="mb-4 mt-1">
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-xs font-bold tracking-widest uppercase" style={{
-              background: 'linear-gradient(135deg, var(--accent-1), var(--accent-2))',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}>KALAM</span>
+            <span className="text-xs font-bold tracking-widest uppercase" style={{ color: 'var(--text-1)' }}>KALAM</span>
             <span className="w-1 h-1 rounded-full" style={{ background: 'var(--text-3)' }} />
             <span className="text-xs" style={{ color: 'var(--text-3)' }}>Welfare Eligibility Engine</span>
           </div>
