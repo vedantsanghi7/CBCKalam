@@ -152,6 +152,12 @@ def _eval_comparison(expr: str, user_data: Dict[str, Any]) -> Any:
         val = _resolve_value(var_name, user_data)
         if val is None:
             raise KeyError(var_name)
+        # Type coercion: convert string to number if bounds are numeric
+        if isinstance(val, str) and isinstance(low, (int, float)):
+            try:
+                val = float(val) if '.' in val else int(val)
+            except (ValueError, TypeError):
+                pass
         return low <= val <= high
 
     # Standard comparisons: ==, !=, >=, <=, >, <
@@ -253,7 +259,7 @@ def run_evaluation(scheme: Scheme, user_data: Dict[str, Any]):
     """Evaluate all rules for a scheme against user data.
     Returns (rule_evaluations, missing_inputs, ambiguity_notes, status).
     """
-    # Normalize user data - convert string booleans to actual booleans
+    # Normalize user data - convert string booleans and numeric strings
     normalized = {}
     for k, v in user_data.items():
         if isinstance(v, str):
@@ -263,7 +269,14 @@ def run_evaluation(scheme: Scheme, user_data: Dict[str, Any]):
             elif vl in ("false", "no", "nahi", "naa"):
                 normalized[k] = False
             else:
-                normalized[k] = v
+                # Try to convert numeric strings to numbers
+                try:
+                    normalized[k] = int(v)
+                except ValueError:
+                    try:
+                        normalized[k] = float(v)
+                    except ValueError:
+                        normalized[k] = v
         else:
             normalized[k] = v
 
