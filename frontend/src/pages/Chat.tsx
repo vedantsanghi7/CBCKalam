@@ -292,7 +292,7 @@ export default function ChatPage() {
       </div>
 
       {/* Context Rail — desktop only */}
-      <div className="hidden lg:flex flex-col gap-4 w-[320px] shrink-0">
+      <div className="hidden lg:flex flex-col gap-4 w-[320px] shrink-0 overflow-y-auto scrollbar-hide pb-4">
         <GlassCard className="flex flex-col gap-3">
           <h3 className="text-sm uppercase tracking-wide font-semibold flex items-center gap-2" style={{ color: 'var(--text-2)' }}>
             <Info size={16} /> <TranslatedText>Your Information</TranslatedText>
