@@ -208,17 +208,30 @@ def handle_turn(sid: str, payload: TurnRequest):
     known_count = len([k for k in session["slots"]
                        if session["slots"][k] not in (None, "", "UNKNOWN")])
                        
-    eligible_count = 0
+    qualifies_count = 0
+    almost_count = 0
     schemes = _load_all_schemes()
     for s in schemes:
         try:
             res = evaluate_scheme(s, session["slots"])
-            if res.status in ("QUALIFIES", "ALMOST_QUALIFIES"):
-                eligible_count += 1
+            if res.status == "QUALIFIES":
+                qualifies_count += 1
+            elif res.status == "ALMOST_QUALIFIES":
+                almost_count += 1
         except Exception:
             pass
 
-    ready = known_count >= MIN_SLOTS_FOR_MATCH and eligible_count > 0
+    eligible_count = qualifies_count + almost_count
+
+    # Ready logic:
+    # - If we have QUALIFIES schemes and enough data → ready (but keep asking if slots remain)
+    # - If all slots exhausted → ready regardless
+    # - If only ALMOST or 0 and slots remain → keep asking
+    all_slots_done = not missing
+    has_qualifiers = qualifies_count > 0
+    enough_data = known_count >= MIN_SLOTS_FOR_MATCH
+    
+    ready = all_slots_done or (has_qualifiers and enough_data)
 
     llm_reply = result.get("next_message") if result else None
 
@@ -233,23 +246,32 @@ def handle_turn(sid: str, payload: TurnRequest):
             next_slot = missing[0]
             q = get_next_question(next_slot)
             session["pending_slot"] = next_slot
-            if ready:
-                reply = (f"Got it. I have collected enough details — so far I have found {eligible_count} schemes. "
-                         f"To check more schemes, please answer: {q['question']}")
+            if has_qualifiers and enough_data:
+                reply = (f"Got it. So far {qualifies_count} schemes look promising. "
+                         f"Let me ask a few more to refine: {q['question']}")
             elif known_count == 0:
                 reply = q["question"]
             else:
                 accepted = next(iter(newly.keys()), None)
                 prefix = ("Got it. " if accepted and pending and accepted == pending
                           else "Okay. ")
+                # Don't set ready if we only have almost-qualifies
+                if almost_count > 0 and qualifies_count == 0:
+                    prefix += f"({almost_count} schemes are close but need more info.) "
                 reply = prefix + q["question"]
             options = q.get("options")
+            # Don't signal ready if there are still questions and 0 qualifiers
+            if not has_qualifiers:
+                ready = False
         else:
-            if eligible_count > 0:
-                reply = f"Got all the details! I am evaluating the eligible schemes for you…"
+            # All questions exhausted
+            if qualifies_count > 0:
+                reply = f"Got all the details! I found {qualifies_count} schemes you are eligible for. Evaluating now…"
+            elif almost_count > 0:
+                reply = f"Got all the details. {almost_count} schemes are close — let me show you the full analysis…"
             else:
-                reply = "Got all the details. Checking matches now..."
-                ready = True # Even if 0, if missing is empty, we must be ready to end conversation.
+                reply = "I have gathered all your details. Let me check the full results for your profile…"
+            ready = True
             options = None
             session["pending_slot"] = None
 
@@ -264,6 +286,8 @@ def handle_turn(sid: str, payload: TurnRequest):
         "slots_missing": missing[:5],
         "ready_to_match": ready,
         "eligible_count": eligible_count,
+        "qualifies_count": qualifies_count,
+        "almost_count": almost_count,
         "total_slots_known": known_count,
         "total_slots_possible": len(SLOT_PRIORITY),
         "contradictions": contradictions,

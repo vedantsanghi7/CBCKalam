@@ -23,6 +23,12 @@ export default function Results() {
   useEffect(() => {
     if (location.state?.results) {
       setResults(location.state.results);
+    } else {
+      // Fallback: load from sessionStorage (saved by chat page)
+      try {
+        const raw = sessionStorage.getItem('kalam_results');
+        if (raw) setResults(JSON.parse(raw));
+      } catch {}
     }
   }, [location.state]);
 

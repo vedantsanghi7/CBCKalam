@@ -69,13 +69,20 @@ export default function ChatPage() {
   const [totalKnown, setTotalKnown] = useState(saved.current?.totalKnown ?? 0);
   const [totalPossible, setTotalPossible] = useState(saved.current?.totalPossible ?? 21);
   const [eligibleCount, setEligibleCount] = useState(saved.current?.eligibleCount ?? 0);
+  const [qualifiesCount, setQualifiesCount] = useState(saved.current?.qualifiesCount ?? 0);
+  const [almostCount, setAlmostCount] = useState(saved.current?.almostCount ?? 0);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Persist chat state on every change
   useEffect(() => {
-    saveState({ sessionId, messages, slots, missingSlots, readyToMatch, options, results, totalKnown, totalPossible, eligibleCount });
-  }, [sessionId, messages, slots, missingSlots, readyToMatch, options, results, totalKnown, totalPossible, eligibleCount]);
+    const state = { sessionId, messages, slots, missingSlots, readyToMatch, options, results, totalKnown, totalPossible, eligibleCount, qualifiesCount, almostCount };
+    saveState(state);
+    // Also save results separately for the Results page
+    if (results) {
+      try { sessionStorage.setItem('kalam_results', JSON.stringify(results)); } catch {}
+    }
+  }, [sessionId, messages, slots, missingSlots, readyToMatch, options, results, totalKnown, totalPossible, eligibleCount, qualifiesCount, almostCount]);
 
   const hasMounted = useRef(false);
 
@@ -117,6 +124,7 @@ export default function ChatPage() {
     }
     // Clear all state
     sessionStorage.removeItem(STORAGE_KEY);
+    sessionStorage.removeItem('kalam_results');
     setMessages([INITIAL_MESSAGE]);
     setSlots({});
     setMissingSlots([]);
@@ -126,6 +134,8 @@ export default function ChatPage() {
     setTotalKnown(0);
     setTotalPossible(21);
     setEligibleCount(0);
+    setQualifiesCount(0);
+    setAlmostCount(0);
     // Start a fresh session
     try {
       const res = await api.startSession();
@@ -151,8 +161,13 @@ export default function ChatPage() {
       setTotalKnown(data.total_slots_known ?? Object.keys(data.slots_known).length);
       setTotalPossible(data.total_slots_possible ?? 21);
       setEligibleCount(data.eligible_count ?? 0);
+      setQualifiesCount(data.qualifies_count ?? 0);
+      setAlmostCount(data.almost_count ?? 0);
 
-      if (data.ready_to_match && !results) {
+      // Auto-match only when there are actual qualifiers and no prior results
+      // Or when all slots exhausted (ready=true, missing=0)
+      const qCount = data.qualifies_count ?? 0;
+      if (data.ready_to_match && !results && (qCount > 0 || data.slots_missing.length === 0)) {
         handleMatch();
       }
     } catch (err) {
@@ -169,8 +184,21 @@ export default function ChatPage() {
       const data = await api.match(sessionId);
       setResults(data);
       const qualCount = data.filter(r => r.status === 'QUALIFIES').length;
-      const almostCount = data.filter(r => r.status === 'ALMOST_QUALIFIES').length;
-      addMessage('assistant', `✅ Evaluation complete! Aap ${qualCount} yojanaon ke liye eligible hain${almostCount > 0 ? `, ${almostCount} ke liye almost eligible.` : ''} Results page par dekhein.`);
+      const almCount = data.filter(r => r.status === 'ALMOST_QUALIFIES').length;
+      const unclearCount = data.filter(r => r.status === 'UNCERTAIN').length;
+
+      // Smart message based on actual results
+      let msg: string;
+      if (qualCount > 0) {
+        msg = `🎉 Aap ${qualCount} yojanaon ke liye eligible hain!`;
+        if (almCount > 0) msg += ` ${almCount} aur schemes ke liye almost eligible.`;
+        msg += ' Results page par dekhein.';
+      } else if (almCount > 0) {
+        msg = `📋 ${almCount} schemes ke liye aap almost eligible hain. Kuch details aur confirm karein toh qualify kar sakte hain. Results dekhein.`;
+      } else {
+        msg = `📋 Evaluation complete. Aapki current profile ke hisaab se koi direct match nahi mila. Results page par full analysis dekhein.`;
+      }
+      addMessage('assistant', msg);
     } catch {
       addMessage('assistant', 'Engine matching mein error aaya. Kripya dubara try karein.');
     } finally {
@@ -240,7 +268,7 @@ export default function ChatPage() {
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
               <GlassCard tone="raised" className="p-4 flex items-center justify-between">
                 <span className="text-sm font-medium" style={{ color: 'var(--text-1)' }}>
-                  <TranslatedText>✅ Enough info collected. Ready to check eligibility!</TranslatedText>
+                  <TranslatedText>{qualifiesCount > 0 ? `${qualifiesCount} schemes found! Ready to evaluate.` : 'All info collected. Ready to check.'}</TranslatedText>
                 </span>
                 <PillButton size="sm" onClick={handleMatch}><TranslatedText>Run Check</TranslatedText></PillButton>
               </GlassCard>
@@ -276,9 +304,14 @@ export default function ChatPage() {
             />
           </div>
           <div className="text-caption"><TranslatedText>{`${totalKnown} of ${totalPossible} details known (${progressPct}%)`}</TranslatedText></div>
-          {eligibleCount > 0 && (
-            <div className="text-xs font-semibold" style={{ color: 'var(--status-yes)' }}>
-              <TranslatedText>{`${eligibleCount} likely eligible schemes`}</TranslatedText>
+          {qualifiesCount > 0 && (
+            <div className="text-xs font-semibold" style={{ color: 'var(--status-qualifies)' }}>
+              <TranslatedText>{`${qualifiesCount} eligible schemes`}</TranslatedText>
+            </div>
+          )}
+          {almostCount > 0 && (
+            <div className="text-xs font-medium" style={{ color: 'var(--status-almost)' }}>
+              <TranslatedText>{`${almostCount} almost eligible`}</TranslatedText>
             </div>
           )}
           {missingSlots.length > 0 && (
@@ -290,23 +323,31 @@ export default function ChatPage() {
 
         {readyToMatch && !results && (
           <GlassCard tone="raised" className="flex flex-col items-center gap-3 py-8">
-            <div className="text-3xl">🎯</div>
-            <div className="text-sm font-semibold text-center" style={{ color: 'var(--text-1)' }}><TranslatedText>Ready to Match!</TranslatedText></div>
+            <div className="text-3xl">{qualifiesCount > 0 ? '🎯' : '🔍'}</div>
+            <div className="text-sm font-semibold text-center" style={{ color: 'var(--text-1)' }}>
+              <TranslatedText>{qualifiesCount > 0 ? `${qualifiesCount} schemes found!` : 'Ready to Evaluate'}</TranslatedText>
+            </div>
             <PillButton onClick={handleMatch}><TranslatedText>Run Eligibility Engine</TranslatedText></PillButton>
           </GlassCard>
         )}
 
-        {results && (
-          <GlassCard tone="raised" className="flex flex-col items-center gap-3 py-6">
-            <div className="text-3xl">✅</div>
-            <div className="text-sm font-semibold text-center" style={{ color: 'var(--text-1)' }}>
-              <TranslatedText>{String(results.filter(r => r.status === 'QUALIFIES' || r.status === 'ALMOST_QUALIFIES').length) + " schemes eligible"}</TranslatedText>
-            </div>
-            <PillButton size="sm" onClick={() => navigate('/results', { state: { results } })}>
-              <TranslatedText>View Full Results</TranslatedText>
-            </PillButton>
-          </GlassCard>
-        )}
+        {results && (() => {
+          const qc = results.filter(r => r.status === 'QUALIFIES').length;
+          const ac = results.filter(r => r.status === 'ALMOST_QUALIFIES').length;
+          return (
+            <GlassCard tone="raised" className="flex flex-col items-center gap-3 py-6">
+              <div className="text-3xl">{qc > 0 ? '🎉' : ac > 0 ? '📋' : '📊'}</div>
+              <div className="text-sm font-semibold text-center" style={{ color: 'var(--text-1)' }}>
+                {qc > 0 && <div><TranslatedText>{`${qc} schemes eligible`}</TranslatedText></div>}
+                {ac > 0 && <div className="text-xs font-medium mt-1" style={{ color: 'var(--status-almost)' }}><TranslatedText>{`${ac} almost eligible`}</TranslatedText></div>}
+                {qc === 0 && ac === 0 && <div><TranslatedText>No matches found</TranslatedText></div>}
+              </div>
+              <PillButton size="sm" onClick={() => navigate('/results', { state: { results } })}>
+                <TranslatedText>View Full Results</TranslatedText>
+              </PillButton>
+            </GlassCard>
+          );
+        })()}
       </div>
     </div>
   );

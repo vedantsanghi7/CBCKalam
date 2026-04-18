@@ -43,6 +43,8 @@ export interface TurnResponse {
   total_slots_known: number;
   total_slots_possible: number;
   eligible_count?: number;
+  qualifies_count?: number;
+  almost_count?: number;
 }
 
 export interface SchemeSummary {
