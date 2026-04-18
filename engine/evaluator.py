@@ -83,6 +83,11 @@ def _eval_expression(expr: str, user_data: Dict[str, Any]) -> Any:
     if expr.startswith("(") and _find_matching_paren(expr, 0) == len(expr) - 1:
         return _eval_expression(expr[1:-1], user_data)
 
+    # IMPORTANT: Detect BETWEEN...AND before splitting on AND
+    # "age BETWEEN 18 AND 50" is a single atomic comparison, not a logical AND
+    if re.search(r'\bBETWEEN\b', expr, re.IGNORECASE):
+        return _eval_comparison(expr, user_data)
+
     # Split on OR (lowest precedence) — case insensitive
     parts = _split_respecting_parens(expr, " OR ")
     if len(parts) > 1:
