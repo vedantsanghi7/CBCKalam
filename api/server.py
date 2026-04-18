@@ -237,14 +237,20 @@ def handle_turn(sid: str, payload: TurnRequest):
 
     if llm_reply:
         reply = llm_reply
-        next_pending = missing[0] if missing else None
-        session["pending_slot"] = next_pending
-        # Still provide options for the next slot (Yes/No, Rural/Urban, etc.)
-        if next_pending:
-            q = get_next_question(next_pending)
+        # Use the LLM's asking_slot to determine which options to show
+        asking_slot = (result.get("asking_slot") or "").strip() if result else None
+        if asking_slot and asking_slot != "null" and asking_slot in SLOT_QUESTIONS:
+            q = get_next_question(asking_slot)
             options = q.get("options")
+            session["pending_slot"] = asking_slot
+        elif missing:
+            # Fallback: use first missing slot
+            q = get_next_question(missing[0])
+            options = q.get("options")
+            session["pending_slot"] = missing[0]
         else:
             options = None
+            session["pending_slot"] = None
         if ready and not missing:
              session["pending_slot"] = None
     else:

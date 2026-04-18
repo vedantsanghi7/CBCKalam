@@ -268,22 +268,7 @@ def extract_slots_llm(utterance: str, current_slots: Dict[str, Any],
         else:
             lang_instruction = f"Reply in the '{language}' language."
 
-    # Determine the next slot to ask about
-    next_slot_to_ask = None
-    for s in SLOT_PRIORITY:
-        if s not in current_slots:
-            next_slot_to_ask = s
-            break
 
-    next_slot_hint = ""
-    if next_slot_to_ask:
-        q_info = SLOT_QUESTIONS.get(next_slot_to_ask, {})
-        slot_opts = q_info.get("options")
-        next_slot_hint = f"\nNEXT SLOT TO ASK: '{next_slot_to_ask}'"
-        if q_info.get("question"):
-            next_slot_hint += f"\nSuggested question: {q_info['question']}"
-        if slot_opts:
-            next_slot_hint += f"\nOptions to offer: {slot_opts}"
 
     prompt = (
         "SYSTEM: You are KALAM, a conversational AI collecting eligibility data for Indian welfare schemes. "
@@ -292,17 +277,18 @@ def extract_slots_llm(utterance: str, current_slots: Dict[str, Any],
         "1. Ask ONLY ONE question per response. Never ask multiple questions.\n"
         "2. Keep your response SHORT — 1-2 sentences max.\n"
         "3. First briefly acknowledge what the user said, then ask the ONE next question.\n"
-        "4. Never invent values. Use UNKNOWN only if the user clearly said they don't know.\n"
-        f"5. {lang_instruction}\n\n"
+        "4. Do NOT list options or choices in your message text. Options are shown as buttons separately.\n"
+        "5. Never invent values. Use UNKNOWN only if the user clearly said they don't know.\n"
+        f"6. {lang_instruction}\n\n"
         f"Available slots: {schema_doc}\n"
-        f"Previously extracted slots: {json.dumps(current_slots, ensure_ascii=False)}\n"
-        f"{next_slot_hint}\n\n"
+        f"Previously extracted slots: {json.dumps(current_slots, ensure_ascii=False)}\n\n"
         f"Recent conversation:\n{hist_str}\n"
         f"USER: \"{utterance.strip()}\"\n\n"
         "Return ONLY JSON in this format:\n"
         "{\n"
         "  \"extracted\": { \"slot_name\": \"new or updated value\" },\n"
-        "  \"next_message\": \"Short friendly response acknowledging info + asking ONE question about the next slot.\"\n"
+        "  \"asking_slot\": \"the slot_name you are asking about in next_message (or null if done)\",\n"
+        "  \"next_message\": \"Short friendly response acknowledging info + asking ONE question. Do NOT include option lists.\"\n"
         "}"
     )
     msgs = [
@@ -360,7 +346,7 @@ def extract_slots(utterance: str, current_slots: Dict[str, Any],
                 merged["land_in_own_name"] = (merged["land_ownership_type"] == "owned_cultivable")
 
             if "next_message" in llm:
-                return {"extracted": merged, "next_message": llm["next_message"], "contradictions": [], "clarifications_needed": []}
+                return {"extracted": merged, "next_message": llm["next_message"], "asking_slot": llm.get("asking_slot"), "contradictions": [], "clarifications_needed": []}
 
     # Post-process: coerce booleans
     for k in list(merged.keys()):
