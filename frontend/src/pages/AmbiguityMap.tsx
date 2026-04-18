@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Map } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { TranslatedText } from "@/lib/i18n";
 
 export default function AmbiguityMap() {
   const [markdown, setMarkdown] = useState<string>("");
@@ -31,8 +32,8 @@ export default function AmbiguityMap() {
         <div className="flex items-center gap-3 mb-8">
           <Map size={28} style={{ color: "var(--accent-1)" }} />
           <div>
-            <h1 className="text-h1" style={{ color: "var(--text-1)" }}>Audit Dashboard</h1>
-            <p className="text-caption">Integrity metrics, validation rules, and logic maps across 18 central schemes.</p>
+            <h1 className="text-h1" style={{ color: "var(--text-1)" }}><TranslatedText>Audit Dashboard</TranslatedText></h1>
+            <p className="text-caption"><TranslatedText>Integrity metrics, validation rules, and logic maps across 30 central schemes.</TranslatedText></p>
           </div>
         </div>
       </motion.div>
