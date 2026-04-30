@@ -102,4 +102,6 @@ export interface ChatMessage {
   text: string;
   timestamp: Date;
   options?: string[] | null;
+  /** Language the message was originally generated in. Used to decide if translation is needed. */
+  lang?: string;
 }

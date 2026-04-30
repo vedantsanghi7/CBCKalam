@@ -34,6 +34,7 @@ const INITIAL_MESSAGE: ChatMessage = {
   role: 'assistant',
   text: 'Namaste! 🙏 Main KALAM hoon — aapki sarkari yojanaon ke liye eligibility check karne wala AI engine. Kaunsi sarkari yojana aapke liye hai? Chaliye pata lagate hain.',
   timestamp: new Date(),
+  lang: 'hinglish',
 };
 
 function loadState(): ChatState | null {
@@ -110,12 +111,13 @@ export default function ChatPage() {
     init();
   }, [sessionId]);
 
-  const addMessage = useCallback((role: 'user' | 'assistant', text: string) => {
+  const addMessage = useCallback((role: 'user' | 'assistant', text: string, msgLang?: string) => {
     setMessages(prev => [...prev, {
       id: String(Date.now() + Math.random()),
       role,
       text,
       timestamp: new Date(),
+      lang: msgLang,
     }]);
   }, []);
 
@@ -155,7 +157,7 @@ export default function ChatPage() {
 
     try {
       const data = await api.turn(sessionId, text.trim(), lang);
-      addMessage('assistant', data.reply);
+      addMessage('assistant', data.reply, lang);
       setSlots(data.slots_known);
       setMissingSlots(data.slots_missing);
       setReadyToMatch(data.ready_to_match);
@@ -178,7 +180,7 @@ export default function ChatPage() {
         }
       }
     } catch (err) {
-      addMessage('assistant', 'Maaf kijiye, connection error. Kripya dubara try karein.');
+      addMessage('assistant', 'Maaf kijiye, connection error. Kripya dubara try karein.', 'hinglish');
     } finally {
       setLoading(false);
     }
@@ -204,10 +206,10 @@ export default function ChatPage() {
         } else {
           msg = `📋 Evaluation complete. Aapki current profile ke hisaab se koi direct match nahi mila. Results page par full analysis dekhein.`;
         }
-        addMessage('assistant', msg);
+        addMessage('assistant', msg, 'hinglish');
       }
     } catch {
-      if (!silent) addMessage('assistant', 'Engine matching mein error aaya. Kripya dubara try karein.');
+      if (!silent) addMessage('assistant', 'Engine matching mein error aaya. Kripya dubara try karein.', 'hinglish');
     } finally {
       if (!silent) setLoading(false);
     }
@@ -251,7 +253,9 @@ export default function ChatPage() {
           <AnimatePresence initial={false}>
             {messages.map(msg => (
               <ChatBubble key={msg.id} from={msg.role}>
-                {msg.role === 'assistant' ? <TranslatedText>{msg.text}</TranslatedText> : msg.text}
+                {msg.role === 'assistant' && msg.lang !== lang
+                  ? <TranslatedText>{msg.text}</TranslatedText>
+                  : msg.text}
               </ChatBubble>
             ))}
           </AnimatePresence>
