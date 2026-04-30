@@ -87,6 +87,16 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   // ---------- Language change handler ----------
   const setLang = useCallback((newLang: string) => {
     if (newLang === langRef.current) return;
+    // Cancel any pending translation batch from the old language
+    if (flushTimer.current) {
+      clearTimeout(flushTimer.current);
+      flushTimer.current = null;
+    }
+    // Reject/resolve all pending queue items with original text
+    for (const entry of pendingQueue.current) {
+      entry.resolve(entry.texts);
+    }
+    pendingQueue.current = [];
     // Persist choice
     try { localStorage.setItem(LANG_KEY, newLang); } catch { /* quota */ }
     // Load cache for the new language
@@ -225,48 +235,39 @@ export function useI18n() {
  */
 export function useTranslatedTexts(texts: string[]): Record<string, string> {
   const { lang, t, translateMany, cacheVersion } = useI18n();
-  const [local, setLocal] = useState<Record<string, string>>({});
-  // Use a serialized key to prevent unnecessary re-fires
+  // local stores { langKey: string, map: Record<string, string> }
+  // so we know WHICH language the local translations are for
+  const [local, setLocal] = useState<{ langKey: string; map: Record<string, string> }>({
+    langKey: '', map: {}
+  });
   const textsKey = texts.join('\x00');
-  // Track the lang+textsKey combo to know when to clear
-  const prevKeyRef = useRef('');
+  const currentLangKey = `${lang}:${textsKey}`;
 
   useEffect(() => {
-    const currentKey = `${lang}:${textsKey}`;
-
-    // If lang or texts changed, clear stale local state immediately
-    if (prevKeyRef.current !== currentKey) {
-      setLocal({});
-      prevKeyRef.current = currentKey;
-    }
-
-    if (NO_TRANSLATE.has(lang)) {
-      return;
-    }
+    if (NO_TRANSLATE.has(lang)) return;
 
     let cancelled = false;
+    const expectedKey = `${lang}:${textsKey}`;
 
     translateMany(texts).then(results => {
       if (cancelled) return;
       const map: Record<string, string> = {};
       texts.forEach((x, i) => { map[x] = results[i] ?? x; });
-      setLocal(map);
+      setLocal({ langKey: expectedKey, map });
     });
 
     return () => { cancelled = true; };
-    // translateMany is stable (ref-based), so it won't cause re-fires.
-    // We deliberately omit translateMany from deps since it's stable.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lang, textsKey]);
 
-  // Build the output map using both local state and the live cache via t()
+  // Build the output map. If local is for a different lang/texts, ignore it.
   return useMemo(() => {
+    const useLocal = local.langKey === currentLangKey;
     const map: Record<string, string> = {};
-    texts.forEach(x => { map[x] = local[x] || t(x); });
+    texts.forEach(x => { map[x] = (useLocal ? local.map[x] : undefined) || t(x); });
     return map;
-    // cacheVersion ensures this re-computes when global cache updates
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [local, cacheVersion, textsKey]);
+  }, [local, cacheVersion, currentLangKey]);
 }
 
 /**
