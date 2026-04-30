@@ -35,7 +35,7 @@ export default function SchemesCatalogue() {
   const [loading, setLoading] = useState(!cached.current);
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState<string>('all');
-  const { t, translateMany, lang } = useI18n();
+  const { t, translateMany, lang, cacheVersion } = useI18n();
 
   useEffect(() => {
     // Always fetch fresh data in background, but show cached first
@@ -48,7 +48,8 @@ export default function SchemesCatalogue() {
       .finally(() => setLoading(false));
   }, []);
 
-  // Pre-translate scheme short descriptions & names when language changes
+  // Pre-translate scheme short descriptions & names when language changes.
+  // translateMany is stable (ref-based), so this only re-fires when schemes or lang changes.
   useEffect(() => {
     if (schemes.length === 0 || lang === 'en' || lang === 'hinglish') return;
     const texts: string[] = [];
@@ -58,8 +59,10 @@ export default function SchemesCatalogue() {
       if (s.category) texts.push(s.category);
       if (s.ministry) texts.push(s.ministry);
     });
+    // Fire-and-forget: the cache update will trigger re-renders via cacheVersion
     translateMany(texts);
-  }, [schemes, lang, translateMany]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [schemes, lang]);
 
   const categories = useMemo(() => {
     const set = new Set<string>();

@@ -57,7 +57,7 @@ function saveState(state: ChatState) {
 
 export default function ChatPage() {
   const navigate = useNavigate();
-  const { lang, t } = useI18n();
+  const { lang, t, cacheVersion } = useI18n();
 
   const saved = useRef(loadState());
   const [sessionId, setSessionId] = useState<string | null>(saved.current?.sessionId ?? null);
