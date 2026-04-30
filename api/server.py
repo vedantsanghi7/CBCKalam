@@ -290,9 +290,25 @@ def handle_turn(sid: str, payload: TurnRequest):
     session["history"].append({"role": "assistant", "text": reply,
                                "pending": session.get("pending_slot")})
 
-    # NOTE: We intentionally do NOT translate the reply here.
-    # The frontend's <TranslatedText> component handles all UI translation.
-    # Translating here would cause double-translation (backend + frontend).
+    # Translate reply if user selected a non-Hinglish/non-English language.
+    # The LLM doesn't reliably generate in the target language, so we
+    # translate server-side as a safety net. The frontend will NOT re-translate
+    # because the message is tagged with the current language.
+    target_lang = (payload.language or "hinglish").strip()
+    if target_lang and target_lang not in ("hinglish", "en", ""):
+        try:
+            reply = sarvam_client.translate(reply, target=target_lang, source="en")
+        except Exception:
+            pass  # Fall back to original if translation fails
+        # Also translate quick-reply options
+        if options:
+            try:
+                translated_opts = []
+                for opt in options:
+                    translated_opts.append(sarvam_client.translate(opt, target=target_lang, source="en"))
+                options = translated_opts
+            except Exception:
+                pass
 
     return {
         "reply": reply,

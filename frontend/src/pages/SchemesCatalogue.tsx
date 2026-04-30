@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { api } from '@/lib/api';
-import { useI18n } from '@/lib/i18n';
+import { TranslatedText, useI18n } from '@/lib/i18n';
 import { motion } from 'framer-motion';
 import type { SchemeSummary } from '@/types';
 import { Compass, FileText, Search, Loader2 } from 'lucide-react';
@@ -35,7 +35,7 @@ export default function SchemesCatalogue() {
   const [loading, setLoading] = useState(!cached.current);
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState<string>('all');
-  const { t, translateMany, lang, cacheVersion } = useI18n();
+  const { lang } = useI18n();
 
   useEffect(() => {
     // Always fetch fresh data in background, but show cached first
@@ -47,22 +47,6 @@ export default function SchemesCatalogue() {
       .catch(console.error)
       .finally(() => setLoading(false));
   }, []);
-
-  // Pre-translate scheme short descriptions & names when language changes.
-  // translateMany is stable (ref-based), so this only re-fires when schemes or lang changes.
-  useEffect(() => {
-    if (schemes.length === 0 || lang === 'en' || lang === 'hinglish') return;
-    const texts: string[] = [];
-    schemes.forEach(s => {
-      if (s.name) texts.push(s.name);
-      if (s.short_description) texts.push(s.short_description);
-      if (s.category) texts.push(s.category);
-      if (s.ministry) texts.push(s.ministry);
-    });
-    // Fire-and-forget: the cache update will trigger re-renders via cacheVersion
-    translateMany(texts);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [schemes, lang]);
 
   const categories = useMemo(() => {
     const set = new Set<string>();
@@ -99,9 +83,9 @@ export default function SchemesCatalogue() {
         <div className="flex items-center gap-3 mb-6">
           <Compass size={28} style={{ color: 'var(--accent-1)' }} />
           <div>
-            <h1 className="text-h1" style={{ color: 'var(--text-1)' }}>{t('All Schemes')}</h1>
+            <h1 className="text-h1" style={{ color: 'var(--text-1)' }}><TranslatedText>All Schemes</TranslatedText></h1>
             <p className="text-caption">
-              {schemes.length} {t('central government welfare schemes')}
+              {schemes.length} <TranslatedText>central government welfare schemes</TranslatedText>
             </p>
           </div>
         </div>
@@ -114,7 +98,7 @@ export default function SchemesCatalogue() {
             type="text"
             value={query}
             onChange={e => setQuery(e.target.value)}
-            placeholder={t('Search schemes…')}
+            placeholder="Search schemes…"
             className="w-full pl-9 pr-3 py-2 text-sm glass"
             style={{ borderRadius: 'var(--radius-sm)', color: 'var(--text-1)' }}
           />
@@ -125,9 +109,9 @@ export default function SchemesCatalogue() {
           className="px-3 py-2 text-sm glass"
           style={{ borderRadius: 'var(--radius-sm)', color: 'var(--text-1)' }}
         >
-          <option value="all">{t('All categories')}</option>
+          <option value="all">All categories</option>
           {categories.map(c => (
-            <option key={c} value={c}>{t(c)}</option>
+            <option key={c} value={c}>{c}</option>
           ))}
         </select>
       </div>
@@ -156,14 +140,14 @@ export default function SchemesCatalogue() {
                     className="text-xs px-2 py-0.5 rounded-[9999px] capitalize"
                     style={{ background: 'rgba(110,108,255,0.08)', color: 'var(--accent-1)' }}
                   >
-                    {t(scheme.category)}
+                    <TranslatedText>{scheme.category}</TranslatedText>
                   </span>
                 )}
               </div>
-              <h3 className="text-h3" style={{ color: 'var(--text-1)' }}>{t(scheme.name)}</h3>
+              <h3 className="text-h3" style={{ color: 'var(--text-1)' }}><TranslatedText>{scheme.name}</TranslatedText></h3>
               {scheme.short_description && (
                 <p className="text-sm line-clamp-3" style={{ color: 'var(--text-2)' }}>
-                  {t(scheme.short_description)}
+                  <TranslatedText>{scheme.short_description}</TranslatedText>
                 </p>
               )}
               {scheme.benefit_line && (
@@ -172,9 +156,9 @@ export default function SchemesCatalogue() {
                 </p>
               )}
               <div className="flex items-center justify-between mt-auto pt-2">
-                <span className="text-caption">{t(scheme.ministry || '')}</span>
+                <span className="text-caption"><TranslatedText>{scheme.ministry || ''}</TranslatedText></span>
                 <span className="text-xs" style={{ color: 'var(--text-3)' }}>
-                  {scheme.rules_count} {t('rules')}
+                  {scheme.rules_count} <TranslatedText>rules</TranslatedText>
                 </span>
               </div>
             </GlassCard>
@@ -184,7 +168,7 @@ export default function SchemesCatalogue() {
 
       {filtered.length === 0 && (
         <div className="text-center py-20" style={{ color: 'var(--text-3)' }}>
-          {t('No schemes match your search.')}
+          <TranslatedText>No schemes match your search.</TranslatedText>
         </div>
       )}
     </div>
