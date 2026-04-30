@@ -115,12 +115,9 @@ SUPPORTED_LANGS = {
 
 
 def _offline_translate(text: str, target: str) -> str:
-    prefix = {
-        "hi": "[हिंदी] ", "bn": "[বাংলা] ", "gu": "[ગુજરાતી] ", "kn": "[ಕನ್ನಡ] ",
-        "ml": "[മലയാളം] ", "mr": "[मराठी] ", "or": "[ଓଡ଼ିଆ] ", "pa": "[ਪੰਜਾਬੀ] ",
-        "ta": "[தமிழ்] ", "te": "[తెలుగు] ", "ur": "[اردو] ", "en": "[EN] ",
-    }.get(target.split("-")[0], f"[{target}] ")
-    return prefix + text
+    # In offline mode, return original text as-is.
+    # Prefixing with language tags (e.g. "[हिंदी]") makes the UI look broken.
+    return text
 
 
 def translate(text: str, target: str, source: str = "auto", purpose: str = "translate") -> str:
